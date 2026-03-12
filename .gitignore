@@ -56,3 +56,4 @@ __pycache__/
 *.sqlite
 shared/runtime/memory/*.db
 *.jsonl
+cron/*.bak

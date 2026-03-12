@@ -1,4 +1,120 @@
 {
   "version": 1,
-  "jobs": []
+  "jobs": [
+    {
+      "id": "96acf7fc-958e-4314-8b2c-3a9c98cbd9db",
+      "name": "companion-morning-checkin",
+      "description": "Step15 morning proactive status check-in",
+      "enabled": true,
+      "createdAtMs": 1773320696144,
+      "updatedAtMs": 1773320696144,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 10 * * *",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请对林做一次轻量晨间状态检查。像日常聊天，不像问卷。优先关心今天的学习起步、精力和心情；控制在3个短点以内。若没有高价值内容，不要硬发。"
+      },
+      "state": {
+        "nextRunAtMs": 1773369000000
+      }
+    },
+    {
+      "id": "5a829294-6c08-4dae-8bc9-2d843bb614f3",
+      "name": "companion-evening-checkin",
+      "description": "Step15 evening learning and mood check-in",
+      "enabled": true,
+      "createdAtMs": 1773320696153,
+      "updatedAtMs": 1773320696153,
+      "schedule": {
+        "kind": "cron",
+        "expr": "20 21 * * *",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请做一次晚间学习与心情 check-in。优先问今天推进了什么、卡在哪里、此刻情绪如何；最后给1个最小下一步，不要造成压力。"
+      },
+      "state": {
+        "nextRunAtMs": 1773321600000
+      }
+    },
+    {
+      "id": "d3a46919-eef7-4a40-b138-8f8176cc28d3",
+      "name": "skill-watch-weekly",
+      "description": "Step15 weekly skill discovery watch",
+      "enabled": true,
+      "createdAtMs": 1773320696157,
+      "updatedAtMs": 1773320696157,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 18 * * 0",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请检查近期是否出现值得关注的新 skill、新 agent capability 或新工具组合。默认只推荐，不自动安装。必须给出来源、用途、风险、为什么值得试，并遵守 Skill_Discovery_Safety.md。"
+      },
+      "state": {
+        "nextRunAtMs": 1773570600000
+      }
+    },
+    {
+      "id": "7101b221-e44f-4775-acb7-463923449c6c",
+      "name": "interest-and-major-briefing",
+      "description": "Step15 midday interest frontier and major-news briefing",
+      "enabled": true,
+      "createdAtMs": 1773320696166,
+      "updatedAtMs": 1773320696166,
+      "schedule": {
+        "kind": "cron",
+        "expr": "40 12 * * *",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请整理一份简短前沿简报。优先给林可能感兴趣领域的2条高质量前沿消息；若当天有其他领域的重大消息，再补1条，并说明为什么值得看。没有高质量内容就跳过。"
+      },
+      "state": {
+        "nextRunAtMs": 1773376800000
+      }
+    },
+    {
+      "id": "4dc29428-daa2-478b-b15d-a5521b2bb683",
+      "name": "light-chat-nightly",
+      "description": "Step15 nightly light social message",
+      "enabled": true,
+      "createdAtMs": 1773320696170,
+      "updatedAtMs": 1773320696170,
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 22 * * *",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请发送一条轻松但不低质的日常聊天消息。可以是网络知识、轻段子或轻调侃，但不要冒犯、不要刷屏、不要强行鸡汤。"
+      },
+      "state": {
+        "nextRunAtMs": 1773324600000
+      }
+    }
+  ]
 }
