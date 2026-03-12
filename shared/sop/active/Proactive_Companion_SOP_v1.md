@@ -119,6 +119,22 @@ hard_constraint: false
 - 夜间轻松聊天消息
 - 每周一次 skill watch
 
+# 送达绑定
+
+若主动消息的默认外发对象是林本人，优先采用显式绑定，而不是长期依赖 `last target` 猜测：
+
+- `heartbeat.session` 绑定到当前有效的 Feishu direct session
+- `heartbeat.target` 显式设为 `feishu`
+- `heartbeat.to` 显式设为林当前使用的 Feishu `open_id`
+
+这样做的作用是：
+
+- 避免 heartbeat 误唤醒本地 `agent:main:main` 会话而不外发
+- 避免“最近一次外部目标”漂移到其他聊天目标
+- 让 `cron -> next-heartbeat -> Feishu direct` 的链路可复现、可验证
+
+若 Feishu direct session 或 `open_id` 发生变化，先更新运行配置，再继续把主动消息作为稳定送达能力使用。
+
 # 跳过条件
 
 满足以下任一情况，可跳过当前轮主动消息：

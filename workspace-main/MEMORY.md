@@ -28,10 +28,10 @@
 - 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Library/Mobile Documents/com~apple~CloudDocs/knowledge-system`，作为 live vault 使用，并已写入本地运行配置。
 - Redis AMS、Qdrant、Neo4j 已在当前项目里完成基础联调确认。
 - 已建立 Obsidian 业务路由基线：`logs / knowledge / taskboard / capabilities / reputation / strategy`，正式目录映射规则见 `shared/policies/Obsidian_Routing.md`。
-- 第 15 步当前采用 `heartbeat + cron + Feishu(last target)` 作为主动陪伴骨架；设备习惯自适应留待第 13 / 14 步接入后再做。
+- 第 15 步当前采用 `heartbeat + cron + Feishu direct` 作为主动陪伴骨架；运行态已改为显式 `heartbeat.session + target + to` 绑定，不再依赖 `last target` 猜测。设备习惯自适应留待第 13 / 14 步接入后再做。
 - 新 skill 发现允许自动推荐，不允许自动安装；网络发现与安装边界见 `shared/policies/Skill_Discovery_Safety.md`。
 - 已在本地 cron 中挂上 5 个第 15 步任务：早间状态检查、晚间状态检查、午间前沿简报、夜间轻聊天、每周 skill watch。
-- 当前第 15 步的实际送达仍受两个运行态条件限制：需要可用的外部聊天 target，且当前 heartbeat 最近一次结果显示 `no-target` 与模型认证失效提示。
+- 2026-03-12 已完成第 15 步送达验证：Feishu direct session 可正常对话，手动 Feishu 出站测试成功，`cron -> next-heartbeat` 最近一次结果已显示 `channel: feishu`。
 
 ## Imported Facts
 - openclaw-smoke-20260312：林在 2026-03-12 完成了 Markdown、AMS、Semantic、Graph 四层记忆桥联调。

@@ -9,6 +9,7 @@ openclaw.json
 openclaw.json.bak
 openclaw.json.bak.*
 update-check.json
+/delivery-queue/
 /memory/
 /logs/
 /shared/logs/

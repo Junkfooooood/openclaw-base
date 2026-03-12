@@ -21,7 +21,9 @@
           "start": "08:30",
           "end": "23:00"
         },
-        "target": "last"
+        "session": "agent:main:feishu:direct:<FEISHU_OPEN_ID>",
+        "target": "feishu",
+        "to": "<FEISHU_OPEN_ID>"
       }
     },
     "list": [
