@@ -24,7 +24,7 @@
 - `obsidian-bridge` 默认应保持 draft-first，不直接写正式库。
 
 ## Pending Configuration Facts
-- 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Desktop/knowledge- system`，已写入本地运行配置。
+- 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Library/Mobile Documents/com~apple~CloudDocs/knowledge-system`，作为 live vault 使用，并已写入本地运行配置。
 - Redis AMS、Qdrant、Neo4j 已在当前项目里完成基础联调确认。
 
 ## Imported Facts
