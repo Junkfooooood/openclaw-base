@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.8"
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "openai-codex/gpt-5.4"
+      },
+      "workspace": "/ABS/PATH/TO/.openclaw/workspace-main",
+      "contextPruning": {
+        "mode": "cache-ttl",
+        "ttl": "1h"
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "heartbeat": {
+        "every": "30m",
+        "activeHours": {
+          "start": "08:30",
+          "end": "23:00"
+        },
+        "target": "last"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "name": "YeHonglong Main",
+        "workspace": "/ABS/PATH/TO/.openclaw/workspace-main",
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/main/agent",
+        "tools": {
+          "profile": "coding",
+          "allow": [
+            "group:fs",
+            "group:runtime",
+            "group:sessions",
+            "group:memory",
+            "image",
+            "llm-task",
+            "policy_gate_check",
+            "lobster"
+          ]
+        }
+      },
+      {
+        "id": "learning",
+        "name": "Learning Supervisor",
+        "workspace": "/ABS/PATH/TO/.openclaw/workspace-learning",
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/learning/agent"
+      },
+      {
+        "id": "curator",
+        "name": "Knowledge Curator",
+        "workspace": "/ABS/PATH/TO/.openclaw/workspace-curator",
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/curator/agent"
+      },
+      {
+        "id": "executor",
+        "name": "Task Executor",
+        "workspace": "/ABS/PATH/TO/.openclaw/workspace-executor",
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/executor/agent"
+      },
+      {
+        "id": "validator",
+        "name": "Validator",
+        "workspace": "/ABS/PATH/TO/.openclaw/workspace-validator",
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/validator/agent"
+      }
+    ]
+  },
+  "tools": {
+    "profile": "coding",
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "gemini",
+        "gemini": {
+          "apiKey": "${GEMINI_API_KEY}"
+        }
+      }
+    }
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "session-memory": {
+          "enabled": true
+        },
+        "command-logger": {
+          "enabled": true
+        },
+        "boot-md": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "appId": "${FEISHU_APP_ID}",
+      "appSecret": "${FEISHU_APP_SECRET}",
+      "connectionMode": "websocket",
+      "domain": "feishu",
+      "groupPolicy": "allowlist",
+      "groupAllowFrom": [
+        "oc_REPLACE_WITH_GROUP_ID"
+      ]
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}",
+      "allowTailscale": false
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "contacts.add",
+        "calendar.add",
+        "reminders.add",
+        "sms.send"
+      ]
+    }
+  },
+  "plugins": {
+    "allow": [
+      "feishu",
+      "open-prose",
+      "llm-task",
+      "policy-gate",
+      "board-sync",
+      "memory-bridge",
+      "obsidian-bridge"
+    ],
+    "load": {
+      "paths": [
+        "/opt/homebrew/lib/node_modules/openclaw/extensions/feishu",
+        "/ABS/PATH/TO/.openclaw/extensions"
+      ]
+    },
+    "entries": {
+      "feishu": {
+        "enabled": true
+      },
+      "open-prose": {
+        "enabled": true
+      },
+      "llm-task": {
+        "enabled": true,
+        "config": {
+          "defaultProvider": "openai-codex",
+          "defaultModel": "gpt-5.4",
+          "defaultAuthProfileId": "openai-codex:default"
+        }
+      },
+      "policy-gate": {
+        "enabled": true,
+        "config": {
+          "maxRetriesPerBranch": 3,
+          "protectedPaths": [
+            "/ABS/PATH/TO/.openclaw/shared/policies/Immutable_Core.md",
+            "/ABS/PATH/TO/.openclaw/shared/policies/Core_Routing.md"
+          ]
+        }
+      },
+      "board-sync": {
+        "enabled": false
+      },
+      "memory-bridge": {
+        "enabled": false
+      },
+      "obsidian-bridge": {
+        "enabled": false
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+.DS_Store
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+
+# Root runtime state and local config
+openclaw.json
+openclaw.json.bak
+openclaw.json.bak.*
+update-check.json
+/memory/
+/logs/
+/shared/logs/
+/feishu/dedup/
+/credentials/
+/devices/
+/identity/
+
+# Agent runtime state
+agents/*/sessions/
+agents/*/agent/auth-profiles.json
+
+# Workspace runtime state
+/workspace-main/.openclaw/
+
+# Backup workspace
+workspace-old-backup/
+
+# Generated dependencies and build output
+extensions/policy-gate/node_modules/
+
+# Keep placeholder files, ignore transient content in hot dirs
+shared/blackboard/hot/*
+!shared/blackboard/hot/.gitkeep
+shared/blackboard/archive/*
+!shared/blackboard/archive/.gitkeep
+shared/runtime/events/*
+!shared/runtime/events/.gitkeep
+shared/runtime/locks/*
+!shared/runtime/locks/.gitkeep
+shared/runtime/queue/*
+!shared/runtime/queue/.gitkeep
+shared/runtime/snapshots/*
+!shared/runtime/snapshots/.gitkeep
+shared/runtime/memory/commits/*
+!shared/runtime/memory/commits/.gitkeep
+shared/runtime/memory/conflicts/*
+!shared/runtime/memory/conflicts/.gitkeep
+shared/runtime/memory/staged/*
+!shared/runtime/memory/staged/.gitkeep
+
+# OS / tool noise
+*.sqlite
+*.jsonl

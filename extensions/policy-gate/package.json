@@ -1,0 +1,8 @@
+{
+  "name": "policy-gate",
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@sinclair/typebox": "^0.32.35"
+  }
+}

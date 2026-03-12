@@ -1,0 +1,23 @@
+{
+  "id": "policy-gate",
+  "name": "Policy Gate",
+  "description": "Workflow gate for task dispatch, retry fuse, and protected-write checks.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "maxRetriesPerBranch": {
+        "type": "integer",
+        "minimum": 1,
+        "default": 3
+      },
+      "protectedPaths": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "default": []
+      }
+    }
+  }
+}
