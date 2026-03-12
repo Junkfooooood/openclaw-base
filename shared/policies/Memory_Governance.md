@@ -79,6 +79,15 @@
 
 ---
 
+## Bridge 执行规则
+- `memory-bridge` 统一负责 Markdown、AMS、Mem0、Neo4j 的编排，不让各层直接互相覆盖
+- Mem0 与 Neo4j 的接入必须通过 compatibility shim，避免依赖版本错位导致 bearer/token 误传
+- 默认先写 staged 记录；只有无冲突且命中自动同步阈值时，才允许同步到 semantic / graph
+- 一旦发现 Markdown 与 semantic / graph 结果相近但不一致，必须进入 `shared/runtime/memory/conflicts/`
+- 正式 commit 后，才允许把批准事实回填到 semantic / graph 作为增强层副本
+
+---
+
 ## 记忆写入级别
 ### Level A：直接进入 Working Memory
 适用：

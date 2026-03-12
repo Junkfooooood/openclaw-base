@@ -19,9 +19,16 @@
 
 ## Current Build Focus
 - 当前正在补齐第 11 步附近的结构缺口，重点是记忆桥、黑板桥、验证规则和多 agent 工作骨架。
-- `memory-bridge` 需要先保证分层治理，再接 Redis AMS / Qdrant / Neo4j。
+- `memory-bridge` 已完成 Redis AMS / Qdrant / Neo4j 基础联调，下一步是细化冲突治理与更稳健的召回策略。
 - `obsidian-bridge` 默认应保持 draft-first，不直接写正式库。
 
 ## Pending Configuration Facts
 - 学习系统 Obsidian Vault 路径尚未写入运行配置。
-- Redis AMS、Qdrant、Neo4j 尚未在当前项目里完成联调确认。
+- Redis AMS、Qdrant、Neo4j 已在当前项目里完成基础联调确认。
+
+## Imported Facts
+- openclaw-smoke-20260312：林在 2026-03-12 完成了 Markdown、AMS、Semantic、Graph 四层记忆桥联调。
+  - source: manual-smoke-test
+  - confidence: 0.98
+  - approved_by: linqingxuan
+  - committed_at: 2026-03-12T08:09:49.134Z

@@ -183,7 +183,30 @@
         "enabled": true
       },
       "memory-bridge": {
-        "enabled": true
+        "enabled": true,
+        "config": {
+          "pythonBin": "/ABS/PATH/TO/mem0-venv/bin/python",
+          "pythonScript": "/ABS/PATH/TO/.openclaw/shared/bridge/memory_bridge.py",
+          "envFile": "/ABS/PATH/TO/agent-memory-server/.env",
+          "amsBaseUrl": "http://127.0.0.1:8000",
+          "defaultUserId": "lin-main",
+          "defaultSessionId": "lin-main",
+          "defaultNamespace": "openclaw-main",
+          "autoSyncConfidence": 0.92,
+          "autoSyncToSemanticGraph": false,
+          "mem0": {
+            "qdrantUrl": "http://127.0.0.1:6333",
+            "collectionName": "openclaw_memory",
+            "embeddingModelDims": 1536,
+            "llmModel": "gpt-4.1-mini",
+            "embedderModel": "text-embedding-3-small",
+            "historyDbPath": "/ABS/PATH/TO/.openclaw/shared/runtime/memory/mem0_history.db",
+            "neo4jUrl": "bolt://127.0.0.1:7687",
+            "neo4jUsername": "neo4j",
+            "neo4jDatabase": "neo4j",
+            "enableGraph": true
+          }
+        }
       },
       "obsidian-bridge": {
         "enabled": true

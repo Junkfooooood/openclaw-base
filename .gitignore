@@ -51,5 +51,8 @@ shared/runtime/memory/staged/*
 !shared/runtime/memory/staged/.gitkeep
 
 # OS / tool noise
+__pycache__/
+*.pyc
 *.sqlite
+shared/runtime/memory/*.db
 *.jsonl

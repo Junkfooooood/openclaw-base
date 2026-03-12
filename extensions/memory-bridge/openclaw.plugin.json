@@ -20,6 +20,72 @@
       },
       "commitsDir": {
         "type": "string"
+      },
+      "pythonBin": {
+        "type": "string"
+      },
+      "pythonScript": {
+        "type": "string"
+      },
+      "envFile": {
+        "type": "string"
+      },
+      "amsBaseUrl": {
+        "type": "string"
+      },
+      "amsAuthToken": {
+        "type": "string"
+      },
+      "defaultUserId": {
+        "type": "string"
+      },
+      "defaultSessionId": {
+        "type": "string"
+      },
+      "defaultNamespace": {
+        "type": "string"
+      },
+      "autoSyncConfidence": {
+        "type": "number"
+      },
+      "autoSyncToSemanticGraph": {
+        "type": "boolean"
+      },
+      "mem0": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "qdrantUrl": {
+            "type": "string"
+          },
+          "collectionName": {
+            "type": "string"
+          },
+          "embeddingModelDims": {
+            "type": "integer"
+          },
+          "llmModel": {
+            "type": "string"
+          },
+          "embedderModel": {
+            "type": "string"
+          },
+          "historyDbPath": {
+            "type": "string"
+          },
+          "neo4jUrl": {
+            "type": "string"
+          },
+          "neo4jUsername": {
+            "type": "string"
+          },
+          "neo4jDatabase": {
+            "type": "string"
+          },
+          "enableGraph": {
+            "type": "boolean"
+          }
+        }
       }
     }
   }
