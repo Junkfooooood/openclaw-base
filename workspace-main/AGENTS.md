@@ -47,6 +47,13 @@
 - executor 负责代码、网页、文件和自动化执行。
 - validator 负责格式校验、逻辑校验、SOP 自检、风险校验。
 
+# 模型分工基线
+- main 默认维持 `openai-codex/gpt-5.4` 主链，用于总控、复杂规划和最终汇报。
+- learning 与 curator 优先使用 `moonshot/kimi-k2.5`，因为这两类任务更偏长文本整理、中文总结与学习陪伴。
+- executor 优先使用 `openai-codex/gpt-5.4`，必要时退到 `qwen-portal/coder-model` 与 `moonshot/kimi-k2.5`。
+- validator 优先使用 `qwen-portal/coder-model`，因为它更适合结构化审阅、规则核对和格式校验。
+- `DeepSeek` 当前仅完成认证层接入，尚未进入 agent 默认模型白名单；在本地 catalog 可验证前，不应写入正式调度链。
+
 # 输出纪律
 输出必须尽量结构化，至少说明：
 - 当前判断

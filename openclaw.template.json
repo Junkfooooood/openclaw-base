@@ -5,7 +5,26 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "openai-codex/gpt-5.4"
+        "primary": "openai-codex/gpt-5.4",
+        "fallbacks": [
+          "moonshot/kimi-k2.5",
+          "qwen-portal/coder-model",
+          "openai/gpt-5.4",
+          "openai/gpt-5.3-codex"
+        ]
+      },
+      "models": {
+        "openai-codex/gpt-5.4": {},
+        "openai/gpt-5.4": {
+          "alias": "gpt"
+        },
+        "openai/gpt-5.3-codex": {},
+        "moonshot/kimi-k2.5": {
+          "alias": "kimi"
+        },
+        "qwen-portal/coder-model": {
+          "alias": "qwen"
+        }
       },
       "workspace": "/ABS/PATH/TO/.openclaw/workspace-main",
       "contextPruning": {
@@ -52,25 +71,54 @@
         "id": "learning",
         "name": "Learning Supervisor",
         "workspace": "/ABS/PATH/TO/.openclaw/workspace-learning",
-        "agentDir": "/ABS/PATH/TO/.openclaw/agents/learning/agent"
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/learning/agent",
+        "model": {
+          "primary": "moonshot/kimi-k2.5",
+          "fallbacks": [
+            "qwen-portal/coder-model",
+            "openai/gpt-5.4"
+          ]
+        }
       },
       {
         "id": "curator",
         "name": "Knowledge Curator",
         "workspace": "/ABS/PATH/TO/.openclaw/workspace-curator",
-        "agentDir": "/ABS/PATH/TO/.openclaw/agents/curator/agent"
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/curator/agent",
+        "model": {
+          "primary": "moonshot/kimi-k2.5",
+          "fallbacks": [
+            "qwen-portal/coder-model",
+            "openai/gpt-5.4"
+          ]
+        }
       },
       {
         "id": "executor",
         "name": "Task Executor",
         "workspace": "/ABS/PATH/TO/.openclaw/workspace-executor",
-        "agentDir": "/ABS/PATH/TO/.openclaw/agents/executor/agent"
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/executor/agent",
+        "model": {
+          "primary": "openai-codex/gpt-5.4",
+          "fallbacks": [
+            "qwen-portal/coder-model",
+            "moonshot/kimi-k2.5",
+            "openai/gpt-5.3-codex"
+          ]
+        }
       },
       {
         "id": "validator",
         "name": "Validator",
         "workspace": "/ABS/PATH/TO/.openclaw/workspace-validator",
-        "agentDir": "/ABS/PATH/TO/.openclaw/agents/validator/agent"
+        "agentDir": "/ABS/PATH/TO/.openclaw/agents/validator/agent",
+        "model": {
+          "primary": "qwen-portal/coder-model",
+          "fallbacks": [
+            "moonshot/kimi-k2.5",
+            "openai/gpt-5.4"
+          ]
+        }
       }
     ]
   },
@@ -144,6 +192,7 @@
     "allow": [
       "feishu",
       "open-prose",
+      "qwen-portal-auth",
       "llm-task",
       "policy-gate",
       "board-sync",
@@ -161,6 +210,9 @@
         "enabled": true
       },
       "open-prose": {
+        "enabled": true
+      },
+      "qwen-portal-auth": {
         "enabled": true
       },
       "llm-task": {
