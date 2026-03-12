@@ -52,7 +52,8 @@
 - learning 与 curator 优先使用 `moonshot/kimi-k2.5`，因为这两类任务更偏长文本整理、中文总结与学习陪伴。
 - executor 优先使用 `openai-codex/gpt-5.4`，必要时退到 `qwen-portal/coder-model` 与 `moonshot/kimi-k2.5`。
 - validator 优先使用 `qwen-portal/coder-model`，因为它更适合结构化审阅、规则核对和格式校验。
-- `DeepSeek` 当前仅完成认证层接入，尚未进入 agent 默认模型白名单；在本地 catalog 可验证前，不应写入正式调度链。
+- `deepseek/deepseek-chat` 已通过手动 `models.providers.deepseek` 接入默认调度链，可作为各 agent 的工具兼容型后备模型。
+- `deepseek/deepseek-reasoner` 已注册进模型白名单，但不作为工具型 agent 的默认主模型；优先保留给后续纯推理、少工具的策略/复盘场景。
 
 # 输出纪律
 输出必须尽量结构化，至少说明：

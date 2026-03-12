@@ -23,7 +23,7 @@
 - `memory-bridge` 已完成 Redis AMS / Qdrant / Neo4j 基础联调，下一步是细化冲突治理与更稳健的召回策略。
 - `obsidian-bridge` 默认应保持 draft-first，不直接写正式库。
 - 已新增轻量 `route review loop`：可通过 validator 对 route plan 做 advisory 级复核，用于后续逐步优化 Conversation-to-Routes SOP。
-- 已完成 `Moonshot + Qwen` 从认证层到 agent 可调度层的接入：当前默认回退链为 `OpenAI Codex -> Kimi -> Qwen -> OpenAI`；learning/curator 优先走 Kimi，validator 优先走 Qwen，executor 继续以 Codex 为主。
+- 已完成 `Moonshot + Qwen + DeepSeek Chat` 从认证层到 agent 可调度层的接入：当前默认回退链为 `OpenAI Codex -> Kimi -> Qwen -> DeepSeek Chat -> OpenAI`；learning/curator 优先走 Kimi，validator 优先走 Qwen，executor 继续以 Codex 为主。
 
 ## Pending Configuration Facts
 - 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Library/Mobile Documents/com~apple~CloudDocs/knowledge-system`，作为 live vault 使用，并已写入本地运行配置。
@@ -33,7 +33,8 @@
 - 新 skill 发现允许自动推荐，不允许自动安装；网络发现与安装边界见 `shared/policies/Skill_Discovery_Safety.md`。
 - 已在本地 cron 中挂上 5 个第 15 步任务：早间状态检查、晚间状态检查、午间前沿简报、夜间轻聊天、每周 skill watch。
 - 2026-03-12 已完成第 15 步送达验证：Feishu direct session 可正常对话，手动 Feishu 出站测试成功，`cron -> next-heartbeat` 最近一次结果已显示 `channel: feishu`。
-- `DeepSeek` 当前只完成 auth profile 接入，尚未进入正式调度链；原因是本地 `openclaw models list --all --provider deepseek --plain` 仍未返回稳定可用的 `deepseek/<model>` 目录。
+- `DeepSeek` 当前通过手动 `models.providers.deepseek` 接入运行配置，而不是依赖自动 provider 注入；已确认 `deepseek/deepseek-chat` 与 `deepseek/deepseek-reasoner` 出现在 runtime `models list` 中。
+- `deepseek-reasoner` 已注册但未进入默认工具型 agent 主链；后续若要用于战略推演，应优先在低工具依赖场景单独验证。
 
 ## Imported Facts
 - openclaw-smoke-20260312：林在 2026-03-12 完成了 Markdown、AMS、Semantic、Graph 四层记忆桥联调。

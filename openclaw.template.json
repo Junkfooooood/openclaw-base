@@ -9,6 +9,7 @@
         "fallbacks": [
           "moonshot/kimi-k2.5",
           "qwen-portal/coder-model",
+          "deepseek/deepseek-chat",
           "openai/gpt-5.4",
           "openai/gpt-5.3-codex"
         ]
@@ -24,6 +25,12 @@
         },
         "qwen-portal/coder-model": {
           "alias": "qwen"
+        },
+        "deepseek/deepseek-chat": {
+          "alias": "deepseek"
+        },
+        "deepseek/deepseek-reasoner": {
+          "alias": "deepseek-r1"
         }
       },
       "workspace": "/ABS/PATH/TO/.openclaw/workspace-main",
@@ -76,6 +83,7 @@
           "primary": "moonshot/kimi-k2.5",
           "fallbacks": [
             "qwen-portal/coder-model",
+            "deepseek/deepseek-chat",
             "openai/gpt-5.4"
           ]
         }
@@ -89,6 +97,7 @@
           "primary": "moonshot/kimi-k2.5",
           "fallbacks": [
             "qwen-portal/coder-model",
+            "deepseek/deepseek-chat",
             "openai/gpt-5.4"
           ]
         }
@@ -102,6 +111,7 @@
           "primary": "openai-codex/gpt-5.4",
           "fallbacks": [
             "qwen-portal/coder-model",
+            "deepseek/deepseek-chat",
             "moonshot/kimi-k2.5",
             "openai/gpt-5.3-codex"
           ]
@@ -115,6 +125,7 @@
         "model": {
           "primary": "qwen-portal/coder-model",
           "fallbacks": [
+            "deepseek/deepseek-chat",
             "moonshot/kimi-k2.5",
             "openai/gpt-5.4"
           ]
@@ -186,6 +197,51 @@
         "reminders.add",
         "sms.send"
       ]
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "deepseek": {
+        "baseUrl": "https://api.deepseek.com/v1",
+        "apiKey": "${DEEPSEEK_API_KEY}",
+        "authHeader": true,
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "deepseek-chat",
+            "name": "DeepSeek Chat",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "deepseek-reasoner",
+            "name": "DeepSeek Reasoner",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 128000,
+            "maxTokens": 64000
+          }
+        ]
+      }
     }
   },
   "plugins": {
