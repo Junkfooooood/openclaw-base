@@ -1,0 +1,26 @@
+{
+  "id": "memory-bridge",
+  "name": "Memory Bridge",
+  "description": "Bridge Markdown truth memory with staged, semantic, and graph memory layers.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "markdownFiles": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "stagedDir": {
+        "type": "string"
+      },
+      "conflictsDir": {
+        "type": "string"
+      },
+      "commitsDir": {
+        "type": "string"
+      }
+    }
+  }
+}

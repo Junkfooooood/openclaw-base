@@ -16,7 +16,7 @@ branch_retry_max: 3
 执行本 SOP 前必须参考以下文件：
 - `shared/policies/Core_Routing.md`
 - `shared/policies/Validation_Rules.md`
-- `shared/blackboard/templates/blackboard_card.md`
+- `shared/blackboard/temple/blackboard_card.md`
 - `shared/schemas/task_tree.schema.json`
 
 # Trigger

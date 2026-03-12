@@ -39,6 +39,8 @@
             "group:memory",
             "image",
             "llm-task",
+            "memory-bridge",
+            "obsidian-bridge",
             "policy_gate_check",
             "lobster"
           ]
@@ -178,13 +180,13 @@
         }
       },
       "board-sync": {
-        "enabled": false
+        "enabled": true
       },
       "memory-bridge": {
-        "enabled": false
+        "enabled": true
       },
       "obsidian-bridge": {
-        "enabled": false
+        "enabled": true
       }
     }
   }

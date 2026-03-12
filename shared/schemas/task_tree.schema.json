@@ -2,17 +2,26 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TaskTree",
   "type": "object",
-  "required": ["task_id", "title", "mode", "branches"],
+  "required": ["task_id", "title", "mode", "approval_mode", "retry_policy", "branches"],
   "properties": {
     "task_id": { "type": "string" },
     "title": { "type": "string" },
     "mode": { "type": "string", "enum": ["single", "multi"] },
-    "approval_mode": { "type": "string" },
+    "approval_mode": { "type": "string", "enum": ["none", "review", "human"] },
+    "retry_policy": {
+      "type": "object",
+      "required": ["max_retries", "on_fail"],
+      "properties": {
+        "max_retries": { "type": "integer", "minimum": 1 },
+        "on_fail": { "type": "string", "enum": ["retry", "block", "notify_human"] }
+      },
+      "additionalProperties": false
+    },
     "branches": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["branch_id", "owner", "goal"],
+        "required": ["branch_id", "owner", "goal", "expected_output", "acceptance"],
         "properties": {
           "branch_id": { "type": "string" },
           "owner": {
@@ -27,9 +36,15 @@
           "expected_output": {
             "type": "array",
             "items": { "type": "string" }
+          },
+          "acceptance": {
+            "type": "array",
+            "items": { "type": "string" }
           }
-        }
+        },
+        "additionalProperties": false
       }
     }
-  }
+  },
+  "additionalProperties": false
 }

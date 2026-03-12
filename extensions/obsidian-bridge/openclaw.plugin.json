@@ -1,0 +1,24 @@
+{
+  "id": "obsidian-bridge",
+  "name": "Obsidian Bridge",
+  "description": "Read from an Obsidian vault and write AI drafts into a safe draft area.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "vaultRoot": {
+        "type": "string"
+      },
+      "draftRoot": {
+        "type": "string"
+      },
+      "patchRoot": {
+        "type": "string"
+      },
+      "allowOfficialWrites": {
+        "type": "boolean",
+        "default": false
+      }
+    }
+  }
+}

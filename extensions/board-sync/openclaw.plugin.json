@@ -1,0 +1,17 @@
+{
+  "id": "board-sync",
+  "name": "Board Sync",
+  "description": "Manage blackboard cards for complex task workflows.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "hotDir": {
+        "type": "string"
+      },
+      "archiveDir": {
+        "type": "string"
+      }
+    }
+  }
+}

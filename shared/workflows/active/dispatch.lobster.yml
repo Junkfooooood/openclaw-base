@@ -31,7 +31,16 @@ steps:
           "task_id": {"type": "string"},
           "title": {"type": "string"},
           "mode": {"type": "string", "enum": ["single", "multi"]},
-          "approval_mode": {"type": "string"},
+          "approval_mode": {"type": "string", "enum": ["none", "review", "human"]},
+          "retry_policy": {
+            "type": "object",
+            "properties": {
+              "max_retries": {"type": "integer", "minimum": 1},
+              "on_fail": {"type": "string", "enum": ["retry", "block", "notify_human"]}
+            },
+            "required": ["max_retries", "on_fail"],
+            "additionalProperties": false
+          },
           "branches": {
             "type": "array",
             "items": {
@@ -41,41 +50,42 @@ steps:
                 "owner": {"type": "string", "enum": ["main", "learning", "curator", "executor", "validator"]},
                 "goal": {"type": "string"},
                 "depends_on": {"type": "array", "items": {"type": "string"}},
-                "expected_output": {"type": "array", "items": {"type": "string"}}
+                "expected_output": {"type": "array", "items": {"type": "string"}},
+                "acceptance": {"type": "array", "items": {"type": "string"}}
               },
-              "required": ["branch_id", "owner", "goal"],
+              "required": ["branch_id", "owner", "goal", "expected_output", "acceptance"],
               "additionalProperties": false
             }
           }
         },
-        "required": ["task_id", "title", "mode", "approval_mode", "branches"],
+        "required": ["task_id", "title", "mode", "approval_mode", "retry_policy", "branches"],
         "additionalProperties": false
       }
     }'
     condition: $classify.stdout.is_complex
 
   - id: board_init
-    command: board-sync init
+    command: openclaw board-sync init
     stdin: $task_tree.stdout
     condition: $classify.stdout.is_complex
 
   - id: dispatch
-    command: internal-dispatch run
+    command: openclaw internal-dispatch run
     stdin: $task_tree.stdout
     condition: $classify.stdout.is_complex
 
   - id: validate
-    command: validator-run
+    command: openclaw validator-run
     stdin: $dispatch.stdout
     condition: $classify.stdout.is_complex
 
   - id: approve
-    command: approval request --kind review
+    command: openclaw approval request --kind review
     stdin: $validate.stdout
     approval: required
     condition: $task_tree.stdout.approval_mode != "none"
 
   - id: finalize
-    command: board-sync finalize
+    command: openclaw board-sync finalize
     stdin: $validate.stdout
     condition: $classify.stdout.is_complex
