@@ -14,6 +14,7 @@
 ## System Facts
 - OpenClaw 是当前总入口，外部消息默认先进入 `main`。
 - Markdown 是记忆系统的真相层；Redis AMS、Qdrant、Neo4j 是增强层，不得反向覆盖 Markdown。
+- Obsidian Vault 当前作为学习系统备份与同步载体，不作为真相层来源；OpenClaw 对其默认采用 draft-first。
 - 复杂任务必须经过 Task Tree、黑板、validator 验收、最多 3 次重试、超限熔断。
 - 正式知识库、六维能力、战略板块、声望板块写入必须先出草稿或 patch，再经林批准。
 
@@ -23,7 +24,7 @@
 - `obsidian-bridge` 默认应保持 draft-first，不直接写正式库。
 
 ## Pending Configuration Facts
-- 学习系统 Obsidian Vault 路径尚未写入运行配置。
+- 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Desktop/knowledge- system`，已写入本地运行配置。
 - Redis AMS、Qdrant、Neo4j 已在当前项目里完成基础联调确认。
 
 ## Imported Facts

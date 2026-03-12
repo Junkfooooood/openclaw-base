@@ -209,7 +209,13 @@
         }
       },
       "obsidian-bridge": {
-        "enabled": true
+        "enabled": true,
+        "config": {
+          "vaultRoot": "/ABS/PATH/TO/knowledge-system",
+          "draftRoot": "Drafts/AI",
+          "patchRoot": "Drafts/AI/_patches",
+          "allowOfficialWrites": false
+        }
       }
     }
   }

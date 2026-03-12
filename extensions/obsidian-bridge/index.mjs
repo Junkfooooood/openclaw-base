@@ -145,12 +145,107 @@ export default function register(api) {
 
   api.registerCli(
     ({ program }) => {
-      program
+      const bridge = program
         .command("obsidian-bridge")
-        .description("Inspect Obsidian bridge configuration.")
-        .command("status")
-        .action(() => {
-          console.log(JSON.stringify(getConfig(api), null, 2));
+        .description("Inspect Obsidian bridge configuration.");
+
+      bridge.command("status").action(() => {
+        console.log(JSON.stringify(getConfig(api), null, 2));
+      });
+
+      bridge
+        .command("read")
+        .requiredOption("--relative-path <relativePath>")
+        .action(async (options) => {
+          const config = getConfig(api);
+          ensureVaultConfigured(config);
+          const target = resolveInside(config.vaultRoot, options.relativePath);
+          const text = await fsp.readFile(target, "utf8");
+          console.log(
+            JSON.stringify(
+              {
+                relative_path: options.relativePath,
+                text
+              },
+              null,
+              2
+            )
+          );
+        });
+
+      bridge
+        .command("write-draft")
+        .requiredOption("--relative-path <relativePath>")
+        .requiredOption("--text <text>")
+        .option("--overwrite")
+        .action(async (options) => {
+          const config = getConfig(api);
+          ensureVaultConfigured(config);
+          const draftRoot = resolveInside(config.vaultRoot, config.draftRoot ?? "Drafts/AI");
+          const target = resolveInside(draftRoot, options.relativePath);
+          await fsp.mkdir(path.dirname(target), { recursive: true });
+          if (!options.overwrite && fs.existsSync(target)) {
+            console.log(
+              JSON.stringify(
+                {
+                  status: "exists",
+                  relative_path: options.relativePath
+                },
+                null,
+                2
+              )
+            );
+            return;
+          }
+          await fsp.writeFile(target, options.text, "utf8");
+          console.log(
+            JSON.stringify(
+              {
+                status: "written",
+                relative_path: options.relativePath,
+                path: target
+              },
+              null,
+              2
+            )
+          );
+        });
+
+      bridge
+        .command("prepare-patch")
+        .requiredOption("--target-path <targetPath>")
+        .requiredOption("--summary <summary>")
+        .requiredOption("--patch-body <patchBody>")
+        .action(async (options) => {
+          const config = getConfig(api);
+          ensureVaultConfigured(config);
+          const patchRoot = resolveInside(
+            config.vaultRoot,
+            config.patchRoot ?? "Drafts/AI/_patches"
+          );
+          await fsp.mkdir(patchRoot, { recursive: true });
+          const fileName = `${Date.now()}-${path.basename(options.targetPath).replace(/\.[^.]+$/, "")}.md`;
+          const target = path.join(patchRoot, fileName);
+          const content = [
+            "# Patch Draft",
+            "",
+            `- target: ${options.targetPath}`,
+            `- summary: ${options.summary}`,
+            "",
+            "## Proposed Patch",
+            options.patchBody
+          ].join("\n");
+          await fsp.writeFile(target, `${content}\n`, "utf8");
+          console.log(
+            JSON.stringify(
+              {
+                status: "prepared",
+                path: target
+              },
+              null,
+              2
+            )
+          );
         });
     },
     { commands: ["obsidian-bridge"] }
