@@ -74,6 +74,12 @@
 进入流程后，必须按以下顺序：
 1. 读取 shared/policies/Core_Routing.md
 2. 读取 shared/sop/active/Task_Dispatch_SOP_v1.md
-3. 创建 Task Tree
-4. 创建黑板卡片
+3. 先产出符合 schema 的 Task Tree JSON
+4. 再交由 `shared/workflows/active/dispatch.lobster.yml` 接管黑板初始化、队列写入与结构校验
 5. 再分发给对应 owner
+
+## Strategy Review Route
+- 当 branch 目标是战略推演、复盘总结、决策取舍时，应优先使用 `route=strategy_review`
+- 该 route 必须使用 `tool_mode=low_tool`
+- 该 route 的默认 `model_hint` 是 `deepseek/deepseek-reasoner`
+- 若仍需网页、文件、代码、设备动作，必须再拆出 `route=default` 的独立 branch

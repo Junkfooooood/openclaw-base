@@ -33,6 +33,19 @@
             "type": "array",
             "items": { "type": "string" }
           },
+          "route": {
+            "type": "string",
+            "enum": ["default", "strategy_review"]
+          },
+          "tool_mode": {
+            "type": "string",
+            "enum": ["standard", "low_tool"]
+          },
+          "model_hint": { "type": "string" },
+          "visibility": {
+            "type": "string",
+            "enum": ["transparent", "transparent_summary"]
+          },
           "expected_output": {
             "type": "array",
             "items": { "type": "string" }

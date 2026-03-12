@@ -1,7 +1,15 @@
 import { Type } from "@sinclair/typebox";
 import fs from "node:fs";
-import fsp from "node:fs/promises";
 import path from "node:path";
+import {
+  KNOWN_EXECUTION_ROUTES,
+  KNOWN_TOOL_MODES,
+  computeDispatchState,
+  findProjectRoot,
+  readJsonFromStdin,
+  validateTaskTree,
+  writeTaskTreeSnapshot
+} from "../../shared/runtime/management/task_dispatch_lib.mjs";
 
 const KNOWN_ROUTES = new Set([
   "logs",
@@ -59,37 +67,6 @@ function hasBlockedBranch(retryCountMap = {}, maxRetries = 3) {
   return false;
 }
 
-function missingTaskTreeFields(taskTree) {
-  if (!taskTree || typeof taskTree !== "object") {
-    return ["taskTree is missing or invalid"];
-  }
-
-  const missing = [];
-  if (!taskTree.task_id) missing.push("task_id");
-  if (!taskTree.title) missing.push("title");
-  if (!taskTree.mode) missing.push("mode");
-  if (!taskTree.approval_mode) missing.push("approval_mode");
-  if (!taskTree.retry_policy) missing.push("retry_policy");
-  if (!Array.isArray(taskTree.branches) || taskTree.branches.length === 0) {
-    missing.push("branches");
-    return missing;
-  }
-
-  taskTree.branches.forEach((b, idx) => {
-    if (!b.branch_id) missing.push(`branches[${idx}].branch_id`);
-    if (!b.owner) missing.push(`branches[${idx}].owner`);
-    if (!b.goal) missing.push(`branches[${idx}].goal`);
-    if (!Array.isArray(b.expected_output) || b.expected_output.length === 0) {
-      missing.push(`branches[${idx}].expected_output`);
-    }
-    if (!Array.isArray(b.acceptance) || b.acceptance.length === 0) {
-      missing.push(`branches[${idx}].acceptance`);
-    }
-  });
-
-  return missing;
-}
-
 function isProtectedWrite(writePath, protectedPaths = []) {
   if (!writePath || !Array.isArray(protectedPaths) || protectedPaths.length === 0) {
     return false;
@@ -103,26 +80,6 @@ function isProtectedWrite(writePath, protectedPaths = []) {
       normalizedWritePath.startsWith(`${normalizedCandidate}${path.sep}`)
     );
   });
-}
-
-function findProjectRoot(startDir = process.cwd()) {
-  let current = path.resolve(startDir);
-  while (true) {
-    if (
-      fs.existsSync(path.join(current, "shared")) &&
-      fs.existsSync(path.join(current, "workspace-main"))
-    ) {
-      return current;
-    }
-    const parent = path.dirname(current);
-    if (parent === current) return path.resolve(startDir);
-    current = parent;
-  }
-}
-
-function readJsonFromStdin() {
-  const raw = fs.readFileSync(0, "utf8").trim();
-  return raw ? JSON.parse(raw) : {};
 }
 
 function normalizeRouteName(route) {
@@ -255,6 +212,21 @@ function validateWorkflowPayload(payload) {
   }
   if (!Array.isArray(payload.branches)) {
     failReasons.push("branches must be an array");
+  } else {
+    payload.branches.forEach((branch, idx) => {
+      if (!branch.branch_id) failReasons.push(`branches[${idx}].branch_id is required`);
+      if (!branch.owner) failReasons.push(`branches[${idx}].owner is required`);
+      if (!branch.status) failReasons.push(`branches[${idx}].status is required`);
+      if (branch.route && !KNOWN_EXECUTION_ROUTES.has(branch.route)) {
+        failReasons.push(`branches[${idx}].route '${branch.route}' is invalid`);
+      }
+      if (branch.tool_mode && !KNOWN_TOOL_MODES.has(branch.tool_mode)) {
+        failReasons.push(`branches[${idx}].tool_mode '${branch.tool_mode}' is invalid`);
+      }
+      if (branch.route === "strategy_review" && branch.tool_mode !== "low_tool") {
+        failReasons.push(`branches[${idx}] strategy_review must use low_tool mode`);
+      }
+    });
   }
 
   return blocked
@@ -280,14 +252,6 @@ function validateWorkflowPayload(payload) {
           suggested_next_step: "continue",
           task_id: payload.task_id
         };
-}
-
-async function writeTaskTreeSnapshot(root, taskTree) {
-  const queueDir = path.join(root, "shared", "runtime", "queue");
-  await fsp.mkdir(queueDir, { recursive: true });
-  const queuePath = path.join(queueDir, `${taskTree.task_id}.json`);
-  await fsp.writeFile(queuePath, `${JSON.stringify(taskTree, null, 2)}\n`, "utf8");
-  return queuePath;
 }
 
 export default function register(api) {
@@ -324,13 +288,13 @@ export default function register(api) {
 
       // 1. 复杂任务必须有 Task Tree
       if (params.isComplex && params.phase !== "pre-dispatch") {
-        const missing = missingTaskTreeFields(taskTree);
-        if (missing.length > 0) {
+        const validation = validateTaskTree(taskTree);
+        if (!validation.valid) {
           result.allowed = false;
           result.decision = "deny";
           result.nextAction = "fix_task_tree";
           result.reasons.push(
-            `complex task missing required task tree fields: ${missing.join(", ")}`
+            `complex task missing or invalid task tree fields: ${validation.issues.join(", ")}`
           );
         }
       }
@@ -431,19 +395,45 @@ export default function register(api) {
         });
 
       program
+        .command("task-tree-normalize")
+        .description("Normalize a task tree into management-mode dispatch shape.")
+        .action(() => {
+          const payload = readJsonFromStdin();
+          const validation = validateTaskTree(payload);
+          if (!validation.valid) {
+            console.log(
+              JSON.stringify(
+                {
+                  status: "FAIL",
+                  reason: "task tree is incomplete or invalid",
+                  failed_checks: validation.issues,
+                  suggested_next_step: "fix_task_tree"
+                },
+                null,
+                2
+              )
+            );
+            process.exitCode = 1;
+            return;
+          }
+
+          console.log(JSON.stringify(validation.taskTree, null, 2));
+        });
+
+      program
         .command("internal-dispatch")
         .description("Persist a task tree and emit a minimal dispatch summary.")
         .command("run")
         .action(async () => {
           const taskTree = readJsonFromStdin();
-          const missing = missingTaskTreeFields(taskTree);
-          if (missing.length > 0) {
+          const dispatchState = computeDispatchState(taskTree);
+          if (!dispatchState.valid) {
             console.log(
               JSON.stringify(
                 {
                   status: "FAIL",
                   reason: "task tree is incomplete",
-                  failed_checks: missing,
+                  failed_checks: dispatchState.issues,
                   suggested_next_step: "fix_task_tree"
                 },
                 null,
@@ -455,18 +445,15 @@ export default function register(api) {
           }
 
           const root = findProjectRoot();
-          const queuePath = await writeTaskTreeSnapshot(root, taskTree);
+          const queuePath = await writeTaskTreeSnapshot(root, dispatchState.taskTree);
           const result = {
-            task_id: taskTree.task_id,
-            title: taskTree.title,
+            task_id: dispatchState.taskTree.task_id,
+            title: dispatchState.taskTree.title,
             status: "dispatched",
             queue_path: queuePath,
-            branches: taskTree.branches.map((branch) => ({
-              branch_id: branch.branch_id,
-              owner: branch.owner,
-              status: "queued",
-              depends_on: branch.depends_on ?? []
-            }))
+            ready_branches: dispatchState.ready_branches,
+            waiting_branches: dispatchState.waiting_branches,
+            branches: dispatchState.branches
           };
           console.log(JSON.stringify(result, null, 2));
         });
@@ -493,6 +480,6 @@ export default function register(api) {
           );
         });
     },
-    { commands: ["validator-run", "internal-dispatch", "approval"] }
+    { commands: ["validator-run", "internal-dispatch", "approval", "task-tree-normalize"] }
   );
 }

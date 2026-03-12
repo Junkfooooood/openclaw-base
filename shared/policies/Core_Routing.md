@@ -47,12 +47,23 @@
 - 网页 / 文件 / 自动化 / 代码 / 设备执行 → executor
 - 格式校验 / 逻辑校验 / 风险校验 / SOP 边界校验 → validator
 
+## Route Profiles
+- 默认 branch 走 `route=default`，`tool_mode=standard`
+- 战略讨论 / 决策推演 / 复盘总结 / 长链反思 branch 应优先走 `route=strategy_review`
+- `strategy_review` 的默认约束：
+  - `tool_mode=low_tool`
+  - `model_hint=deepseek/deepseek-reasoner`
+  - `visibility=transparent_summary`
+  - 不直接承担正式写库、外发消息、设备执行
+- `strategy_review` 可由 `main` 承担总 synthesis，也可由 `validator` 承担复核型 branch；若需要网页、代码、文件动作，应拆出新的 `default` branch 交给 `executor`
+
 ## 黑板规则
 凡进入复杂任务流程，必须：
 - 在 `shared/blackboard/hot/` 创建对应卡片
 - 每次状态变化更新黑板
 - 明确写出 branch 状态、当前输出、下一步、阻塞点
-- 完成后移动到 `shared/blackboard/archive/`
+- 完成后完整记录进入 `shared/blackboard/archive/`
+- 热板保留一份摘要卡，至少包含一句话总结、输出路径和 archive 指针
 
 ## Task Tree 规则
 Task Tree 必须至少包含：
@@ -62,6 +73,9 @@ Task Tree 必须至少包含：
 - branch 列表
 - 每个 branch 的 owner
 - depends_on
+- route
+- tool_mode
+- model_hint
 - expected_output
 - acceptance
 - retry_policy

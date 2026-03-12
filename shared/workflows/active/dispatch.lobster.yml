@@ -1,91 +1,26 @@
 name: task-dispatch
 args:
-  task:
-    default: ""
+  task_tree_json:
+    default: "{}"
 
 steps:
-  - id: classify
-    command: openclaw.invoke --tool llm-task --action json --args-json '{
-      "prompt": "判断输入任务是否为复杂任务。若是，输出 {is_complex, reasons, title, approval_mode}。复杂任务条件：多输出物、多agent协作、超过3个步骤、涉及正式写库、涉及系统执行/外发消息/设备动作、存在依赖或并行分支。",
-      "input": {"task": ${task}},
-      "schema": {
-        "type": "object",
-        "properties": {
-          "is_complex": {"type": "boolean"},
-          "reasons": {"type": "array", "items": {"type": "string"}},
-          "title": {"type": "string"},
-          "approval_mode": {"type": "string"}
-        },
-        "required": ["is_complex", "reasons", "title", "approval_mode"],
-        "additionalProperties": false
-      }
-    }'
-
-  - id: task_tree
-    command: openclaw.invoke --tool llm-task --action json --args-json '{
-      "prompt": "根据输入任务与复杂任务规则，输出 Task Tree JSON。owner 只能是 main, learning, curator, executor, validator。",
-      "input": {"task": ${task}, "classification": $classify.stdout},
-      "schema": {
-        "type": "object",
-        "properties": {
-          "task_id": {"type": "string"},
-          "title": {"type": "string"},
-          "mode": {"type": "string", "enum": ["single", "multi"]},
-          "approval_mode": {"type": "string", "enum": ["none", "review", "human"]},
-          "retry_policy": {
-            "type": "object",
-            "properties": {
-              "max_retries": {"type": "integer", "minimum": 1},
-              "on_fail": {"type": "string", "enum": ["retry", "block", "notify_human"]}
-            },
-            "required": ["max_retries", "on_fail"],
-            "additionalProperties": false
-          },
-          "branches": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "branch_id": {"type": "string"},
-                "owner": {"type": "string", "enum": ["main", "learning", "curator", "executor", "validator"]},
-                "goal": {"type": "string"},
-                "depends_on": {"type": "array", "items": {"type": "string"}},
-                "expected_output": {"type": "array", "items": {"type": "string"}},
-                "acceptance": {"type": "array", "items": {"type": "string"}}
-              },
-              "required": ["branch_id", "owner", "goal", "expected_output", "acceptance"],
-              "additionalProperties": false
-            }
-          }
-        },
-        "required": ["task_id", "title", "mode", "approval_mode", "retry_policy", "branches"],
-        "additionalProperties": false
-      }
-    }'
-    condition: $classify.stdout.is_complex
+  - id: normalize
+    command: node shared/workflows/bin/task_dispatch_workflow.mjs normalize --task-tree-json '${task_tree_json}'
 
   - id: board_init
-    command: openclaw board-sync init
-    stdin: $task_tree.stdout
-    condition: $classify.stdout.is_complex
+    command: node shared/workflows/bin/task_dispatch_workflow.mjs board-init
+    stdin: $normalize.stdout
 
   - id: dispatch
-    command: openclaw internal-dispatch run
-    stdin: $task_tree.stdout
-    condition: $classify.stdout.is_complex
+    command: node shared/workflows/bin/task_dispatch_workflow.mjs dispatch
+    stdin: $normalize.stdout
 
   - id: validate
-    command: openclaw validator-run
+    command: node shared/workflows/bin/task_dispatch_workflow.mjs validate
     stdin: $dispatch.stdout
-    condition: $classify.stdout.is_complex
 
   - id: approve
-    command: openclaw approval request --kind review
+    command: node shared/workflows/bin/task_dispatch_workflow.mjs approval --kind review
     stdin: $validate.stdout
     approval: required
-    condition: $task_tree.stdout.approval_mode != "none"
-
-  - id: finalize
-    command: openclaw board-sync finalize
-    stdin: $validate.stdout
-    condition: $classify.stdout.is_complex
+    condition: $normalize.stdout.approval_mode != "none"

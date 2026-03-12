@@ -24,6 +24,8 @@
 - `obsidian-bridge` 默认应保持 draft-first，不直接写正式库。
 - 已新增轻量 `route review loop`：可通过 validator 对 route plan 做 advisory 级复核，用于后续逐步优化 Conversation-to-Routes SOP。
 - 已完成 `Moonshot + Qwen + DeepSeek Chat` 从认证层到 agent 可调度层的接入：当前默认回退链为 `OpenAI Codex -> Kimi -> Qwen -> DeepSeek Chat -> OpenAI`；learning/curator 优先走 Kimi，validator 优先走 Qwen，executor 继续以 Codex 为主。
+- 第 8 / 9 / 10 步的管理模式主链已落地为本地状态机：复杂任务先产出 Task Tree JSON，再由 `shared/workflows/bin/task_dispatch_workflow.mjs` 接管 normalize / board-init / dispatch / validate / approval / finalize。
+- 已新增 `strategy_review` 低工具 route：默认 `tool_mode=low_tool`、`model_hint=deepseek/deepseek-reasoner`，用于战略讨论、决策推演、复盘总结；需要网页、代码、文件、设备动作时必须拆出新的 `default` branch。
 
 ## Pending Configuration Facts
 - 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Library/Mobile Documents/com~apple~CloudDocs/knowledge-system`，作为 live vault 使用，并已写入本地运行配置。
@@ -35,6 +37,7 @@
 - 2026-03-12 已完成第 15 步送达验证：Feishu direct session 可正常对话，手动 Feishu 出站测试成功，`cron -> next-heartbeat` 最近一次结果已显示 `channel: feishu`。
 - `DeepSeek` 当前通过手动 `models.providers.deepseek` 接入运行配置，而不是依赖自动 provider 注入；已确认 `deepseek/deepseek-chat` 与 `deepseek/deepseek-reasoner` 出现在 runtime `models list` 中。
 - `deepseek-reasoner` 已注册但未进入默认工具型 agent 主链；后续若要用于战略推演，应优先在低工具依赖场景单独验证。
+- 黑板热冷分层已更新：`finalize` 后完整卡片进入 `shared/blackboard/archive/`，热板仅保留摘要卡和 archive 指针。
 
 ## Imported Facts
 - openclaw-smoke-20260312：林在 2026-03-12 完成了 Markdown、AMS、Semantic、Graph 四层记忆桥联调。

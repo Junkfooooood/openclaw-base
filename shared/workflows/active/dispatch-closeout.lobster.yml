@@ -1,0 +1,8 @@
+name: task-dispatch-closeout
+args:
+  finalize_payload_json:
+    default: "{}"
+
+steps:
+  - id: finalize
+    command: node shared/workflows/bin/task_dispatch_workflow.mjs finalize --payload-json '${finalize_payload_json}'

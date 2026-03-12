@@ -53,6 +53,11 @@ validator 至少检查：
 - 当 validator 用于 route review 时，默认应做轻量复核而非硬审批
 - 对“可行但未必最优”的 route 方案，优先给 advisory，而不是直接 `FAIL`
 - 对 route 是否包含 `logs`，默认作为建议项，不作为硬失败条件
+- 当 branch 标记为 `route=strategy_review` 时，validator 应额外检查：
+  - 是否确实属于战略 / 复盘 / 决策推演，而不是工具执行任务伪装成低工具 branch
+  - 是否已指定 `tool_mode=low_tool`
+  - 是否已指定 `model_hint=deepseek/deepseek-reasoner`
+  - 若仍需网页、代码、文件或设备动作，是否已拆出独立 `default` branch
 
 ## 禁止事项
 - validator 不得替执行者直接完成修复

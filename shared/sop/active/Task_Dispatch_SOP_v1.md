@@ -57,7 +57,7 @@ Task Tree 必须至少包含：
 - approval_mode
 - retry_policy
 - branches
-- 每个 branch 的 owner / goal / depends_on / expected_output / acceptance
+- 每个 branch 的 owner / goal / depends_on / route / tool_mode / model_hint / expected_output / acceptance
 
 ## Step 3: 创建黑板卡片
 在 `shared/blackboard/hot/` 创建对应黑板卡片。
@@ -74,6 +74,15 @@ Task Tree 必须至少包含：
 - curator
 - executor
 - validator
+
+同时必须为每个 branch 指定 route profile：
+- 常规分支：`route=default`
+- 战略讨论 / 决策推演 / 复盘总结：`route=strategy_review`
+
+当 branch 使用 `strategy_review` 时，必须同步写入：
+- `tool_mode=low_tool`
+- `model_hint=deepseek/deepseek-reasoner`
+- 如该 branch 仍需要网页/代码/文件动作，必须再拆出新 branch，而不是让 reasoner route 越权执行
 
 ## Step 5: 分发执行
 每个 branch 执行者仅负责：
@@ -124,7 +133,8 @@ validator 只允许输出：
 当所有 branch 均通过后：
 - main 汇总总结果
 - 若涉及正式动作，则等待审批通过
-- 任务完成后将黑板卡片从 `hot/` 移到 `archive/`
+- 任务完成后将完整黑板卡片写入 `archive/`
+- 在 `hot/` 保留一份摘要卡，仅保留一句话总结、输出路径和 archive 指针
 
 # Output
 主输出至少应包括：
