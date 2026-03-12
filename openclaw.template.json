@@ -214,6 +214,38 @@
           "vaultRoot": "/ABS/PATH/TO/knowledge-system",
           "draftRoot": "Drafts/AI",
           "patchRoot": "Drafts/AI/_patches",
+          "routes": {
+            "logs": {
+              "label": "日志板块",
+              "draftSubdir": "Logs",
+              "officialRoot": "日志板块"
+            },
+            "knowledge": {
+              "label": "知识库",
+              "draftSubdir": "Knowledge",
+              "officialRoot": "_知识库"
+            },
+            "taskboard": {
+              "label": "任务看板",
+              "draftSubdir": "TaskBoard",
+              "officialRoot": "任务榜单记录"
+            },
+            "capabilities": {
+              "label": "六维能力",
+              "draftSubdir": "Capabilities",
+              "officialRoot": "六维能力记录"
+            },
+            "reputation": {
+              "label": "声望",
+              "draftSubdir": "Reputation",
+              "officialRoot": "声望榜单"
+            },
+            "strategy": {
+              "label": "战略板块",
+              "draftSubdir": "Strategy",
+              "officialRoot": "_战略板块"
+            }
+          },
           "allowOfficialWrites": false
         }
       }

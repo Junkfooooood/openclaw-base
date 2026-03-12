@@ -15,6 +15,24 @@
       "patchRoot": {
         "type": "string"
       },
+      "routes": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "draftSubdir": {
+              "type": "string"
+            },
+            "officialRoot": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "allowOfficialWrites": {
         "type": "boolean",
         "default": false

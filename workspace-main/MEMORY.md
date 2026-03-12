@@ -26,6 +26,7 @@
 ## Pending Configuration Facts
 - 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Library/Mobile Documents/com~apple~CloudDocs/knowledge-system`，作为 live vault 使用，并已写入本地运行配置。
 - Redis AMS、Qdrant、Neo4j 已在当前项目里完成基础联调确认。
+- 已建立 Obsidian 业务路由基线：`logs / knowledge / taskboard / capabilities / reputation / strategy`，正式目录映射规则见 `shared/policies/Obsidian_Routing.md`。
 
 ## Imported Facts
 - openclaw-smoke-20260312：林在 2026-03-12 完成了 Markdown、AMS、Semantic、Graph 四层记忆桥联调。
