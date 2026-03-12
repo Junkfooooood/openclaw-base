@@ -22,6 +22,7 @@
 - 当前正在补齐第 11 步附近的结构缺口，重点是记忆桥、黑板桥、验证规则和多 agent 工作骨架。
 - `memory-bridge` 已完成 Redis AMS / Qdrant / Neo4j 基础联调，下一步是细化冲突治理与更稳健的召回策略。
 - `obsidian-bridge` 默认应保持 draft-first，不直接写正式库。
+- 已新增轻量 `route review loop`：可通过 validator 对 route plan 做 advisory 级复核，用于后续逐步优化 Conversation-to-Routes SOP。
 
 ## Pending Configuration Facts
 - 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Library/Mobile Documents/com~apple~CloudDocs/knowledge-system`，作为 live vault 使用，并已写入本地运行配置。

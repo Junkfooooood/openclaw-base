@@ -49,6 +49,11 @@ validator 至少检查：
 - 审批要求
 - 黑板状态
 
+## Route Review 补充说明
+- 当 validator 用于 route review 时，默认应做轻量复核而非硬审批
+- 对“可行但未必最优”的 route 方案，优先给 advisory，而不是直接 `FAIL`
+- 对 route 是否包含 `logs`，默认作为建议项，不作为硬失败条件
+
 ## 禁止事项
 - validator 不得替执行者直接完成修复
 - validator 不得越权宣布正式写库成功

@@ -3,6 +3,46 @@ import fs from "node:fs";
 import fsp from "node:fs/promises";
 import path from "node:path";
 
+const KNOWN_ROUTES = new Set([
+  "logs",
+  "knowledge",
+  "taskboard",
+  "capabilities",
+  "reputation",
+  "strategy"
+]);
+
+const KNOWN_ROUTE_ALIASES = new Map([
+  ["log", "logs"],
+  ["logs", "logs"],
+  ["journal", "logs"],
+  ["日志", "logs"],
+  ["日志板块", "logs"],
+  ["knowledge", "knowledge"],
+  ["kb", "knowledge"],
+  ["知识", "knowledge"],
+  ["知识库", "knowledge"],
+  ["task", "taskboard"],
+  ["tasks", "taskboard"],
+  ["taskboard", "taskboard"],
+  ["任务", "taskboard"],
+  ["任务板块", "taskboard"],
+  ["任务看板", "taskboard"],
+  ["capability", "capabilities"],
+  ["capabilities", "capabilities"],
+  ["能力", "capabilities"],
+  ["六维能力", "capabilities"],
+  ["六维能力记录", "capabilities"],
+  ["reputation", "reputation"],
+  ["声望", "reputation"],
+  ["声望榜单", "reputation"],
+  ["strategy", "strategy"],
+  ["战略", "strategy"],
+  ["战略板块", "strategy"]
+]);
+
+const KNOWN_OUTPUT_TYPES = new Set(["draft", "patch", "suggestion"]);
+
 function parseJsonMaybe(raw) {
   if (!raw || typeof raw !== "string") return null;
   try {
@@ -83,6 +123,163 @@ function findProjectRoot(startDir = process.cwd()) {
 function readJsonFromStdin() {
   const raw = fs.readFileSync(0, "utf8").trim();
   return raw ? JSON.parse(raw) : {};
+}
+
+function normalizeRouteName(route) {
+  const normalized = String(route ?? "").trim().toLowerCase();
+  return KNOWN_ROUTE_ALIASES.get(normalized) ?? normalized;
+}
+
+function validateRoutePlan(payload) {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return {
+      status: "BLOCK",
+      reason: "route review payload is missing or invalid",
+      failed_checks: ["payload is missing or invalid"],
+      advisories: [],
+      suggested_next_step: "provide_valid_route_review_payload",
+      task_id: null
+    };
+  }
+
+  const routePlan = payload.route_plan;
+  const failedChecks = [];
+  const advisories = [];
+  const seenRoutes = new Map();
+
+  if (!Array.isArray(routePlan) || routePlan.length === 0) {
+    return {
+      status: "BLOCK",
+      reason: "route_plan is missing or empty",
+      failed_checks: ["route_plan must be a non-empty array"],
+      advisories: [],
+      suggested_next_step: "provide_route_plan",
+      task_id: payload.task_id ?? null
+    };
+  }
+
+  const normalizedPlan = routePlan.map((item, idx) => {
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      failedChecks.push(`route_plan[${idx}] must be an object`);
+      return null;
+    }
+
+    const normalizedRoute = normalizeRouteName(item.route);
+    if (!item.route) {
+      failedChecks.push(`route_plan[${idx}].route is required`);
+    } else if (!KNOWN_ROUTES.has(normalizedRoute)) {
+      failedChecks.push(`route_plan[${idx}].route '${item.route}' is not a known route`);
+    }
+
+    if (!item.why || !String(item.why).trim()) {
+      failedChecks.push(`route_plan[${idx}].why is required`);
+    }
+
+    if (!item.output_type || !String(item.output_type).trim()) {
+      failedChecks.push(`route_plan[${idx}].output_type is required`);
+    } else if (!KNOWN_OUTPUT_TYPES.has(String(item.output_type).trim().toLowerCase())) {
+      failedChecks.push(
+        `route_plan[${idx}].output_type '${item.output_type}' must be one of: ${Array.from(KNOWN_OUTPUT_TYPES).join(", ")}`
+      );
+    }
+
+    if (item.confidence != null) {
+      const confidence = Number(item.confidence);
+      if (!Number.isFinite(confidence) || confidence < 0 || confidence > 1) {
+        failedChecks.push(`route_plan[${idx}].confidence must be between 0 and 1`);
+      }
+    }
+
+    if (KNOWN_ROUTES.has(normalizedRoute)) {
+      seenRoutes.set(normalizedRoute, (seenRoutes.get(normalizedRoute) ?? 0) + 1);
+    }
+
+    return {
+      route: normalizedRoute,
+      why: String(item.why ?? "").trim(),
+      output_type: String(item.output_type ?? "").trim().toLowerCase(),
+      confidence: item.confidence ?? null
+    };
+  });
+
+  for (const [route, count] of seenRoutes.entries()) {
+    if (count > 1) {
+      advisories.push(`route '${route}' appears ${count} times; consider merging or clarifying the split`);
+    }
+  }
+
+  const hasLogs = normalizedPlan.some((item) => item?.route === "logs");
+  if (!hasLogs) {
+    advisories.push("consider adding logs if this conversation should be archived in the learning system");
+  }
+
+  if (!payload.source_summary || !String(payload.source_summary).trim()) {
+    advisories.push("source_summary is missing; route review is still possible but less comparable over time");
+  }
+
+  if (failedChecks.length > 0) {
+    return {
+      status: "FAIL",
+      reason: "route plan failed lightweight review",
+      failed_checks: failedChecks,
+      advisories,
+      suggested_next_step: "revise_route_plan",
+      task_id: payload.task_id ?? null,
+      normalized_route_plan: normalizedPlan.filter(Boolean)
+    };
+  }
+
+  return {
+    status: "PASS",
+    reason: "route plan is structurally valid and broadly reasonable",
+    failed_checks: [],
+    advisories,
+    suggested_next_step: "continue",
+    task_id: payload.task_id ?? null,
+    normalized_route_plan: normalizedPlan.filter(Boolean)
+  };
+}
+
+function validateWorkflowPayload(payload) {
+  const blocked = payload?.status === "blocked";
+  const failReasons = [];
+
+  if (!payload || typeof payload !== "object") {
+    failReasons.push("payload is missing or invalid");
+  }
+  if (!payload.task_id) {
+    failReasons.push("task_id is required");
+  }
+  if (!payload.title) {
+    failReasons.push("title is required");
+  }
+  if (!Array.isArray(payload.branches)) {
+    failReasons.push("branches must be an array");
+  }
+
+  return blocked
+    ? {
+        status: "BLOCK",
+        reason: "task is already blocked",
+        failed_checks: ["blocked_state"],
+        suggested_next_step: "notify_human",
+        task_id: payload.task_id ?? null
+      }
+    : failReasons.length > 0
+      ? {
+          status: "FAIL",
+          reason: "workflow payload failed structural validation",
+          failed_checks: failReasons,
+          suggested_next_step: "repair_workflow_payload",
+          task_id: payload.task_id ?? null
+        }
+      : {
+          status: "PASS",
+          reason: "workflow payload passed structural validation",
+          failed_checks: [],
+          suggested_next_step: "continue",
+          task_id: payload.task_id
+        };
 }
 
 async function writeTaskTreeSnapshot(root, taskTree) {
@@ -188,52 +385,47 @@ export default function register(api) {
     }
   });
 
+  api.registerTool({
+    name: "policy_route_review",
+    description:
+      "Run a lightweight validator-style review for a route plan produced from conversation routing.",
+    parameters: Type.Object({
+      sourceSummary: Type.Optional(Type.String()),
+      routePlanJson: Type.String(),
+      taskId: Type.Optional(Type.String()),
+      title: Type.Optional(Type.String())
+    }),
+    async execute(_id, params) {
+      const routePlan = parseJsonMaybe(params.routePlanJson);
+      const payload = {
+        task_id: params.taskId ?? null,
+        title: params.title ?? null,
+        source_summary: params.sourceSummary ?? "",
+        route_plan: routePlan
+      };
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(validateRoutePlan(payload), null, 2)
+          }
+        ]
+      };
+    }
+  });
+
   api.registerCli(
     ({ program }) => {
       program
         .command("validator-run")
         .description("Run lightweight structural validation for workflow outputs.")
-        .action(() => {
+        .option("--kind <kind>", "Validation kind", "workflow")
+        .action((opts) => {
           const payload = readJsonFromStdin();
-          const blocked = payload?.status === "blocked";
-          const failReasons = [];
-
-          if (!payload || typeof payload !== "object") {
-            failReasons.push("payload is missing or invalid");
-          }
-          if (!payload.task_id) {
-            failReasons.push("task_id is required");
-          }
-          if (!payload.title) {
-            failReasons.push("title is required");
-          }
-          if (!Array.isArray(payload.branches)) {
-            failReasons.push("branches must be an array");
-          }
-
-          const result = blocked
-            ? {
-                status: "BLOCK",
-                reason: "task is already blocked",
-                failed_checks: ["blocked_state"],
-                suggested_next_step: "notify_human",
-                task_id: payload.task_id ?? null
-              }
-            : failReasons.length > 0
-              ? {
-                  status: "FAIL",
-                  reason: "workflow payload failed structural validation",
-                  failed_checks: failReasons,
-                  suggested_next_step: "repair_workflow_payload",
-                  task_id: payload.task_id ?? null
-                }
-              : {
-                  status: "PASS",
-                  reason: "workflow payload passed structural validation",
-                  failed_checks: [],
-                  suggested_next_step: "continue",
-                  task_id: payload.task_id
-                };
+          const result =
+            opts.kind === "route-review"
+              ? validateRoutePlan(payload)
+              : validateWorkflowPayload(payload);
 
           console.log(JSON.stringify(result, null, 2));
         });

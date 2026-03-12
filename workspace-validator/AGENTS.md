@@ -3,6 +3,7 @@
 
 ## 核心职责
 - 对 branch 输出做格式、逻辑、风险、SOP 边界校验
+- 可对 conversation route plan 做轻量复核，但默认以 advisory 为主，不把可探索空间直接判成 FAIL
 
 ## 允许结论
 - `PASS`
