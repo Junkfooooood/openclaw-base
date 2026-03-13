@@ -3,6 +3,33 @@ import fs from "node:fs";
 import fsp from "node:fs/promises";
 import path from "node:path";
 
+const HYBRID_SCOPE_WEIGHTS = {
+  markdown: 1,
+  commit: 0.97,
+  conflict: 0.72,
+  staged: 0.76,
+  "working-memory": 0.79,
+  "working-message": 0.7,
+  semantic: 0.83,
+  graph: 0.67
+};
+
+const NEGATION_TOKENS = [
+  "not",
+  "no",
+  "never",
+  "without",
+  "cannot",
+  "can't",
+  "禁止",
+  "不得",
+  "不是",
+  "不",
+  "未",
+  "无",
+  "没有"
+];
+
 function findProjectRoot(startDir = process.cwd()) {
   let current = path.resolve(startDir);
   while (true) {
@@ -115,6 +142,27 @@ function buildToolText(payload) {
   return { content: [{ type: "text", text: JSON.stringify(payload, null, 2) }] };
 }
 
+function pickBestSnippet(text, query, maxChars = 240) {
+  const candidates = text
+    .split(/\n+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  let bestSnippet = text.slice(0, maxChars).trim();
+  let bestScore = 0;
+
+  for (const candidate of candidates) {
+    const exact = normalizeText(candidate).includes(normalizeText(query)) ? 1 : 0;
+    const overlap = countTokenOverlap(query, candidate);
+    const similarity = jaccard(query, candidate);
+    const score = exact * 2 + overlap + similarity;
+    if (score <= bestScore) continue;
+    bestScore = score;
+    bestSnippet = candidate.slice(0, maxChars).trim();
+  }
+
+  return bestSnippet;
+}
+
 async function searchMarkdown(pathsConfig, query, maxResults) {
   const files = await collectMarkdownFiles(pathsConfig);
   const lower = query.trim().toLowerCase();
@@ -124,9 +172,15 @@ async function searchMarkdown(pathsConfig, query, maxResults) {
     const text = await fsp.readFile(file, "utf8");
     const haystack = text.toLowerCase();
     const firstIndex = haystack.indexOf(lower);
-    if (firstIndex === -1) continue;
-    const score = haystack.split(lower).length - 1;
-    const preview = text.slice(Math.max(0, firstIndex - 80), firstIndex + query.length + 160).trim();
+    const exact = firstIndex === -1 ? 0 : 1;
+    const overlap = countTokenOverlap(query, text);
+    const similarity = jaccard(query, text);
+    if (Math.max(exact, overlap, similarity) < 0.25) continue;
+    const score = Number((exact * 2 + overlap + similarity).toFixed(3));
+    const preview =
+      firstIndex >= 0
+        ? text.slice(Math.max(0, firstIndex - 80), firstIndex + query.length + 160).trim()
+        : pickBestSnippet(text, query);
     results.push({
       scope: "markdown",
       source: file,
@@ -136,6 +190,166 @@ async function searchMarkdown(pathsConfig, query, maxResults) {
   }
 
   return results.sort((a, b) => b.score - a.score).slice(0, maxResults);
+}
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+async function readJsonFile(filePath) {
+  return JSON.parse(await fsp.readFile(filePath, "utf8"));
+}
+
+async function readLocalRecordDir(dir, scope) {
+  try {
+    const entries = (await fsp.readdir(dir)).filter((entry) => entry.endsWith(".json")).sort();
+    const records = [];
+    for (const entry of entries) {
+      const filePath = path.join(dir, entry);
+      try {
+        const payload = await readJsonFile(filePath);
+        records.push({
+          scope,
+          source: filePath,
+          preview: getComparableText(payload).slice(0, 240),
+          ...payload
+        });
+      } catch {
+        // Ignore malformed local records so retrieval remains resilient.
+      }
+    }
+    return records;
+  } catch {
+    return [];
+  }
+}
+
+async function searchLocalRecordDir(dir, scope, query, maxResults) {
+  const records = await readLocalRecordDir(dir, scope);
+  const matches = [];
+
+  for (const record of records) {
+    const preview = getComparableText(record);
+    const exact = normalizeText(preview).includes(normalizeText(query)) ? 1 : 0;
+    const overlap = countTokenOverlap(query, preview);
+    const similarity = jaccard(query, preview);
+    if (Math.max(exact, overlap, similarity) < 0.3) continue;
+    matches.push({
+      scope,
+      source: record.source,
+      preview: preview.slice(0, 240),
+      score: Number((exact * 2 + overlap + similarity).toFixed(3)),
+      record_id: record.id ?? path.basename(record.source, ".json"),
+      confidence: record.confidence ?? null,
+      resolution_action: record.resolution_action ?? null
+    });
+  }
+
+  return matches.sort((a, b) => b.score - a.score).slice(0, maxResults);
+}
+
+async function collectLocalSnapshot(pathsConfig, query, maxResults) {
+  return {
+    staged: await searchLocalRecordDir(pathsConfig.stagedDir, "staged", query, maxResults),
+    conflicts: await searchLocalRecordDir(pathsConfig.conflictsDir, "conflict", query, maxResults),
+    commits: await searchLocalRecordDir(pathsConfig.commitsDir, "commit", query, maxResults)
+  };
+}
+
+function normalizeRawScore(scope, value) {
+  if (!Number.isFinite(value)) return 0;
+  if (scope === "semantic" || scope === "graph") {
+    return clamp(Number(value), 0, 1);
+  }
+  return clamp(Number(value) / 3, 0, 1);
+}
+
+function countTokenOverlap(query, text) {
+  const queryTokens = tokenize(query);
+  const textTokens = tokenize(text);
+  if (queryTokens.size === 0 || textTokens.size === 0) return 0;
+
+  let hits = 0;
+  for (const item of queryTokens) {
+    if (textTokens.has(item)) hits += 1;
+  }
+  return hits / queryTokens.size;
+}
+
+function trustTierForScope(scope) {
+  if (scope === "markdown" || scope === "commit") return "truth";
+  if (scope === "semantic" || scope === "graph") return "enhanced";
+  if (scope === "working-memory" || scope === "working-message") return "runtime";
+  return "pending";
+}
+
+function getPreviewText(item) {
+  return String(item.preview ?? item.memory ?? getComparableText(item) ?? "").trim();
+}
+
+function buildHybridResult(query, item) {
+  const preview = getPreviewText(item);
+  const exact = normalizeText(preview).includes(normalizeText(query)) ? 1 : 0;
+  const overlap = countTokenOverlap(query, preview);
+  const semanticSimilarity = jaccard(query, preview);
+  const rawScore = normalizeRawScore(item.scope, Number(item.score));
+  const scopeWeight = HYBRID_SCOPE_WEIGHTS[item.scope] ?? 0.6;
+  const hybridScore = Number(
+    (
+      scopeWeight * 0.35 +
+      rawScore * 0.15 +
+      overlap * 0.25 +
+      semanticSimilarity * 0.15 +
+      exact * 0.1
+    ).toFixed(3)
+  );
+
+  return {
+    scope: item.scope,
+    source: item.source ?? null,
+    preview: preview.slice(0, 240),
+    raw_score: Number(rawScore.toFixed(3)),
+    hybrid_score: hybridScore,
+    trust_tier: trustTierForScope(item.scope)
+  };
+}
+
+function buildFusedResults(query, snapshot, maxResults) {
+  const seen = new Set();
+  return flattenSnapshot(snapshot)
+    .map((item) => buildHybridResult(query, item))
+    .filter((item) => {
+      const key = `${item.scope}:${item.source}:${item.preview}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return item.hybrid_score > 0.3;
+    })
+    .sort((a, b) => b.hybrid_score - a.hybrid_score || a.scope.localeCompare(b.scope))
+    .slice(0, maxResults);
+}
+
+function buildRetrievalAdvisories(snapshot, fusedResults) {
+  const advisories = [];
+
+  if ((snapshot.conflicts ?? []).length > 0) {
+    advisories.push("retrieval matched unresolved conflict records; prefer Markdown truth before pending memory candidates");
+  }
+
+  const hasTruthHit = fusedResults.some((item) => item.scope === "markdown" || item.scope === "commit");
+  const hasEnhancedHit = fusedResults.some((item) => item.scope === "semantic" || item.scope === "graph");
+  if (!hasTruthHit && hasEnhancedHit) {
+    advisories.push("top matches come from enhanced memory, but no Markdown truth hit was found");
+  }
+
+  if ((snapshot.staged ?? []).length > 0) {
+    advisories.push("some matches come from staged memory and are not yet approved truth");
+  }
+
+  if ((snapshot.errors ?? []).length > 0) {
+    advisories.push("one or more memory layers returned errors; retrieval quality may be degraded");
+  }
+
+  return advisories;
 }
 
 async function writeJsonRecord(dir, id, payload) {
@@ -196,12 +410,24 @@ function normalizeText(value) {
 }
 
 function tokenize(value) {
-  return new Set(
-    normalizeText(value)
+  const normalized = normalizeText(value);
+  const tokens = new Set(
+    normalized
       .split(" ")
       .map((item) => item.trim())
       .filter((item) => item.length >= 2)
   );
+
+  // Chinese-heavy text often has too few whitespace tokens; fall back to bigrams.
+  if (tokens.size <= 1) {
+    const compact = normalized.replace(/\s+/g, "");
+    for (let index = 0; index < compact.length - 1; index += 1) {
+      const gram = compact.slice(index, index + 2);
+      if (gram.length >= 2) tokens.add(gram);
+    }
+  }
+
+  return tokens;
 }
 
 function jaccard(a, b) {
@@ -215,6 +441,16 @@ function jaccard(a, b) {
   return intersection / (setA.size + setB.size - intersection);
 }
 
+function hasNegationCue(value) {
+  const raw = String(value ?? "").toLowerCase();
+  const normalized = normalizeText(value);
+  return NEGATION_TOKENS.some((token) => raw.includes(token) || normalized.includes(token));
+}
+
+function conflictSeverityRank(level) {
+  return level === "high" ? 3 : level === "medium" ? 2 : 1;
+}
+
 function detectConflicts(candidateText, records) {
   const normalizedCandidate = normalizeText(candidateText);
   const conflicts = [];
@@ -224,16 +460,45 @@ function detectConflicts(candidateText, records) {
     const normalizedRecord = normalizeText(comparisonText);
     if (!normalizedRecord || normalizedRecord === normalizedCandidate) continue;
     const similarity = jaccard(candidateText, comparisonText);
-    if (similarity < 0.35) continue;
+    const overlap = countTokenOverlap(candidateText, comparisonText);
+    if (Math.max(similarity, overlap) < 0.35) continue;
+
+    const negationMismatch = hasNegationCue(candidateText) !== hasNegationCue(comparisonText);
+    let relation = "overlap";
+    if (similarity >= 0.82 && overlap >= 0.7 && !negationMismatch) {
+      relation = "duplicate";
+    } else if (negationMismatch && (similarity >= 0.45 || overlap >= 0.5)) {
+      relation = "contradiction";
+    }
+
+    let severity = relation === "contradiction" ? "high" : relation === "duplicate" ? "low" : "medium";
+    if ((record.scope === "markdown" || record.scope === "commit") && relation !== "duplicate") {
+      severity = "high";
+    }
+    const reviewRequired =
+      severity === "high" ||
+      ((record.scope === "markdown" || record.scope === "commit" || record.scope === "conflict") &&
+        severity === "medium");
+
     conflicts.push({
       scope: record.scope ?? "unknown",
       source: record.source ?? null,
+      relation,
+      severity,
+      review_required: reviewRequired,
       similarity: Number(similarity.toFixed(3)),
+      overlap: Number(overlap.toFixed(3)),
       preview: comparisonText.slice(0, 240)
     });
   }
 
-  return conflicts.sort((a, b) => b.similarity - a.similarity);
+  return conflicts.sort((a, b) => {
+    const reviewDelta = Number(b.review_required) - Number(a.review_required);
+    if (reviewDelta !== 0) return reviewDelta;
+    const severityDelta = conflictSeverityRank(b.severity) - conflictSeverityRank(a.severity);
+    if (severityDelta !== 0) return severityDelta;
+    return b.similarity - a.similarity;
+  });
 }
 
 function amsHeaders(pathsConfig) {
@@ -452,11 +717,19 @@ async function runPythonBridge(pathsConfig, command, payload = {}) {
 async function collectLayerSnapshot(pathsConfig, { query, userId, sessionId, namespace, maxResults }) {
   const snapshot = {
     markdown: await searchMarkdown(pathsConfig, query, maxResults),
+    staged: [],
+    conflicts: [],
+    commits: [],
     working: [],
     semantic: [],
     graph: [],
     errors: []
   };
+
+  const localSnapshot = await collectLocalSnapshot(pathsConfig, query, maxResults);
+  snapshot.staged = localSnapshot.staged;
+  snapshot.conflicts = localSnapshot.conflicts;
+  snapshot.commits = localSnapshot.commits;
 
   const working = await searchWorkingMemory(pathsConfig, query, sessionId, userId, namespace);
   snapshot.working = working.results ?? [];
@@ -492,7 +765,15 @@ function flattenSnapshot(snapshot) {
     relationship: item.relationship,
     destination: item.destination ?? item.target ?? null
   }));
-  return [...(snapshot.markdown ?? []), ...(snapshot.working ?? []), ...semantic, ...graph];
+  return [
+    ...(snapshot.markdown ?? []),
+    ...(snapshot.staged ?? []),
+    ...(snapshot.conflicts ?? []),
+    ...(snapshot.commits ?? []),
+    ...(snapshot.working ?? []),
+    ...semantic,
+    ...graph
+  ];
 }
 
 function defaultUserId(pathsConfig, params) {
@@ -577,13 +858,15 @@ export default function register(api) {
         const userId = defaultUserId(pathsConfig, params);
         const sessionId = defaultSessionId(pathsConfig, params);
         const namespace = defaultNamespace(pathsConfig, params);
+        const maxResults = params.max_results ?? 5;
         const snapshot = await collectLayerSnapshot(pathsConfig, {
           query: params.query,
           userId,
           sessionId,
           namespace,
-          maxResults: params.max_results ?? 5
+          maxResults
         });
+        const fusedResults = buildFusedResults(params.query, snapshot, maxResults);
 
         return buildToolText({
           query: params.query,
@@ -591,9 +874,14 @@ export default function register(api) {
           session_id: sessionId,
           namespace,
           markdown: snapshot.markdown,
+          staged: snapshot.staged,
+          conflicts: snapshot.conflicts,
+          commits: snapshot.commits,
           working: snapshot.working,
           semantic: snapshot.semantic,
           graph: snapshot.graph,
+          fused_results: fusedResults,
+          advisories: buildRetrievalAdvisories(snapshot, fusedResults),
           errors: snapshot.errors
         });
       }
@@ -635,6 +923,7 @@ export default function register(api) {
           maxResults: 5
         });
         const conflictCandidates = detectConflicts(params.text, flattenSnapshot(snapshot));
+        const reviewRequired = conflictCandidates.some((item) => item.review_required);
         const shouldSyncWorking = params.sync_working ?? true;
         const shouldSyncSemanticGraph =
           params.sync_semantic_graph ??
@@ -699,16 +988,18 @@ export default function register(api) {
           staged_at: new Date().toISOString(),
           retrieval_snapshot: snapshot,
           conflict_candidates: conflictCandidates,
+          conflict_review_required: reviewRequired,
           backend_status: backendStatus
         };
 
-        const targetDir = conflictCandidates.length > 0 ? pathsConfig.conflictsDir : pathsConfig.stagedDir;
+        const targetDir = reviewRequired ? pathsConfig.conflictsDir : pathsConfig.stagedDir;
         const filePath = await writeJsonRecord(targetDir, id, payload);
 
         return buildToolText({
-          status: conflictCandidates.length > 0 ? "conflict" : "staged",
+          status: reviewRequired ? "conflict" : "staged",
           id,
           file_path: filePath,
+          review_required: reviewRequired,
           conflict_candidates: conflictCandidates,
           backend_status: backendStatus
         });
@@ -825,7 +1116,8 @@ export default function register(api) {
         properties: {
           id: { type: "string" },
           action: { type: "string", enum: ["keep", "replace", "merge", "defer"] },
-          notes: { type: "string" }
+          notes: { type: "string" },
+          resolved_by: { type: "string" }
         },
         required: ["id", "action"],
         additionalProperties: false
@@ -843,12 +1135,63 @@ export default function register(api) {
           ...record.payload,
           resolution_action: params.action,
           resolution_notes: params.notes ?? "",
+          resolved_by: params.resolved_by ?? null,
           resolved_at: new Date().toISOString()
         });
         if (record.filePath !== filePath) {
           await fsp.rm(record.filePath, { force: true });
         }
         return buildToolText({ status: "resolved", id: params.id, action: params.action, file_path: filePath });
+      }
+    },
+    { optional: true }
+  );
+
+  api.registerTool(
+    {
+      name: "memory_bridge_review_conflicts",
+      description: "Summarize unresolved memory conflicts and suggest the next human review action.",
+      parameters: {
+        type: "object",
+        properties: {
+          limit: { type: "integer", minimum: 1, default: 10 }
+        },
+        additionalProperties: false
+      },
+      async execute(_id, params) {
+        const pathsConfig = getPaths(api);
+        const records = await readLocalRecordDir(pathsConfig.conflictsDir, "conflict");
+        const suggestions = records
+          .slice()
+          .sort((a, b) => String(b.staged_at ?? "").localeCompare(String(a.staged_at ?? "")))
+          .slice(0, params.limit ?? 10)
+          .map((record) => {
+            const candidates = Array.isArray(record.conflict_candidates) ? record.conflict_candidates : [];
+            const hasContradiction = candidates.some((item) => item.relation === "contradiction");
+            const hasDuplicate = candidates.every((item) => item.relation === "duplicate");
+            const suggestedAction = hasContradiction ? "defer" : hasDuplicate ? "keep" : "merge";
+            const reason = hasContradiction
+              ? "candidate conflicts with an existing truth-like memory and should wait for human review"
+              : hasDuplicate
+                ? "candidate mostly duplicates an existing memory and can usually be kept as-is or ignored"
+                : "candidate partially overlaps with existing memory and likely needs merge-style consolidation";
+
+            return {
+              id: record.id ?? path.basename(record.source ?? "", ".json"),
+              source: record.source ?? null,
+              staged_at: record.staged_at ?? null,
+              confidence: record.confidence ?? null,
+              preview: getComparableText(record).slice(0, 240),
+              conflict_candidates: candidates.slice(0, 5),
+              suggested_action: suggestedAction,
+              suggested_reason: reason
+            };
+          });
+
+        return buildToolText({
+          conflict_count: records.length,
+          suggestions
+        });
       }
     },
     { optional: true }
@@ -861,12 +1204,22 @@ export default function register(api) {
       memoryBridge.command("status").action(async () => {
         const pathsConfig = getPaths(api);
         const markdownFiles = await collectMarkdownFiles(pathsConfig);
+        const [stagedRecords, conflictRecords, commitRecords] = await Promise.all([
+          readLocalRecordDir(pathsConfig.stagedDir, "staged"),
+          readLocalRecordDir(pathsConfig.conflictsDir, "conflict"),
+          readLocalRecordDir(pathsConfig.commitsDir, "commit")
+        ]);
         const result = {
           root: pathsConfig.root,
           markdown_files: markdownFiles,
           staged_dir: pathsConfig.stagedDir,
           conflicts_dir: pathsConfig.conflictsDir,
           commits_dir: pathsConfig.commitsDir,
+          local_record_counts: {
+            staged: stagedRecords.length,
+            conflicts: conflictRecords.length,
+            commits: commitRecords.length
+          },
           ams_base_url: pathsConfig.amsBaseUrl,
           python_bin: pathsConfig.pythonBin,
           python_script: pathsConfig.pythonScript,
@@ -903,13 +1256,15 @@ export default function register(api) {
           const userId = defaultUserId(pathsConfig, { user_id: options.userId });
           const sessionId = defaultSessionId(pathsConfig, { user_id: userId, session_id: options.sessionId });
           const namespace = defaultNamespace(pathsConfig, { namespace: options.namespace });
+          const maxResults = Number(options.maxResults || 5);
           const snapshot = await collectLayerSnapshot(pathsConfig, {
             query: options.query,
             userId,
             sessionId,
             namespace,
-            maxResults: Number(options.maxResults || 5)
+            maxResults
           });
+          const fusedResults = buildFusedResults(options.query, snapshot, maxResults);
           console.log(
             JSON.stringify(
               {
@@ -918,9 +1273,14 @@ export default function register(api) {
                 session_id: sessionId,
                 namespace,
                 markdown: snapshot.markdown,
+                staged: snapshot.staged,
+                conflicts: snapshot.conflicts,
+                commits: snapshot.commits,
                 working: snapshot.working,
                 semantic: snapshot.semantic,
                 graph: snapshot.graph,
+                fused_results: fusedResults,
+                advisories: buildRetrievalAdvisories(snapshot, fusedResults),
                 errors: snapshot.errors
               },
               null,
@@ -957,6 +1317,7 @@ export default function register(api) {
             maxResults: 5
           });
           const conflictCandidates = detectConflicts(options.text, flattenSnapshot(snapshot));
+          const reviewRequired = conflictCandidates.some((item) => item.review_required);
           const confidence = Number(options.confidence);
           const shouldSyncSemanticGraph =
             Boolean(options.syncSemanticGraph) ||
@@ -1014,16 +1375,18 @@ export default function register(api) {
             staged_at: new Date().toISOString(),
             retrieval_snapshot: snapshot,
             conflict_candidates: conflictCandidates,
+            conflict_review_required: reviewRequired,
             backend_status: backendStatus
           };
-          const targetDir = conflictCandidates.length > 0 ? pathsConfig.conflictsDir : pathsConfig.stagedDir;
+          const targetDir = reviewRequired ? pathsConfig.conflictsDir : pathsConfig.stagedDir;
           const filePath = await writeJsonRecord(targetDir, id, payload);
           console.log(
             JSON.stringify(
               {
-                status: conflictCandidates.length > 0 ? "conflict" : "staged",
+                status: reviewRequired ? "conflict" : "staged",
                 id,
                 file_path: filePath,
+                review_required: reviewRequired,
                 conflict_candidates: conflictCandidates,
                 backend_status: backendStatus
               },
@@ -1124,6 +1487,84 @@ export default function register(api) {
                 target_path: targetPath,
                 commit_path: commitPath,
                 backend_status: backendStatus
+              },
+              null,
+              2
+            )
+          );
+        });
+
+      memoryBridge
+        .command("review-conflicts")
+        .option("--limit <limit>", undefined, "10")
+        .action(async (options) => {
+          const pathsConfig = getPaths(api);
+          const records = await readLocalRecordDir(pathsConfig.conflictsDir, "conflict");
+          const suggestions = records
+            .slice()
+            .sort((a, b) => String(b.staged_at ?? "").localeCompare(String(a.staged_at ?? "")))
+            .slice(0, Number(options.limit || 10))
+            .map((record) => {
+              const candidates = Array.isArray(record.conflict_candidates) ? record.conflict_candidates : [];
+              const hasContradiction = candidates.some((item) => item.relation === "contradiction");
+              const hasDuplicate = candidates.length > 0 && candidates.every((item) => item.relation === "duplicate");
+              return {
+                id: record.id ?? path.basename(record.source ?? "", ".json"),
+                source: record.source ?? null,
+                staged_at: record.staged_at ?? null,
+                confidence: record.confidence ?? null,
+                preview: getComparableText(record).slice(0, 240),
+                suggested_action: hasContradiction ? "defer" : hasDuplicate ? "keep" : "merge",
+                conflict_candidates: candidates.slice(0, 5)
+              };
+            });
+
+          console.log(
+            JSON.stringify(
+              {
+                conflict_count: records.length,
+                suggestions
+              },
+              null,
+              2
+            )
+          );
+        });
+
+      memoryBridge
+        .command("resolve-conflict")
+        .requiredOption("--id <id>")
+        .requiredOption("--action <action>")
+        .option("--notes <notes>")
+        .option("--resolved-by <resolvedBy>")
+        .action(async (options) => {
+          const pathsConfig = getPaths(api);
+          const record = await readRecordById(pathsConfig, options.id);
+          if (!record) {
+            console.log(JSON.stringify({ status: "missing", id: options.id }, null, 2));
+            return;
+          }
+
+          const destinationDir =
+            options.action === "defer" ? pathsConfig.conflictsDir : pathsConfig.commitsDir;
+          const filePath = await writeJsonRecord(destinationDir, options.id, {
+            ...record.payload,
+            resolution_action: options.action,
+            resolution_notes: options.notes ?? "",
+            resolved_by: options.resolvedBy ?? null,
+            resolved_at: new Date().toISOString()
+          });
+          if (record.filePath !== filePath) {
+            await fsp.rm(record.filePath, { force: true });
+          }
+
+          console.log(
+            JSON.stringify(
+              {
+                status: "resolved",
+                id: options.id,
+                action: options.action,
+                file_path: filePath
               },
               null,
               2

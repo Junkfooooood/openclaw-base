@@ -4,28 +4,5 @@ args:
     default: "{}"
 
 steps:
-  - id: normalize
-    command: node shared/workflows/bin/task_dispatch_workflow.mjs normalize --task-tree-json '${task_tree_json}'
-
-  - id: board_init
-    command: node shared/workflows/bin/task_dispatch_workflow.mjs board-init
-    stdin: $normalize.stdout
-
-  - id: dispatch
-    command: node shared/workflows/bin/task_dispatch_workflow.mjs dispatch
-    stdin: $normalize.stdout
-
-  - id: validate
-    command: node shared/workflows/bin/task_dispatch_workflow.mjs validate
-    stdin: $dispatch.stdout
-
-  - id: handoff
-    command: node shared/workflows/bin/task_dispatch_workflow.mjs handoff
-    stdin: $dispatch.stdout
-    condition: $validate.stdout.status == "PASS"
-
-  - id: approve
-    command: node shared/workflows/bin/task_dispatch_workflow.mjs approval --kind review
-    stdin: $validate.stdout
-    approval: required
-    condition: $normalize.stdout.approval_mode != "none"
+  - id: run_full
+    command: node shared/workflows/bin/task_dispatch_workflow.mjs run-full --task-tree-json '${task_tree_json}'

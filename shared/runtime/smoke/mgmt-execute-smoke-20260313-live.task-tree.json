@@ -1,0 +1,49 @@
+{
+  "task_id": "mgmt-execute-smoke-20260313-live6",
+  "title": "管理模式完整主链 live smoke v6",
+  "approval_mode": "none",
+  "retry_policy": {
+    "max_retries": 2,
+    "on_fail": "retry"
+  },
+  "branches": [
+    {
+      "branch_id": "retro",
+      "owner": "learning",
+      "goal": "复盘当前管理模式已落地能力、剩余风险与正式验收关注点。",
+      "depends_on": [],
+      "route": "strategy_review",
+      "tool_mode": "low_tool",
+      "model_hint": "deepseek/deepseek-reasoner",
+      "visibility": "transparent_summary",
+      "expected_output": [
+        "管理模式复盘纪要",
+        "正式验收关注点"
+      ],
+      "acceptance": [
+        "聚焦复盘与判断，不执行外部工具动作",
+        "明确指出 validator 和 finalize 的关键检查点"
+      ]
+    },
+    {
+      "branch_id": "closeout",
+      "owner": "executor",
+      "goal": "基于 retro 结论，产出管理模式正式验收收口清单。",
+      "depends_on": [
+        "retro"
+      ],
+      "route": "default",
+      "tool_mode": "standard",
+      "model_hint": "deepseek/deepseek-chat",
+      "visibility": "transparent_summary",
+      "expected_output": [
+        "收口验收清单",
+        "后续维护建议"
+      ],
+      "acceptance": [
+        "引用 retro 的结论",
+        "给出 board-init 到 finalize 的验收要点"
+      ]
+    }
+  ]
+}

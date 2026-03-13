@@ -51,6 +51,39 @@
       "autoSyncToSemanticGraph": {
         "type": "boolean"
       },
+      "management": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "namespace": {
+            "type": "string"
+          },
+          "retentionDays": {
+            "type": "integer"
+          },
+          "mirrorDir": {
+            "type": "string"
+          },
+          "syncTaskTreeToWorking": {
+            "type": "boolean"
+          },
+          "syncBranchPacketToWorking": {
+            "type": "boolean"
+          },
+          "syncActivityToWorking": {
+            "type": "boolean"
+          },
+          "syncSearchTraceToWorking": {
+            "type": "boolean"
+          },
+          "syncStrategyReviewToSemanticGraph": {
+            "type": "boolean"
+          },
+          "syncSearchTraceToSemanticGraph": {
+            "type": "boolean"
+          }
+        }
+      },
       "mem0": {
         "type": "object",
         "additionalProperties": false,

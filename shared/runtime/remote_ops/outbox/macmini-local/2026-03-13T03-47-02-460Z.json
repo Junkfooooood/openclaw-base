@@ -1,0 +1,609 @@
+{
+  "schema_version": 1,
+  "collected_at": "2026-03-13T03:47:02.460Z",
+  "device_id": "macmini-local",
+  "device_label": "macmini-local",
+  "hostname": "linqingxuandeMac-mini.local",
+  "user": "linqingxuan",
+  "browser": {
+    "collected_at": "2026-03-13T03:47:02.459Z",
+    "lookback_days": 3,
+    "browsers": [
+      {
+        "available": true,
+        "error": null,
+        "browser_id": "chrome",
+        "browser": "Google Chrome",
+        "total_visits": 864,
+        "categories": {
+          "agent": [
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "chatgpt.com",
+              "visit_count": 174,
+              "last_visited_at": "2026-03-13 01:10:00",
+              "sample_titles": [
+                "模型介绍",
+                "ChatGPT",
+                "开始使用 | ChatGPT"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "gemini.google.com",
+              "visit_count": 41,
+              "last_visited_at": "2026-03-13 01:36:31",
+              "sample_titles": [
+                "Google Gemini",
+                "‎Google Gemini",
+                "gemini.google.com"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "doubao.com",
+              "visit_count": 4,
+              "last_visited_at": "2026-03-12 01:11:38",
+              "sample_titles": [
+                "doubao.com/chat/38416639325549826",
+                "豆包 - 字节跳动旗下 AI 智能助手"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "chat.deepseek.com",
+              "visit_count": 2,
+              "last_visited_at": "2026-03-13 01:44:38",
+              "sample_titles": [
+                "DeepSeek - 探索未至之境"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "chat.openai.com",
+              "visit_count": 2,
+              "last_visited_at": "2026-03-12 00:52:11",
+              "sample_titles": [
+                "开始使用 | ChatGPT",
+                "ChatGPT"
+              ]
+            }
+          ],
+          "course": [
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "course",
+              "domain": "bilibili.com",
+              "visit_count": 29,
+              "last_visited_at": "2026-03-12 08:51:29",
+              "sample_titles": [
+                "【Obsidian】多端同步和备份方案_哔哩哔哩_bilibili",
+                "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+                "国内用户用海外 AI 的正确姿势：官方、正规、邪道一口气讲透_哔哩哔哩_bilibili"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "course",
+              "domain": "search.bilibili.com",
+              "visit_count": 10,
+              "last_visited_at": "2026-03-12 08:44:23",
+              "sample_titles": [
+                "obsidian多端同步和备份方案-哔哩哔哩_bilibili",
+                "obsidian多端同步-哔哩哔哩_bilibili",
+                "国内怎么用chatgpt-哔哩哔哩_bilibili"
+              ]
+            }
+          ],
+          "other": [
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "auth.openai.com",
+              "visit_count": 135,
+              "last_visited_at": "2026-03-13 01:37:16",
+              "sample_titles": [
+                "Sign into Codex",
+                "使用 ChatGPT 登录到 Codex - OpenAI",
+                "检查您的收件箱 - OpenAI"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "github.com",
+              "visit_count": 51,
+              "last_visited_at": "2026-03-12 13:15:36",
+              "sample_titles": [
+                "Fine-grained Personal Access Tokens",
+                "New Fine-grained Personal Access Token",
+                "GitHub Apps"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "accounts.google.com",
+              "visit_count": 32,
+              "last_visited_at": "2026-03-12 14:15:55",
+              "sample_titles": [
+                "登录 - Google 账号",
+                "注册账号",
+                "Chrome 应用商店"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "douyin.com",
+              "visit_count": 32,
+              "last_visited_at": "2026-03-11 10:26:39",
+              "sample_titles": [
+                "似离灼霞并明心的抖音 - 抖音",
+                "抖音-记录美好生活"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "google.com",
+              "visit_count": 28,
+              "last_visited_at": "2026-03-12 14:39:02",
+              "sample_titles": [
+                "gl - Google 搜索",
+                "Qwen - Google 搜索",
+                "moonshot - Google 搜索"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "platform.moonshot.cn",
+              "visit_count": 23,
+              "last_visited_at": "2026-03-12 14:25:11",
+              "sample_titles": [
+                "Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+                "Kimi K2.5 - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+                "开始使用 Kimi API - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "localhost",
+              "visit_count": 18,
+              "last_visited_at": "2026-03-13 01:37:16",
+              "sample_titles": [
+                "Sign into Codex",
+                "Authentication successful",
+                "Neo4j Browser"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "bailian.console.aliyun.com",
+              "visit_count": 18,
+              "last_visited_at": "2026-03-12 14:24:00",
+              "sample_titles": [
+                "大模型服务平台百炼控制台"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "127.0.0.1",
+              "visit_count": 18,
+              "last_visited_at": "2026-03-12 13:16:54",
+              "sample_titles": [
+                "OpenClaw 控制 --- OpenClaw Control",
+                "OpenClaw Control"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "help.openai.com",
+              "visit_count": 15,
+              "last_visited_at": "2026-03-10 06:38:11",
+              "sample_titles": [
+                "排查模型功能访问问题 | OpenAI Help Center",
+                "ChatGPT | OpenAI Help Center"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "account.alibabacloud.com",
+              "visit_count": 12,
+              "last_visited_at": "2026-03-12 14:17:33",
+              "sample_titles": [
+                "Alicloud supply info",
+                "注册账号",
+                "登录 - Google 账号"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "scn0mulklu7f.feishu.cn",
+              "visit_count": 11,
+              "last_visited_at": "2026-03-12 01:11:39",
+              "sample_titles": [
+                "智能纪要：企业组织形态类型及特点分析 2026年3月11日 - 飞书云文档",
+                "Docs",
+                "accounts.feishu.cn/accounts/page/login?query_scope=all&redirect_uri=https%3A%2F%2Fscn0mul…"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "browser_id": "arc",
+        "browser": "Arc",
+        "available": false,
+        "error": "history database not found",
+        "total_visits": 0,
+        "categories": {
+          "agent": [],
+          "course": [],
+          "other": []
+        }
+      },
+      {
+        "browser_id": "brave",
+        "browser": "Brave",
+        "available": false,
+        "error": "history database not found",
+        "total_visits": 0,
+        "categories": {
+          "agent": [],
+          "course": [],
+          "other": []
+        }
+      },
+      {
+        "browser_id": "edge",
+        "browser": "Microsoft Edge",
+        "available": false,
+        "error": "history database not found",
+        "total_visits": 0,
+        "categories": {
+          "agent": [],
+          "course": [],
+          "other": []
+        }
+      },
+      {
+        "browser_id": "safari",
+        "browser": "Safari",
+        "available": false,
+        "error": "Error: unable to open database \"file:///Users/linqingxuan/Library/Safari/History.db?immutable=1\": authorization denied",
+        "total_visits": 0,
+        "categories": {
+          "agent": [],
+          "course": [],
+          "other": []
+        }
+      }
+    ],
+    "aggregate": {
+      "total_visits": 864,
+      "agent_sites": [
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "agent",
+          "domain": "chatgpt.com",
+          "visit_count": 174,
+          "last_visited_at": "2026-03-13 01:10:00",
+          "sample_titles": [
+            "模型介绍",
+            "ChatGPT",
+            "开始使用 | ChatGPT"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "agent",
+          "domain": "gemini.google.com",
+          "visit_count": 41,
+          "last_visited_at": "2026-03-13 01:36:31",
+          "sample_titles": [
+            "Google Gemini",
+            "‎Google Gemini",
+            "gemini.google.com"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "agent",
+          "domain": "doubao.com",
+          "visit_count": 4,
+          "last_visited_at": "2026-03-12 01:11:38",
+          "sample_titles": [
+            "doubao.com/chat/38416639325549826",
+            "豆包 - 字节跳动旗下 AI 智能助手"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "agent",
+          "domain": "chat.deepseek.com",
+          "visit_count": 2,
+          "last_visited_at": "2026-03-13 01:44:38",
+          "sample_titles": [
+            "DeepSeek - 探索未至之境"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "agent",
+          "domain": "chat.openai.com",
+          "visit_count": 2,
+          "last_visited_at": "2026-03-12 00:52:11",
+          "sample_titles": [
+            "开始使用 | ChatGPT",
+            "ChatGPT"
+          ]
+        }
+      ],
+      "course_sites": [
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "course",
+          "domain": "bilibili.com",
+          "visit_count": 29,
+          "last_visited_at": "2026-03-12 08:51:29",
+          "sample_titles": [
+            "【Obsidian】多端同步和备份方案_哔哩哔哩_bilibili",
+            "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+            "国内用户用海外 AI 的正确姿势：官方、正规、邪道一口气讲透_哔哩哔哩_bilibili"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "course",
+          "domain": "search.bilibili.com",
+          "visit_count": 10,
+          "last_visited_at": "2026-03-12 08:44:23",
+          "sample_titles": [
+            "obsidian多端同步和备份方案-哔哩哔哩_bilibili",
+            "obsidian多端同步-哔哩哔哩_bilibili",
+            "国内怎么用chatgpt-哔哩哔哩_bilibili"
+          ]
+        }
+      ],
+      "other_sites": [
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "auth.openai.com",
+          "visit_count": 135,
+          "last_visited_at": "2026-03-13 01:37:16",
+          "sample_titles": [
+            "Sign into Codex",
+            "使用 ChatGPT 登录到 Codex - OpenAI",
+            "检查您的收件箱 - OpenAI"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "github.com",
+          "visit_count": 51,
+          "last_visited_at": "2026-03-12 13:15:36",
+          "sample_titles": [
+            "Fine-grained Personal Access Tokens",
+            "New Fine-grained Personal Access Token",
+            "GitHub Apps"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "accounts.google.com",
+          "visit_count": 32,
+          "last_visited_at": "2026-03-12 14:15:55",
+          "sample_titles": [
+            "登录 - Google 账号",
+            "注册账号",
+            "Chrome 应用商店"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "douyin.com",
+          "visit_count": 32,
+          "last_visited_at": "2026-03-11 10:26:39",
+          "sample_titles": [
+            "似离灼霞并明心的抖音 - 抖音",
+            "抖音-记录美好生活"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "google.com",
+          "visit_count": 28,
+          "last_visited_at": "2026-03-12 14:39:02",
+          "sample_titles": [
+            "gl - Google 搜索",
+            "Qwen - Google 搜索",
+            "moonshot - Google 搜索"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "platform.moonshot.cn",
+          "visit_count": 23,
+          "last_visited_at": "2026-03-12 14:25:11",
+          "sample_titles": [
+            "Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+            "Kimi K2.5 - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+            "开始使用 Kimi API - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "localhost",
+          "visit_count": 18,
+          "last_visited_at": "2026-03-13 01:37:16",
+          "sample_titles": [
+            "Sign into Codex",
+            "Authentication successful",
+            "Neo4j Browser"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "bailian.console.aliyun.com",
+          "visit_count": 18,
+          "last_visited_at": "2026-03-12 14:24:00",
+          "sample_titles": [
+            "大模型服务平台百炼控制台"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "127.0.0.1",
+          "visit_count": 18,
+          "last_visited_at": "2026-03-12 13:16:54",
+          "sample_titles": [
+            "OpenClaw 控制 --- OpenClaw Control",
+            "OpenClaw Control"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "help.openai.com",
+          "visit_count": 15,
+          "last_visited_at": "2026-03-10 06:38:11",
+          "sample_titles": [
+            "排查模型功能访问问题 | OpenAI Help Center",
+            "ChatGPT | OpenAI Help Center"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "account.alibabacloud.com",
+          "visit_count": 12,
+          "last_visited_at": "2026-03-12 14:17:33",
+          "sample_titles": [
+            "Alicloud supply info",
+            "注册账号",
+            "登录 - Google 账号"
+          ]
+        },
+        {
+          "browser": "Google Chrome",
+          "browser_id": "chrome",
+          "category": "other",
+          "domain": "scn0mulklu7f.feishu.cn",
+          "visit_count": 11,
+          "last_visited_at": "2026-03-12 01:11:39",
+          "sample_titles": [
+            "智能纪要：企业组织形态类型及特点分析 2026年3月11日 - 飞书云文档",
+            "Docs",
+            "accounts.feishu.cn/accounts/page/login?query_scope=all&redirect_uri=https%3A%2F%2Fscn0mul…"
+          ]
+        }
+      ]
+    }
+  },
+  "chatlogs": {
+    "total_files": 27,
+    "recent_files": [
+      {
+        "name": "2026-03-13-112356.md",
+        "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-112356.md",
+        "updated_at": "2026-03-13T03:24:46.632Z",
+        "title": "2026-03-13 11:23:56 对话记录"
+      },
+      {
+        "name": "2026-03-13-100339.md",
+        "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-100339.md",
+        "updated_at": "2026-03-13T02:04:23.243Z",
+        "title": "2026-03-13 10:03:39 对话记录"
+      },
+      {
+        "name": "2026-03-13-083646.md",
+        "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-083646.md",
+        "updated_at": "2026-03-13T00:37:30.403Z",
+        "title": "2026-03-13 对话记录"
+      },
+      {
+        "name": "2026-03-13-083032.md",
+        "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-083032.md",
+        "updated_at": "2026-03-13T00:32:02.546Z",
+        "title": "2026-03-13 对话记录"
+      },
+      {
+        "name": "2026-03-12-232951.md",
+        "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-12-232951.md",
+        "updated_at": "2026-03-12T15:36:02.586Z",
+        "title": "2026-03-12 对话记录：将第 8/9/10 步管理模式与 reasoner route 一起落地"
+      },
+      {
+        "name": "2026-03-12-231431.md",
+        "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-12-231431.md",
+        "updated_at": "2026-03-12T15:15:50.457Z",
+        "title": "2026-03-12 对话记录：把 DeepSeek 接成 OpenClaw 可调度模型"
+      }
+    ]
+  },
+  "apps": {
+    "available": true,
+    "sample_count": 1,
+    "last_sample_at": "2026-03-13T03:45:24.392Z",
+    "top_apps": []
+  }
+}

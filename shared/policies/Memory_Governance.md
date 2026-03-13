@@ -85,6 +85,17 @@
 - 默认先写 staged 记录；只有无冲突且命中自动同步阈值时，才允许同步到 semantic / graph
 - 一旦发现 Markdown 与 semantic / graph 结果相近但不一致，必须进入 `shared/runtime/memory/conflicts/`
 - 正式 commit 后，才允许把批准事实回填到 semantic / graph 作为增强层副本
+- retrieve 默认应返回 fused results，并明确区分 `truth / enhanced / runtime / pending` 信任层级
+- unresolved conflict 命中检索时，必须给出 advisory，提醒优先参考 Markdown truth
+- conflict record 应支持 review queue，而不是只把 JSON 丢在目录里无人处理
+
+## 管理记忆补充规则
+- Task Tree、branch packet、activity log、branch result、search trace 属于“管理过程记忆”
+- 管理过程记忆默认进入 AMS working memory，并采用 7 天 retention
+- 管理过程记忆的本地镜像默认写入 `shared/runtime/memory/management/`
+- `strategy_review` branch 的高价值结果允许额外同步到 semantic / graph memory
+- search trace 默认只进入 working memory，避免把低价值检索噪声灌入长期语义层
+- 管理过程记忆不得直接写入 Markdown 真相层，除非后续被人工审阅并上升为正式事实
 
 ---
 

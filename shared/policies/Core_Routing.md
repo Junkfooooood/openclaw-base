@@ -7,6 +7,7 @@
 - 所有外部消息默认进入 main。
 - 只有 main 可以直接向林做最终汇报。
 - 其他 agent 不直接对外承担最终输出职责，除非被明确授权。
+- 若林的当前指令与本文件、Active SOP 或审批关口冲突，main 必须先进入 `shared/sop/active/Conflict_Resolution_SOP_v1.md`，说明冲突并请求林拍板。
 
 ## 简单任务
 满足以下条件时，可视为简单任务，由 main 直接处理：
@@ -69,6 +70,7 @@
 ## Handoff Packet 规则
 - 所有 ready branch 必须生成 packet，路径为 `shared/runtime/dispatch/<task_id>/<branch_id>.json`
 - 所有 handoff 事件必须统一追加到 `shared/runtime/activity/<task_id>.jsonl`
+- handoff 后，管理摘要必须同步到 working memory；默认 retention 为 7 天
 - packet 必须包含：
   - owner
   - route
@@ -81,6 +83,7 @@
   - blackboard_card_path
   - recommended_invocation
 - 黑板中的 ready branch 一旦生成 packet，状态应改为 `assigned`
+- owner 执行完成后，branch result 与 search trace 应回写到管理记忆层，再交 validator
 
 ## Task Tree 规则
 Task Tree 必须至少包含：
@@ -123,3 +126,16 @@ Task Tree 必须至少包含：
 - 高风险系统执行
 - 修改核心规则
 - 跨受保护路径写入
+
+## 指令冲突处理
+若出现以下情况：
+- 林要求跳过当前审批
+- 林要求绕过 validator / 黑板 / Task Tree / handoff
+- 林要求当前 route 或当前 agent 越权执行
+- 林要求直接违反当前 Active SOP
+
+则 main 不得直接执行，而应：
+- 明确指出冲突点
+- 说明风险和可选处理
+- 由林拍板
+- 需要长期变更时，再转为 patch / SOP 更新流程

@@ -91,6 +91,7 @@ Task Tree 必须至少包含：
 - 将 packet 写入 `shared/runtime/dispatch/<task_id>/<branch_id>.json`
 - 将 handoff 事件追加到 `shared/runtime/activity/<task_id>.jsonl`
 - 把黑板中的 branch 状态从 `ready` 改为 `assigned`
+- 将 Task Tree / branch packet / handoff 摘要同步到 management working memory（默认保留 7 天）
 
 每个 branch 执行者仅负责：
 - 读取任务树
@@ -98,6 +99,7 @@ Task Tree 必须至少包含：
 - 读取相关 SOP
 - 完成本 branch 输出
 - 回写黑板状态
+- 若使用搜索 / 浏览 / 检索，必须在最终输出里显式给出 `Search Trace`
 
 执行者不得：
 - 自行宣布最终通过
@@ -119,6 +121,7 @@ Task Tree 必须至少包含：
 若 branch 已分发给 owner，则还应保证：
 - 对应 packet 路径已可追踪
 - activity log 已追加 handoff 记录
+- 管理记忆同步已完成，且 session / retention 信息可追踪
 
 ## Step 7: validator 验收
 branch 产出后，交 validator 进行验收。

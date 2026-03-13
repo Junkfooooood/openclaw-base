@@ -52,6 +52,8 @@ shared/runtime/memory/commits/*
 !shared/runtime/memory/commits/.gitkeep
 shared/runtime/memory/conflicts/*
 !shared/runtime/memory/conflicts/.gitkeep
+shared/runtime/memory/management/*
+!shared/runtime/memory/management/.gitkeep
 shared/runtime/memory/staged/*
 !shared/runtime/memory/staged/.gitkeep
 

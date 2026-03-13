@@ -1,0 +1,18 @@
+{
+  "id": "1773378011675-conversation-to-routes-v1-route-review-signal-seed-1",
+  "sop_id": "conversation_to_routes_v1",
+  "target_path": "/Users/linqingxuan/.openclaw/shared/sop/active/Conversation_To_Routes_SOP_v1.md",
+  "target_title": "目标",
+  "source_kind": "manual",
+  "source_path": null,
+  "status": "PASS",
+  "summary": "route review signal seed 1",
+  "advisories": [
+    "consider adding logs if this conversation should be archived in the learning system",
+    "source_summary is missing; route review is still possible but less comparable over time"
+  ],
+  "failed_checks": [],
+  "suggested_next_step": "",
+  "metadata": {},
+  "captured_at": "2026-03-13T05:00:11.674Z"
+}

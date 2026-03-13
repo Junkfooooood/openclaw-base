@@ -11,6 +11,7 @@ import {
   validateTaskTree,
   writeTaskTreeSnapshot
 } from "../../shared/runtime/management/task_dispatch_lib.mjs";
+import { executeReadyBranches } from "../../shared/runtime/management/branch_execution_lib.mjs";
 
 const KNOWN_ROUTES = new Set([
   "logs",
@@ -492,6 +493,15 @@ export default function register(api) {
             return;
           }
 
+          console.log(JSON.stringify(result, null, 2));
+        });
+
+      internalDispatch
+        .command("execute-ready")
+        .action(async () => {
+          const payload = readJsonFromStdin();
+          const root = findProjectRoot();
+          const result = await executeReadyBranches(root, payload);
           console.log(JSON.stringify(result, null, 2));
         });
 

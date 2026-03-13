@@ -2,8 +2,11 @@
 
 import fs from "node:fs";
 
+import { executeReadyBranches } from "../../runtime/management/branch_execution_lib.mjs";
+import { validateExecutedBranches } from "../../runtime/management/branch_validation_lib.mjs";
 import {
   computeDispatchState,
+  deriveRuntimeBranchStates,
   finalizeBoardCard,
   findProjectRoot,
   handoffReadyBranches,
@@ -59,6 +62,8 @@ function buildRuntimeConfig(args = {}) {
   if (args["dispatch-dir"]) config.dispatchDir = args["dispatch-dir"];
   if (args["activity-dir"]) config.activityDir = args["activity-dir"];
   if (args["queue-path"]) config.queuePath = args["queue-path"];
+  if (args["openclaw-bin"]) config.openclawBin = args["openclaw-bin"];
+  if (args["timeout-seconds"]) config.timeoutSeconds = Number(args["timeout-seconds"]);
   return config;
 }
 
@@ -110,6 +115,160 @@ function validateDispatchPayload(payload) {
         suggested_next_step: "continue",
         task_id: payload.task_id
       };
+}
+
+function buildFinalizePayload(taskTree, runtimeState, queuePath) {
+  const outputPaths = [
+    queuePath,
+    ...runtimeState.branches.flatMap((branch) => [branch.result_path, branch.validation_path]).filter(Boolean)
+  ];
+
+  return {
+    task_id: taskTree.task_id,
+    title: taskTree.title,
+    summary: `Management workflow completed with ${runtimeState.completed_branches.length} branches validated PASS.`,
+    output_paths: outputPaths
+  };
+}
+
+async function collectPendingValidationPayload(root, taskTree, runtimeConfig) {
+  const runtimeState = await deriveRuntimeBranchStates(root, taskTree, {}, runtimeConfig);
+  return {
+    task_id: taskTree.task_id,
+    results: runtimeState.branches
+      .filter(
+        (branch) =>
+          branch.status === "completed_pending_validation" &&
+          branch.packet_path &&
+          branch.result_path
+      )
+      .map((branch) => ({
+        branch_id: branch.branch_id,
+        owner: branch.owner,
+        packet_path: branch.packet_path,
+        result_path: branch.result_path,
+        board_path: runtimeState.board_path
+      }))
+  };
+}
+
+async function runFullWorkflow(root, taskTree, runtimeConfig) {
+  const queuePath = await writeTaskTreeSnapshot(root, taskTree, runtimeConfig);
+  const boardPath = await writeBoardInit(root, taskTree, runtimeConfig);
+  const maxRetries = Number(taskTree.retry_policy?.max_retries ?? 3);
+  const maxIterations = Math.max(taskTree.branches.length * (maxRetries + 2), 6);
+  const iterations = [];
+  let finalizeResult = null;
+
+  for (let iteration = 1; iteration <= maxIterations; iteration += 1) {
+    const stateBefore = await deriveRuntimeBranchStates(root, taskTree, {}, runtimeConfig);
+    if (stateBefore.branches.every((branch) => branch.status === "done")) {
+      finalizeResult = await finalizeBoardCard(
+        root,
+        buildFinalizePayload(taskTree, stateBefore, queuePath),
+        runtimeConfig
+      );
+      return {
+        status: "archived",
+        task_id: taskTree.task_id,
+        queue_path: queuePath,
+        card_path: finalizeResult.archive_path,
+        hot_summary_path: finalizeResult.hot_path,
+        iterations,
+        branch_status: stateBefore.branch_status_lines
+      };
+    }
+    if (stateBefore.blocked_branches.length > 0) {
+      return {
+        status: "blocked",
+        task_id: taskTree.task_id,
+        queue_path: queuePath,
+        card_path: boardPath,
+        blocked_branches: stateBefore.blocked_branches,
+        branch_status: stateBefore.branch_status_lines,
+        iterations
+      };
+    }
+
+    const handoff = await handoffReadyBranches(root, taskTree, {
+      ...runtimeConfig,
+      queuePath: runtimeConfig.queuePath ?? queuePath
+    });
+    let executed = null;
+    let validated = null;
+
+    if ((handoff.handoff_count ?? 0) > 0) {
+      executed = await executeReadyBranches(root, handoff, runtimeConfig);
+      if ((executed.executed_count ?? 0) > 0) {
+        validated = await validateExecutedBranches(root, executed, runtimeConfig);
+      }
+    } else {
+      const pendingValidation = await collectPendingValidationPayload(root, taskTree, runtimeConfig);
+      if (pendingValidation.results.length > 0) {
+        validated = await validateExecutedBranches(root, pendingValidation, runtimeConfig);
+      }
+    }
+
+    const stateAfter = await deriveRuntimeBranchStates(root, taskTree, {}, runtimeConfig);
+    iterations.push({
+      iteration,
+      ready_before: stateBefore.ready_branches,
+      handoff_count: handoff.handoff_count ?? 0,
+      executed_count: executed?.executed_count ?? 0,
+      validated_count: validated?.validated_count ?? 0,
+      ready_after: stateAfter.ready_branches,
+      blocked_after: stateAfter.blocked_branches,
+      completed_after: stateAfter.completed_branches
+    });
+
+    const progressCount =
+      (handoff.handoff_count ?? 0) +
+      (executed?.executed_count ?? 0) +
+      (validated?.validated_count ?? 0);
+    if (progressCount === 0) {
+      return {
+        status: "FAIL",
+        reason: "workflow made no progress",
+        failed_checks: ["no_progress"],
+        suggested_next_step: "inspect_hot_board_and_runtime_artifacts",
+        task_id: taskTree.task_id,
+        queue_path: queuePath,
+        card_path: boardPath,
+        branch_status: stateAfter.branch_status_lines,
+        iterations
+      };
+    }
+  }
+
+  const finalState = await deriveRuntimeBranchStates(root, taskTree, {}, runtimeConfig);
+  if (finalState.branches.every((branch) => branch.status === "done")) {
+    finalizeResult = await finalizeBoardCard(
+      root,
+      buildFinalizePayload(taskTree, finalState, queuePath),
+      runtimeConfig
+    );
+    return {
+      status: "archived",
+      task_id: taskTree.task_id,
+      queue_path: queuePath,
+      card_path: finalizeResult.archive_path,
+      hot_summary_path: finalizeResult.hot_path,
+      iterations,
+      branch_status: finalState.branch_status_lines
+    };
+  }
+
+  return {
+    status: "FAIL",
+    reason: "workflow hit iteration limit before completion",
+    failed_checks: ["iteration_limit_reached"],
+    suggested_next_step: "inspect_hot_board_and_runtime_artifacts",
+    task_id: taskTree.task_id,
+    queue_path: queuePath,
+    card_path: boardPath,
+    branch_status: finalState.branch_status_lines,
+    iterations
+  };
 }
 
 async function main() {
@@ -231,6 +390,18 @@ async function main() {
       printJson(result);
       return;
     }
+    case "execute-ready": {
+      const rawPayload = readPayload(args, positional);
+      const result = await executeReadyBranches(root, rawPayload, runtimeConfig);
+      printJson(result);
+      return;
+    }
+    case "validate-results": {
+      const rawPayload = readPayload(args, positional);
+      const result = await validateExecutedBranches(root, rawPayload, runtimeConfig);
+      printJson(result);
+      return;
+    }
     case "validate": {
       const payload = readPayload(args, positional);
       printJson(validateDispatchPayload(payload));
@@ -270,13 +441,33 @@ async function main() {
       });
       return;
     }
+    case "run-full": {
+      const payload = readPayload(args, positional);
+      const validation = validateTaskTree(payload);
+      if (!validation.valid) {
+        printJson(
+          {
+            status: "FAIL",
+            reason: "task tree is incomplete or invalid",
+            failed_checks: validation.issues,
+            suggested_next_step: "fix_task_tree"
+          },
+          1
+        );
+        return;
+      }
+      const result = await runFullWorkflow(root, validation.taskTree, runtimeConfig);
+      printJson(result, result.status === "FAIL" ? 1 : 0);
+      return;
+    }
     default:
       printJson(
         {
           status: "FAIL",
           reason: `unknown command '${command ?? ""}'`,
           failed_checks: ["unsupported_command"],
-          suggested_next_step: "use one of: normalize, board-init, board-update, dispatch, handoff, validate, approval, finalize"
+          suggested_next_step:
+            "use one of: normalize, board-init, board-update, dispatch, handoff, execute-ready, validate-results, validate, approval, finalize, run-full"
         },
         1
       );

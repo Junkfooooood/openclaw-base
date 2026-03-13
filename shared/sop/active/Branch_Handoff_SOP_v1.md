@@ -25,6 +25,7 @@ requires_activity_log: true
 2. packet 必须写入 `shared/runtime/dispatch/<task_id>/<branch_id>.json`。
 3. 每次 handoff 必须追加一条统一格式活动日志到 `shared/runtime/activity/<task_id>.jsonl`。
 4. 黑板必须把对应 branch 从 `ready` 更新为 `assigned`。
+5. handoff 后必须同步一条 management memory 记录到 working memory，默认 retention 为 7 天。
 5. packet 必须至少包含：
    - task_id
    - title
@@ -65,6 +66,7 @@ requires_activity_log: true
 handoff 结束后，至少应能看到：
 - packet 文件路径
 - activity log 路径
+- management memory sync 结果
 - 黑板已更新为 `assigned`
 - 下一步应由哪个 owner 执行
 

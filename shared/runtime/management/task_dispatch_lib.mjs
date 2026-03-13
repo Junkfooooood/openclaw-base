@@ -1,6 +1,11 @@
 import fs from "node:fs";
 import fsp from "node:fs/promises";
 import path from "node:path";
+import {
+  managementMemoryDefaults,
+  managementWorkingSessionId,
+  syncManagementRecord
+} from "./management_memory_bridge.mjs";
 
 export const KNOWN_OWNERS = new Set([
   "main",
@@ -29,6 +34,15 @@ const STRATEGY_KEYWORDS = [
 
 function stableStringify(value) {
   return JSON.stringify(value);
+}
+
+function slugify(value, fallback = "item") {
+  const normalized = String(value ?? "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 40);
+  return normalized || fallback;
 }
 
 export function findProjectRoot(startDir = process.cwd()) {
@@ -316,6 +330,43 @@ export function resolveDispatchDirs(root, config = {}) {
   };
 }
 
+function taskDispatchDir(root, taskId, config = {}) {
+  const { dispatchDir } = resolveDispatchDirs(root, config);
+  return path.join(dispatchDir, taskId);
+}
+
+export function branchPacketPath(root, taskId, branchId, config = {}) {
+  return path.join(taskDispatchDir(root, taskId, config), `${branchId}.json`);
+}
+
+export function branchResultPath(root, taskId, branchId, config = {}) {
+  return path.join(taskDispatchDir(root, taskId, config), `${branchId}.result.json`);
+}
+
+export function branchMarkdownResultPath(root, taskId, branchId, config = {}) {
+  return path.join(taskDispatchDir(root, taskId, config), `${branchId}.result.md`);
+}
+
+export function branchValidationPath(root, taskId, branchId, config = {}) {
+  return path.join(taskDispatchDir(root, taskId, config), `${branchId}.validation.json`);
+}
+
+async function resetBranchRuntimeArtifacts(root, taskId, branchId, config = {}) {
+  const staleArtifacts = [
+    branchMarkdownResultPath(root, taskId, branchId, config),
+    branchResultPath(root, taskId, branchId, config),
+    branchValidationPath(root, taskId, branchId, config)
+  ];
+
+  await Promise.all(
+    staleArtifacts.map(async (candidate) => {
+      if (fs.existsSync(candidate)) {
+        await fsp.rm(candidate, { force: true });
+      }
+    })
+  );
+}
+
 export function resolveBoardDirs(root, config = {}) {
   return {
     hotDir: path.resolve(root, config.hotDir ?? path.join("shared", "blackboard", "hot")),
@@ -342,6 +393,15 @@ function ownerWorkspacePath(root, owner) {
   return path.join(root, `workspace-${owner}`);
 }
 
+function safeExecutionSessionId(taskTree, branch) {
+  return [
+    "run",
+    slugify(branch.owner, "agent"),
+    slugify(taskTree.task_id, "task"),
+    slugify(branch.branch_id, "branch")
+  ].join("-");
+}
+
 function branchSessionKey(taskTree, branch) {
   return `agent:${branch.owner}:management:${taskTree.task_id}:${branch.branch_id}`;
 }
@@ -353,6 +413,20 @@ function buildRouteNote(branch) {
 
 function branchStatusLine(branch, status = branch.status) {
   return `[${status}] ${branch.branch_id} | owner=${branch.owner} | route=${branch.route} | tool_mode=${branch.tool_mode} | model=${branch.model_hint}`;
+}
+
+function parseFrontmatterValue(value) {
+  const raw = String(value ?? "").trim();
+  if (raw === "") return "";
+  if (raw === "null") return null;
+  if (raw === "true") return true;
+  if (raw === "false") return false;
+  if (/^-?\d+(\.\d+)?$/.test(raw)) return Number(raw);
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return raw;
+  }
 }
 
 function buildBranchInstructions(packet) {
@@ -397,10 +471,10 @@ function buildBranchInstructions(packet) {
 function buildBranchPacket(root, taskTree, branch, context = {}) {
   const createdAt = new Date().toISOString();
   const packetPath = context.packetPath;
-  const relativePacketPath = relativePathOrAbsolute(root, packetPath);
-  const relativeQueuePath = relativePathOrAbsolute(root, context.queuePath);
-  const relativeBoardPath = relativePathOrAbsolute(root, context.boardPath);
-  const relativeActivityLogPath = relativePathOrAbsolute(root, context.activityLogPath);
+  const absolutePacketPath = path.resolve(packetPath);
+  const absoluteQueuePath = context.queuePath ? path.resolve(context.queuePath) : null;
+  const absoluteBoardPath = context.boardPath ? path.resolve(context.boardPath) : null;
+  const absoluteActivityLogPath = context.activityLogPath ? path.resolve(context.activityLogPath) : null;
   const workspacePath = ownerWorkspacePath(root, branch.owner);
   const sessionKey = branchSessionKey(taskTree, branch);
 
@@ -420,13 +494,14 @@ function buildBranchPacket(root, taskTree, branch, context = {}) {
       visibility: branch.visibility
     },
     inputs: {
-      task_tree_path: relativeQueuePath,
-      blackboard_card_path: relativeBoardPath,
+      task_tree_path: absoluteQueuePath,
+      blackboard_card_path: absoluteBoardPath,
       dependencies: branch.depends_on ?? []
     },
     execution: {
       workspace_path: workspacePath,
       session_key: sessionKey,
+      session_id: safeExecutionSessionId(taskTree, branch),
       preferred_model: branch.model_hint,
       recommended_invocation: {
         command: "openclaw agent",
@@ -436,9 +511,9 @@ function buildBranchPacket(root, taskTree, branch, context = {}) {
           "--local",
           "--json",
           "--session-id",
-          sessionKey,
+          safeExecutionSessionId(taskTree, branch),
           "--message",
-          `Read branch packet at ${relativePacketPath}. Execute only branch ${branch.branch_id}, update blackboard, and return a structured branch result.`
+          `Read branch packet at ${absolutePacketPath}. Execute only branch ${branch.branch_id}, update blackboard, and return a structured branch result.`
         ]
       }
     },
@@ -450,8 +525,8 @@ function buildBranchPacket(root, taskTree, branch, context = {}) {
     },
     transparency: {
       visibility: branch.visibility,
-      packet_path: relativePacketPath,
-      activity_log_path: relativeActivityLogPath
+      packet_path: absolutePacketPath,
+      activity_log_path: absoluteActivityLogPath
     }
   };
 
@@ -472,16 +547,205 @@ export async function appendActivityLog(root, taskId, event, config = {}) {
   return activityLogPath;
 }
 
-export async function handoffReadyBranches(root, taskTreeInput, config = {}) {
+export function deriveBranchStates(root, taskTreeInput, overrides = {}, config = {}) {
   const dispatchState = computeDispatchState(taskTreeInput);
+  if (!dispatchState.valid) {
+    return dispatchState;
+  }
+
+  const { dispatchDir } = resolveDispatchDirs(root, config);
+  const taskDispatchDir = path.join(dispatchDir, dispatchState.taskTree.task_id);
+  const branches = dispatchState.branches.map((branch) => {
+    const packetPath = path.join(taskDispatchDir, `${branch.branch_id}.json`);
+    const packetExists = fs.existsSync(packetPath);
+    let status = branch.status;
+    if (status === "ready" && packetExists) {
+      status = "assigned";
+    }
+    if (overrides[branch.branch_id]) {
+      status = overrides[branch.branch_id];
+    }
+    return {
+      ...branch,
+      status
+    };
+  });
+
+  return {
+    ...dispatchState,
+    branches,
+    branch_status_lines: branches.map((branch) => branchStatusLine(branch, branch.status))
+  };
+}
+
+export async function readBoardState(root, taskId, config = {}) {
+  const { hotDir } = resolveBoardDirs(root, config);
+  const boardPath = cardPath(hotDir, taskId);
+  if (!fs.existsSync(boardPath)) {
+    return {
+      board_path: null,
+      frontmatter: {},
+      retry_count: {}
+    };
+  }
+
+  const markdown = await fsp.readFile(boardPath, "utf8");
+  const { frontmatter } = parseFrontmatter(markdown);
+  const parsed = Object.fromEntries(
+    Array.from(frontmatter.entries()).map(([key, value]) => [key, parseFrontmatterValue(value)])
+  );
+
+  return {
+    board_path: boardPath,
+    frontmatter: parsed,
+    retry_count:
+      parsed.retry_count && typeof parsed.retry_count === "object" && !Array.isArray(parsed.retry_count)
+        ? parsed.retry_count
+        : {}
+  };
+}
+
+export async function deriveRuntimeBranchStates(root, taskTreeInput, overrides = {}, config = {}) {
+  const { valid, issues, taskTree } = validateTaskTree(taskTreeInput);
+  if (!valid) {
+    return {
+      valid,
+      issues,
+      taskTree
+    };
+  }
+
+  const boardState = await readBoardState(root, taskTree.task_id, config);
+  const retryCount = config.retryCountOverride ?? boardState.retry_count ?? {};
+  const maxRetries = Number(taskTree.retry_policy?.max_retries ?? 3);
+  const branchMap = new Map(taskTree.branches.map((branch) => [branch.branch_id, branch]));
+  const artifacts = new Map();
+
+  await Promise.all(
+    taskTree.branches.map(async (branch) => {
+      const packetPath = branchPacketPath(root, taskTree.task_id, branch.branch_id, config);
+      const resultPath = branchResultPath(root, taskTree.task_id, branch.branch_id, config);
+      const validationPath = branchValidationPath(root, taskTree.task_id, branch.branch_id, config);
+
+      let resultPayload = null;
+      let validationPayload = null;
+      if (fs.existsSync(resultPath)) {
+        resultPayload = JSON.parse(await fsp.readFile(resultPath, "utf8"));
+      }
+      if (fs.existsSync(validationPath)) {
+        validationPayload = JSON.parse(await fsp.readFile(validationPath, "utf8"));
+      }
+
+      artifacts.set(branch.branch_id, {
+        packet_path: packetPath,
+        packet_exists: fs.existsSync(packetPath),
+        result_path: resultPath,
+        result_exists: Boolean(resultPayload),
+        result_payload: resultPayload,
+        validation_path: validationPath,
+        validation_exists: Boolean(validationPayload),
+        validation_payload: validationPayload,
+        retry_count: Number(retryCount[branch.branch_id] ?? 0)
+      });
+    })
+  );
+
+  const memo = new Map();
+  function statusFor(branchId) {
+    if (memo.has(branchId)) return memo.get(branchId);
+    const branch = branchMap.get(branchId);
+    const artifact = artifacts.get(branchId) ?? {};
+
+    let status;
+    const validationStatus = String(artifact.validation_payload?.validation?.status ?? artifact.validation_payload?.status ?? "")
+      .trim()
+      .toUpperCase();
+    if (validationStatus === "PASS") {
+      status = "done";
+    } else if (validationStatus === "BLOCK") {
+      status = "blocked";
+    } else if (validationStatus === "FAIL") {
+      status = artifact.retry_count >= maxRetries ? "blocked" : "ready";
+    } else if (artifact.result_exists) {
+      const executionOk =
+        artifact.result_payload?.execution?.ok ??
+        artifact.result_payload?.ok ??
+        artifact.result_payload?.status === "completed_pending_validation";
+      status = executionOk ? "completed_pending_validation" : artifact.retry_count >= maxRetries ? "blocked" : "ready";
+    } else if (artifact.packet_exists) {
+      status = "assigned";
+    } else {
+      const dependencyStatuses = (branch?.depends_on ?? []).map((depId) => statusFor(depId));
+      if (dependencyStatuses.some((depStatus) => depStatus === "blocked")) {
+        status = "blocked";
+      } else if ((branch?.depends_on ?? []).length === 0 || dependencyStatuses.every((depStatus) => depStatus === "done")) {
+        status = "ready";
+      } else {
+        status = "waiting_on_dependencies";
+      }
+    }
+
+    if (overrides[branchId]) {
+      status = overrides[branchId];
+    }
+    memo.set(branchId, status);
+    return status;
+  }
+
+  const branches = taskTree.branches.map((branch) => {
+    const artifact = artifacts.get(branch.branch_id) ?? {};
+    return {
+      branch_id: branch.branch_id,
+      owner: branch.owner,
+      goal: branch.goal,
+      status: statusFor(branch.branch_id),
+      depends_on: branch.depends_on ?? [],
+      route: branch.route,
+      tool_mode: branch.tool_mode,
+      model_hint: branch.model_hint,
+      visibility: branch.visibility,
+      expected_output: branch.expected_output ?? [],
+      acceptance: branch.acceptance ?? [],
+      retry_count: artifact.retry_count ?? 0,
+      packet_path: artifact.packet_exists ? relativePathOrAbsolute(root, artifact.packet_path) : null,
+      result_path: artifact.result_exists ? relativePathOrAbsolute(root, artifact.result_path) : null,
+      validation_path: artifact.validation_exists ? relativePathOrAbsolute(root, artifact.validation_path) : null
+    };
+  });
+
+  return {
+    valid: true,
+    issues: [],
+    taskTree,
+    board_path: boardState.board_path ? relativePathOrAbsolute(root, boardState.board_path) : null,
+    retry_count: retryCount,
+    branches,
+    ready_branches: branches
+      .filter((branch) => branch.status === "ready")
+      .map((branch) => branch.branch_id),
+    waiting_branches: branches
+      .filter((branch) => branch.status === "waiting_on_dependencies")
+      .map((branch) => branch.branch_id),
+    blocked_branches: branches
+      .filter((branch) => branch.status === "blocked")
+      .map((branch) => branch.branch_id),
+    completed_branches: branches
+      .filter((branch) => branch.status === "done")
+      .map((branch) => branch.branch_id),
+    branch_status_lines: branches.map((branch) => branchStatusLine(branch, branch.status))
+  };
+}
+
+export async function handoffReadyBranches(root, taskTreeInput, config = {}) {
+  const dispatchState = await deriveRuntimeBranchStates(root, taskTreeInput, {}, config);
   if (!dispatchState.valid) {
     return dispatchState;
   }
 
   const { taskTree } = dispatchState;
   const { dispatchDir, activityDir } = resolveDispatchDirs(root, config);
-  const taskDispatchDir = path.join(dispatchDir, taskTree.task_id);
-  await fsp.mkdir(taskDispatchDir, { recursive: true });
+  const currentTaskDispatchDir = path.join(dispatchDir, taskTree.task_id);
+  await fsp.mkdir(currentTaskDispatchDir, { recursive: true });
   await fsp.mkdir(activityDir, { recursive: true });
 
   const { hotDir } = resolveBoardDirs(root, config);
@@ -492,13 +756,39 @@ export async function handoffReadyBranches(root, taskTreeInput, config = {}) {
       ? path.resolve(config.queuePath)
       : await writeTaskTreeSnapshot(root, taskTree, config);
   const activityLogPath = path.join(activityDir, `${taskTree.task_id}.jsonl`);
+  const memoryConfig = managementMemoryDefaults(root);
+  const memoryStatus = {
+    task_tree: null,
+    branch_packets: [],
+    activity_events: []
+  };
+
+  if (memoryConfig.syncTaskTreeToWorking) {
+    memoryStatus.task_tree = await syncManagementRecord(root, {
+      kind: "task_tree",
+      task_id: taskTree.task_id,
+      title: taskTree.title,
+      summary: `Task Tree created for ${taskTree.title}`,
+      detail: JSON.stringify(taskTree, null, 2),
+      session_id: managementWorkingSessionId(taskTree.task_id),
+      tags: ["management", "task-tree"],
+      sync_semantic_graph: false
+    }).catch((error) => ({
+      status: "error",
+      error: error.message
+    }));
+  } else {
+    memoryStatus.task_tree = { status: "skipped" };
+  }
 
   const packets = [];
   for (const branchId of dispatchState.ready_branches) {
     const branch = taskTree.branches.find((item) => item.branch_id === branchId);
     if (!branch) continue;
 
-    const packetPath = path.join(taskDispatchDir, `${branch.branch_id}.json`);
+    await resetBranchRuntimeArtifacts(root, taskTree.task_id, branch.branch_id, config);
+
+    const packetPath = branchPacketPath(root, taskTree.task_id, branch.branch_id, config);
     const packet = buildBranchPacket(root, taskTree, branch, {
       packetPath,
       queuePath,
@@ -523,6 +813,59 @@ export async function handoffReadyBranches(root, taskTreeInput, config = {}) {
       config
     );
 
+    if (memoryConfig.syncBranchPacketToWorking) {
+      memoryStatus.branch_packets.push(
+        await syncManagementRecord(root, {
+          kind: "branch_packet",
+          task_id: taskTree.task_id,
+          branch_id: branch.branch_id,
+          owner: branch.owner,
+          route: branch.route,
+          tool_mode: branch.tool_mode,
+          model_hint: branch.model_hint,
+          title: taskTree.title,
+          summary: `Branch packet assigned to ${branch.owner} for ${branch.branch_id}`,
+          detail: packet.instructions,
+          session_id: managementWorkingSessionId(taskTree.task_id, branch.branch_id),
+          tags: ["management", "branch-packet", branch.owner, branch.route],
+          sync_semantic_graph:
+            branch.route === "strategy_review" && memoryConfig.syncStrategyReviewToSemanticGraph
+        }).catch((error) => ({
+          status: "error",
+          branch_id: branch.branch_id,
+          error: error.message
+        }))
+      );
+    } else {
+      memoryStatus.branch_packets.push({ status: "skipped", branch_id: branch.branch_id });
+    }
+
+    if (memoryConfig.syncActivityToWorking) {
+      memoryStatus.activity_events.push(
+        await syncManagementRecord(root, {
+          kind: "activity_event",
+          task_id: taskTree.task_id,
+          branch_id: branch.branch_id,
+          owner: branch.owner,
+          route: branch.route,
+          tool_mode: branch.tool_mode,
+          model_hint: branch.model_hint,
+          title: taskTree.title,
+          summary: `Branch ${branch.branch_id} assigned to ${branch.owner}`,
+          detail: `packet_path=${relativePathOrAbsolute(root, packetPath)}\nactivity_log=${relativePathOrAbsolute(root, activityLogPath)}`,
+          session_id: managementWorkingSessionId(taskTree.task_id, branch.branch_id),
+          tags: ["management", "activity", "branch-assigned", branch.owner],
+          sync_semantic_graph: false
+        }).catch((error) => ({
+          status: "error",
+          branch_id: branch.branch_id,
+          error: error.message
+        }))
+      );
+    } else {
+      memoryStatus.activity_events.push({ status: "skipped", branch_id: branch.branch_id });
+    }
+
     packets.push({
       branch_id: branch.branch_id,
       owner: branch.owner,
@@ -532,17 +875,20 @@ export async function handoffReadyBranches(root, taskTreeInput, config = {}) {
       visibility: branch.visibility,
       packet_path: relativePathOrAbsolute(root, packetPath),
       session_key: packet.execution.session_key,
+      session_id: packet.execution.session_id,
       workspace_path: packet.execution.workspace_path,
       recommended_invocation: packet.execution.recommended_invocation
     });
   }
 
   if (hasBoardCard) {
-    const assignedSet = new Set(packets.map((packet) => packet.branch_id));
-    const branchStatus = dispatchState.branches.map((branch) =>
-      branchStatusLine(branch, assignedSet.has(branch.branch_id) ? "assigned" : branch.status)
+    const derived = await deriveRuntimeBranchStates(
+      root,
+      taskTree,
+      Object.fromEntries(packets.map((packet) => [packet.branch_id, "assigned"])),
+      config
     );
-    const routeNotes = dispatchState.branches
+    const routeNotes = derived.branches
       .map((branch) => buildRouteNote(branch))
       .filter(Boolean);
 
@@ -552,7 +898,7 @@ export async function handoffReadyBranches(root, taskTreeInput, config = {}) {
         task_id: taskTree.task_id,
         status: packets.length > 0 ? "in_progress" : "pending",
         current_branch: packets[0]?.branch_id ?? dispatchState.ready_branches[0] ?? "main",
-        branch_status: branchStatus,
+        branch_status: derived.branch_status_lines,
         last_action:
           packets.length > 0
             ? `Assigned ready branches: ${packets.map((packet) => packet.branch_id).join(", ")}`
@@ -577,9 +923,10 @@ export async function handoffReadyBranches(root, taskTreeInput, config = {}) {
     title: taskTree.title,
     status: packets.length > 0 ? "handed_off" : "idle",
     queue_path: relativePathOrAbsolute(root, queuePath),
-    dispatch_dir: relativePathOrAbsolute(root, taskDispatchDir),
+    dispatch_dir: relativePathOrAbsolute(root, currentTaskDispatchDir),
     activity_log_path: relativePathOrAbsolute(root, activityLogPath),
     card_path: hasBoardCard ? relativePathOrAbsolute(root, boardPath) : null,
+    memory_status: memoryStatus,
     handoff_count: packets.length,
     ready_branches: dispatchState.ready_branches,
     waiting_branches: dispatchState.waiting_branches,
@@ -730,7 +1077,9 @@ export function updateBoardMarkdown(markdown, payload = {}) {
   setFrontmatterValue(frontmatter, "updated_at", new Date().toISOString());
   setFrontmatterValue(frontmatter, "current_branch", payload.current_branch ?? "main");
   setFrontmatterValue(frontmatter, "blocker", payload.blocker ?? "null");
-  setFrontmatterValue(frontmatter, "retry_count", payload.retry_count ?? {});
+  if (Object.prototype.hasOwnProperty.call(payload, "retry_count")) {
+    setFrontmatterValue(frontmatter, "retry_count", payload.retry_count ?? {});
+  }
 
   if (Array.isArray(payload.branch_status) && payload.branch_status.length > 0) {
     setSection(sections, "Branch Status", payload.branch_status.map((item) => `- ${item}`));

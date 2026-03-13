@@ -1,0 +1,43 @@
+{
+  "report_id": "1773378014456-conversation-to-routes-v1-aggregate",
+  "sop_id": "conversation_to_routes_v1",
+  "target_path": "/Users/linqingxuan/.openclaw/shared/sop/active/Conversation_To_Routes_SOP_v1.md",
+  "target_title": "目标",
+  "signal_count": 2,
+  "generated_at": "2026-03-13T05:00:14.456Z",
+  "min_occurrences": 2,
+  "status_counts": {
+    "PASS": 2
+  },
+  "recurring_advisories": [
+    {
+      "text": "consider adding logs if this conversation should be archived in the learning system",
+      "count": 2,
+      "first_seen": "2026-03-13T05:00:11.674Z",
+      "last_seen": "2026-03-13T05:00:11.674Z",
+      "signal_ids": [
+        "1773378011675-conversation-to-routes-v1-route-review-signal-seed-1",
+        "1773378011675-conversation-to-routes-v1-route-review-signal-seed-2"
+      ]
+    },
+    {
+      "text": "source_summary is missing; route review is still possible but less comparable over time",
+      "count": 2,
+      "first_seen": "2026-03-13T05:00:11.674Z",
+      "last_seen": "2026-03-13T05:00:11.674Z",
+      "signal_ids": [
+        "1773378011675-conversation-to-routes-v1-route-review-signal-seed-1",
+        "1773378011675-conversation-to-routes-v1-route-review-signal-seed-2"
+      ]
+    }
+  ],
+  "recurring_failed_checks": [],
+  "proposed_runtime_learnings": [
+    "若对话涉及学习进展、阻塞、节奏变化或值得回顾的判断，应先检查是否至少需要一条 `logs`；缺失时默认给 advisory，而不是直接 FAIL。",
+    "route review 输入若条件允许，应附带 `source_summary`，方便后续比较、复盘与 SOP 收敛。"
+  ],
+  "source_signal_ids": [
+    "1773378011675-conversation-to-routes-v1-route-review-signal-seed-1",
+    "1773378011675-conversation-to-routes-v1-route-review-signal-seed-2"
+  ]
+}

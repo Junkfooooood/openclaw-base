@@ -1,0 +1,39 @@
+{
+  "deviceId": "macmini",
+  "lookbackDays": 3,
+  "lookbackHoursForApps": 24,
+  "ssh": {
+    "collectorHost": "linqingxuandeMac-mini.local",
+    "collectorUser": "linqingxuan",
+    "remoteRoot": "~/.openclaw",
+    "dashboardLocalPort": 18790,
+    "dashboardRemotePort": 18789
+  },
+  "browser": {
+    "agentDomains": [
+      "chatgpt.com",
+      "claude.ai",
+      "gemini.google.com",
+      "kimi.moonshot.cn",
+      "chat.deepseek.com"
+    ],
+    "courseDomains": [
+      "www.coursera.org",
+      "www.edx.org",
+      "www.bilibili.com",
+      "www.xuetangx.com",
+      "www.icourse163.org"
+    ]
+  },
+  "export": {
+    "obsidianDraftSubdir": "RemoteHub",
+    "maxRecentTasks": 8,
+    "maxRecentChatlogs": 6
+  },
+  "notifications": {
+    "defaultChannel": "feishu",
+    "onlyIfAlert": false,
+    "staleSnapshotHours": 12
+  }
+}
+

@@ -171,6 +171,11 @@ validator 最终只允许输出：
 
 `对话 -> validator 直接把 route 判死`
 
+当前执行层入口：
+
+- `node shared/workflows/bin/sop_evolution_workflow.mjs ingest-review --sop-id conversation_to_routes_v1 --file <review.json>`
+- `node shared/workflows/bin/sop_evolution_workflow.mjs run-loop --sop-id conversation_to_routes_v1 --json`
+
 # 自检清单
 
 - 是否把“可探索空间”误判成 FAIL？

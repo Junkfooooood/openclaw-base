@@ -10,6 +10,13 @@
 - 若任务存在风险、成本或副作用，必须先说明。
 - 处理情绪内容时，原话保留，只做模式分析，不把分析写成事实。
 - 复杂任务进入 agent 模式前，应先确保当前版本已留档并可回滚。
+- 每轮对话结束后，按 `chatlog/` 目录现有格式生成一份对话记录，至少说明本轮目标、关键结论、文件修改与 Git 处理边界。
+- 若林的当前指令与现有规则或 Active SOP 冲突，必须先把冲突点、风险和可选处理说清楚，再由林拍板；不要静默忽略，也不要偷偷绕过。
+- 面向林输出时，默认中文，整体表达可偏古风、清峻、含蓄、克制，但技术事实、风险说明和执行步骤仍应保持清楚。
+- 对系统内部可采用以下自称：记忆系统 = 神识，管理系统 = 功法，工作流 = 脉络，skill 模块 = 五行物。
+- `.openclaw` 仓库不要求每轮对话都上传 Git；若发生重大文档改动，应在当轮结束前同步 Git，另设每日 `00:00` 自动同步兜底。
+- `.openclaw` 的 Git 同步目标为 GitHub 上的 `openclaw-base` 仓库，默认走 `origin/main`。
+- 每日晨报当前默认关注领域为金融与 AI，形式为紧凑的双主播式读报。
 
 ## System Facts
 - OpenClaw 是当前总入口，外部消息默认先进入 `main`。
@@ -20,13 +27,15 @@
 
 ## Current Build Focus
 - 当前正在补齐第 11 步附近的结构缺口，重点是记忆桥、黑板桥、验证规则和多 agent 工作骨架。
-- `memory-bridge` 已完成 Redis AMS / Qdrant / Neo4j 基础联调，下一步是细化冲突治理与更稳健的召回策略。
+- `memory-bridge` 已补上 fused retrieval、truth/enhanced/runtime/pending 分层返回、conflict review queue；当前在本地沙箱下，AMS / Mem0 / Neo4j 仍可能因权限或网络限制返回降级错误，但冲突治理与本地审查入口已成型。
 - `obsidian-bridge` 默认应保持 draft-first，不直接写正式库。
 - 已新增轻量 `route review loop`：可通过 validator 对 route plan 做 advisory 级复核，用于后续逐步优化 Conversation-to-Routes SOP。
+- 已新增 `sop_evolution_workflow` 执行层：支持 `signal -> aggregate -> draft -> shadow-test -> activate`，并已在 `Conversation_To_Routes_SOP_v1.md` 上完成一次批准式 runtime learnings 更新验证。
 - 已完成 `Moonshot + Qwen + DeepSeek Chat` 从认证层到 agent 可调度层的接入：当前默认回退链为 `OpenAI Codex -> Kimi -> Qwen -> DeepSeek Chat -> OpenAI`；learning/curator 优先走 Kimi，validator 优先走 Qwen，executor 继续以 Codex 为主。
 - 第 8 / 9 / 10 步的管理模式主链已落地为本地状态机：复杂任务先产出 Task Tree JSON，再由 `shared/workflows/bin/task_dispatch_workflow.mjs` 接管 normalize / board-init / dispatch / validate / approval / finalize。
 - 已新增 `strategy_review` 低工具 route：默认 `tool_mode=low_tool`、`model_hint=deepseek/deepseek-reasoner`，用于战略讨论、决策推演、复盘总结；需要网页、代码、文件、设备动作时必须拆出新的 `default` branch。
 - 已新增 branch handoff 执行层：ready branch 会生成 `shared/runtime/dispatch/<task_id>/<branch_id>.json`，同时把统一格式事件写入 `shared/runtime/activity/<task_id>.jsonl`，并把黑板状态从 `ready` 更新为 `assigned`。
+- 管理过程记忆已开始接入 memory bridge：Task Tree、branch packet、activity event、branch result、search trace 默认同步到 management working memory，保留 7 天；`strategy_review` 的高价值结果允许额外同步到 semantic / graph。
 
 ## Pending Configuration Facts
 - 学习系统 Obsidian Vault 当前路径为 `/Users/linqingxuan/Library/Mobile Documents/com~apple~CloudDocs/knowledge-system`，作为 live vault 使用，并已写入本地运行配置。

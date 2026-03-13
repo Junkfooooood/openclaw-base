@@ -7,7 +7,7 @@
       "description": "Step15 morning proactive status check-in",
       "enabled": true,
       "createdAtMs": 1773320696144,
-      "updatedAtMs": 1773320696144,
+      "updatedAtMs": 1773369000012,
       "schedule": {
         "kind": "cron",
         "expr": "30 10 * * *",
@@ -21,7 +21,13 @@
         "text": "第15步主动陪伴：请对林做一次轻量晨间状态检查。像日常聊天，不像问卷。优先关心今天的学习起步、精力和心情；控制在3个短点以内。若没有高价值内容，不要硬发。"
       },
       "state": {
-        "nextRunAtMs": 1773369000000
+        "nextRunAtMs": 1773455400000,
+        "lastRunAtMs": 1773369000009,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 3,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
       }
     },
     {
@@ -30,7 +36,7 @@
       "description": "Step15 evening learning and mood check-in",
       "enabled": true,
       "createdAtMs": 1773320696153,
-      "updatedAtMs": 1773320696153,
+      "updatedAtMs": 1773323366095,
       "schedule": {
         "kind": "cron",
         "expr": "20 21 * * *",
@@ -44,7 +50,13 @@
         "text": "第15步主动陪伴：请做一次晚间学习与心情 check-in。优先问今天推进了什么、卡在哪里、此刻情绪如何；最后给1个最小下一步，不要造成压力。"
       },
       "state": {
-        "nextRunAtMs": 1773321600000
+        "nextRunAtMs": 1773408000000,
+        "lastRunAtMs": 1773323366093,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 2,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
       }
     },
     {
@@ -76,7 +88,7 @@
       "description": "Step15 midday interest frontier and major-news briefing",
       "enabled": true,
       "createdAtMs": 1773320696166,
-      "updatedAtMs": 1773320696166,
+      "updatedAtMs": 1773376800011,
       "schedule": {
         "kind": "cron",
         "expr": "40 12 * * *",
@@ -90,7 +102,13 @@
         "text": "第15步主动陪伴：请整理一份简短前沿简报。优先给林可能感兴趣领域的2条高质量前沿消息；若当天有其他领域的重大消息，再补1条，并说明为什么值得看。没有高质量内容就跳过。"
       },
       "state": {
-        "nextRunAtMs": 1773376800000
+        "nextRunAtMs": 1773463200000,
+        "lastRunAtMs": 1773376800007,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 4,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
       }
     },
     {
@@ -99,7 +117,7 @@
       "description": "Step15 nightly light social message",
       "enabled": true,
       "createdAtMs": 1773320696170,
-      "updatedAtMs": 1773320696170,
+      "updatedAtMs": 1773324600011,
       "schedule": {
         "kind": "cron",
         "expr": "10 22 * * *",
@@ -113,7 +131,63 @@
         "text": "第15步主动陪伴：请发送一条轻松但不低质的日常聊天消息。可以是网络知识、轻段子或轻调侃，但不要冒犯、不要刷屏、不要强行鸡汤。"
       },
       "state": {
-        "nextRunAtMs": 1773324600000
+        "nextRunAtMs": 1773411000000,
+        "lastRunAtMs": 1773324600008,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 3,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "59f6218a-666b-4959-86fe-881bb00db1ce",
+      "name": "morning-anchor-briefing",
+      "description": "Daily 8:30 finance and AI anchor-style briefing",
+      "enabled": true,
+      "createdAtMs": 1773382589156,
+      "updatedAtMs": 1773382636665,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 8 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请读取 /Users/linqingxuan/.openclaw/skills/morning-anchor-briefing/SKILL.md，并按其规范为林生成一份早间主播型读报。默认主题为金融与AI；若当天没有足够高质量更新，可压缩成短版，但不要编造。"
+      },
+      "state": {
+        "nextRunAtMs": 1773448200000,
+        "lastRunAtMs": 1773382636662,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 3,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "d3ffbfd5-2a1b-48d3-a0ed-9dea37c12849",
+      "name": "openclaw-daily-git-sync",
+      "description": "Daily midnight Git sync for .openclaw",
+      "enabled": true,
+      "createdAtMs": 1773382814249,
+      "updatedAtMs": 1773382814249,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 0 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "仓库维护：请使用 /bin/zsh /Users/linqingxuan/.openclaw/shared/runtime/git_sync/openclaw_git_sync.sh --daily 同步 .openclaw 仓库。若没有变更则直接结束；若推送失败，需在结果中说明阻塞原因。"
+      },
+      "state": {
+        "nextRunAtMs": 1773417600000
       }
     }
   ]

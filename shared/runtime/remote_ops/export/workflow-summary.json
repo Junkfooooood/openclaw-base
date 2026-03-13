@@ -1,0 +1,3169 @@
+{
+  "generated_at": "2026-03-13T03:48:03.101Z",
+  "device_id": "macmini-local",
+  "local_snapshot": {
+    "schema_version": 1,
+    "collected_at": "2026-03-13T03:48:03.100Z",
+    "device_id": "macmini-local",
+    "device_label": "macmini-local",
+    "hostname": "linqingxuandeMac-mini.local",
+    "user": "linqingxuan",
+    "browser": {
+      "collected_at": "2026-03-13T03:48:03.100Z",
+      "lookback_days": 3,
+      "browsers": [
+        {
+          "available": true,
+          "error": null,
+          "browser_id": "chrome",
+          "browser": "Google Chrome",
+          "total_visits": 864,
+          "categories": {
+            "agent": [
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "agent",
+                "domain": "chatgpt.com",
+                "visit_count": 174,
+                "last_visited_at": "2026-03-13 01:10:00",
+                "sample_titles": [
+                  "模型介绍",
+                  "ChatGPT",
+                  "开始使用 | ChatGPT"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "agent",
+                "domain": "gemini.google.com",
+                "visit_count": 41,
+                "last_visited_at": "2026-03-13 01:36:31",
+                "sample_titles": [
+                  "Google Gemini",
+                  "‎Google Gemini",
+                  "gemini.google.com"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "agent",
+                "domain": "doubao.com",
+                "visit_count": 4,
+                "last_visited_at": "2026-03-12 01:11:38",
+                "sample_titles": [
+                  "doubao.com/chat/38416639325549826",
+                  "豆包 - 字节跳动旗下 AI 智能助手"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "agent",
+                "domain": "chat.deepseek.com",
+                "visit_count": 2,
+                "last_visited_at": "2026-03-13 01:44:38",
+                "sample_titles": [
+                  "DeepSeek - 探索未至之境"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "agent",
+                "domain": "chat.openai.com",
+                "visit_count": 2,
+                "last_visited_at": "2026-03-12 00:52:11",
+                "sample_titles": [
+                  "开始使用 | ChatGPT",
+                  "ChatGPT"
+                ]
+              }
+            ],
+            "course": [
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "course",
+                "domain": "bilibili.com",
+                "visit_count": 29,
+                "last_visited_at": "2026-03-12 08:51:29",
+                "sample_titles": [
+                  "【Obsidian】多端同步和备份方案_哔哩哔哩_bilibili",
+                  "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+                  "国内用户用海外 AI 的正确姿势：官方、正规、邪道一口气讲透_哔哩哔哩_bilibili"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "course",
+                "domain": "search.bilibili.com",
+                "visit_count": 10,
+                "last_visited_at": "2026-03-12 08:44:23",
+                "sample_titles": [
+                  "obsidian多端同步和备份方案-哔哩哔哩_bilibili",
+                  "obsidian多端同步-哔哩哔哩_bilibili",
+                  "国内怎么用chatgpt-哔哩哔哩_bilibili"
+                ]
+              }
+            ],
+            "other": [
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "auth.openai.com",
+                "visit_count": 135,
+                "last_visited_at": "2026-03-13 01:37:16",
+                "sample_titles": [
+                  "Sign into Codex",
+                  "使用 ChatGPT 登录到 Codex - OpenAI",
+                  "检查您的收件箱 - OpenAI"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "github.com",
+                "visit_count": 51,
+                "last_visited_at": "2026-03-12 13:15:36",
+                "sample_titles": [
+                  "Fine-grained Personal Access Tokens",
+                  "New Fine-grained Personal Access Token",
+                  "GitHub Apps"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "accounts.google.com",
+                "visit_count": 32,
+                "last_visited_at": "2026-03-12 14:15:55",
+                "sample_titles": [
+                  "登录 - Google 账号",
+                  "注册账号",
+                  "Chrome 应用商店"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "douyin.com",
+                "visit_count": 32,
+                "last_visited_at": "2026-03-11 10:26:39",
+                "sample_titles": [
+                  "似离灼霞并明心的抖音 - 抖音",
+                  "抖音-记录美好生活"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "google.com",
+                "visit_count": 28,
+                "last_visited_at": "2026-03-12 14:39:02",
+                "sample_titles": [
+                  "gl - Google 搜索",
+                  "Qwen - Google 搜索",
+                  "moonshot - Google 搜索"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "platform.moonshot.cn",
+                "visit_count": 23,
+                "last_visited_at": "2026-03-12 14:25:11",
+                "sample_titles": [
+                  "Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+                  "Kimi K2.5 - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+                  "开始使用 Kimi API - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "localhost",
+                "visit_count": 18,
+                "last_visited_at": "2026-03-13 01:37:16",
+                "sample_titles": [
+                  "Sign into Codex",
+                  "Authentication successful",
+                  "Neo4j Browser"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "bailian.console.aliyun.com",
+                "visit_count": 18,
+                "last_visited_at": "2026-03-12 14:24:00",
+                "sample_titles": [
+                  "大模型服务平台百炼控制台"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "127.0.0.1",
+                "visit_count": 18,
+                "last_visited_at": "2026-03-12 13:16:54",
+                "sample_titles": [
+                  "OpenClaw 控制 --- OpenClaw Control",
+                  "OpenClaw Control"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "help.openai.com",
+                "visit_count": 15,
+                "last_visited_at": "2026-03-10 06:38:11",
+                "sample_titles": [
+                  "排查模型功能访问问题 | OpenAI Help Center",
+                  "ChatGPT | OpenAI Help Center"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "account.alibabacloud.com",
+                "visit_count": 12,
+                "last_visited_at": "2026-03-12 14:17:33",
+                "sample_titles": [
+                  "Alicloud supply info",
+                  "注册账号",
+                  "登录 - Google 账号"
+                ]
+              },
+              {
+                "browser": "Google Chrome",
+                "browser_id": "chrome",
+                "category": "other",
+                "domain": "scn0mulklu7f.feishu.cn",
+                "visit_count": 11,
+                "last_visited_at": "2026-03-12 01:11:39",
+                "sample_titles": [
+                  "智能纪要：企业组织形态类型及特点分析 2026年3月11日 - 飞书云文档",
+                  "Docs",
+                  "accounts.feishu.cn/accounts/page/login?query_scope=all&redirect_uri=https%3A%2F%2Fscn0mul…"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "browser_id": "arc",
+          "browser": "Arc",
+          "available": false,
+          "error": "history database not found",
+          "total_visits": 0,
+          "categories": {
+            "agent": [],
+            "course": [],
+            "other": []
+          }
+        },
+        {
+          "browser_id": "brave",
+          "browser": "Brave",
+          "available": false,
+          "error": "history database not found",
+          "total_visits": 0,
+          "categories": {
+            "agent": [],
+            "course": [],
+            "other": []
+          }
+        },
+        {
+          "browser_id": "edge",
+          "browser": "Microsoft Edge",
+          "available": false,
+          "error": "history database not found",
+          "total_visits": 0,
+          "categories": {
+            "agent": [],
+            "course": [],
+            "other": []
+          }
+        },
+        {
+          "browser_id": "safari",
+          "browser": "Safari",
+          "available": false,
+          "error": "Error: unable to open database \"file:///Users/linqingxuan/Library/Safari/History.db?immutable=1\": authorization denied",
+          "total_visits": 0,
+          "categories": {
+            "agent": [],
+            "course": [],
+            "other": []
+          }
+        }
+      ],
+      "aggregate": {
+        "total_visits": 864,
+        "agent_sites": [
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "agent",
+            "domain": "chatgpt.com",
+            "visit_count": 174,
+            "last_visited_at": "2026-03-13 01:10:00",
+            "sample_titles": [
+              "模型介绍",
+              "ChatGPT",
+              "开始使用 | ChatGPT"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "agent",
+            "domain": "gemini.google.com",
+            "visit_count": 41,
+            "last_visited_at": "2026-03-13 01:36:31",
+            "sample_titles": [
+              "Google Gemini",
+              "‎Google Gemini",
+              "gemini.google.com"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "agent",
+            "domain": "doubao.com",
+            "visit_count": 4,
+            "last_visited_at": "2026-03-12 01:11:38",
+            "sample_titles": [
+              "doubao.com/chat/38416639325549826",
+              "豆包 - 字节跳动旗下 AI 智能助手"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "agent",
+            "domain": "chat.deepseek.com",
+            "visit_count": 2,
+            "last_visited_at": "2026-03-13 01:44:38",
+            "sample_titles": [
+              "DeepSeek - 探索未至之境"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "agent",
+            "domain": "chat.openai.com",
+            "visit_count": 2,
+            "last_visited_at": "2026-03-12 00:52:11",
+            "sample_titles": [
+              "开始使用 | ChatGPT",
+              "ChatGPT"
+            ]
+          }
+        ],
+        "course_sites": [
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "course",
+            "domain": "bilibili.com",
+            "visit_count": 29,
+            "last_visited_at": "2026-03-12 08:51:29",
+            "sample_titles": [
+              "【Obsidian】多端同步和备份方案_哔哩哔哩_bilibili",
+              "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+              "国内用户用海外 AI 的正确姿势：官方、正规、邪道一口气讲透_哔哩哔哩_bilibili"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "course",
+            "domain": "search.bilibili.com",
+            "visit_count": 10,
+            "last_visited_at": "2026-03-12 08:44:23",
+            "sample_titles": [
+              "obsidian多端同步和备份方案-哔哩哔哩_bilibili",
+              "obsidian多端同步-哔哩哔哩_bilibili",
+              "国内怎么用chatgpt-哔哩哔哩_bilibili"
+            ]
+          }
+        ],
+        "other_sites": [
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "auth.openai.com",
+            "visit_count": 135,
+            "last_visited_at": "2026-03-13 01:37:16",
+            "sample_titles": [
+              "Sign into Codex",
+              "使用 ChatGPT 登录到 Codex - OpenAI",
+              "检查您的收件箱 - OpenAI"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "github.com",
+            "visit_count": 51,
+            "last_visited_at": "2026-03-12 13:15:36",
+            "sample_titles": [
+              "Fine-grained Personal Access Tokens",
+              "New Fine-grained Personal Access Token",
+              "GitHub Apps"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "accounts.google.com",
+            "visit_count": 32,
+            "last_visited_at": "2026-03-12 14:15:55",
+            "sample_titles": [
+              "登录 - Google 账号",
+              "注册账号",
+              "Chrome 应用商店"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "douyin.com",
+            "visit_count": 32,
+            "last_visited_at": "2026-03-11 10:26:39",
+            "sample_titles": [
+              "似离灼霞并明心的抖音 - 抖音",
+              "抖音-记录美好生活"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "google.com",
+            "visit_count": 28,
+            "last_visited_at": "2026-03-12 14:39:02",
+            "sample_titles": [
+              "gl - Google 搜索",
+              "Qwen - Google 搜索",
+              "moonshot - Google 搜索"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "platform.moonshot.cn",
+            "visit_count": 23,
+            "last_visited_at": "2026-03-12 14:25:11",
+            "sample_titles": [
+              "Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+              "Kimi K2.5 - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+              "开始使用 Kimi API - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "localhost",
+            "visit_count": 18,
+            "last_visited_at": "2026-03-13 01:37:16",
+            "sample_titles": [
+              "Sign into Codex",
+              "Authentication successful",
+              "Neo4j Browser"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "bailian.console.aliyun.com",
+            "visit_count": 18,
+            "last_visited_at": "2026-03-12 14:24:00",
+            "sample_titles": [
+              "大模型服务平台百炼控制台"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "127.0.0.1",
+            "visit_count": 18,
+            "last_visited_at": "2026-03-12 13:16:54",
+            "sample_titles": [
+              "OpenClaw 控制 --- OpenClaw Control",
+              "OpenClaw Control"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "help.openai.com",
+            "visit_count": 15,
+            "last_visited_at": "2026-03-10 06:38:11",
+            "sample_titles": [
+              "排查模型功能访问问题 | OpenAI Help Center",
+              "ChatGPT | OpenAI Help Center"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "account.alibabacloud.com",
+            "visit_count": 12,
+            "last_visited_at": "2026-03-12 14:17:33",
+            "sample_titles": [
+              "Alicloud supply info",
+              "注册账号",
+              "登录 - Google 账号"
+            ]
+          },
+          {
+            "browser": "Google Chrome",
+            "browser_id": "chrome",
+            "category": "other",
+            "domain": "scn0mulklu7f.feishu.cn",
+            "visit_count": 11,
+            "last_visited_at": "2026-03-12 01:11:39",
+            "sample_titles": [
+              "智能纪要：企业组织形态类型及特点分析 2026年3月11日 - 飞书云文档",
+              "Docs",
+              "accounts.feishu.cn/accounts/page/login?query_scope=all&redirect_uri=https%3A%2F%2Fscn0mul…"
+            ]
+          }
+        ]
+      }
+    },
+    "chatlogs": {
+      "total_files": 27,
+      "recent_files": [
+        {
+          "name": "2026-03-13-112356.md",
+          "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-112356.md",
+          "updated_at": "2026-03-13T03:24:46.632Z",
+          "title": "2026-03-13 11:23:56 对话记录"
+        },
+        {
+          "name": "2026-03-13-100339.md",
+          "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-100339.md",
+          "updated_at": "2026-03-13T02:04:23.243Z",
+          "title": "2026-03-13 10:03:39 对话记录"
+        },
+        {
+          "name": "2026-03-13-083646.md",
+          "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-083646.md",
+          "updated_at": "2026-03-13T00:37:30.403Z",
+          "title": "2026-03-13 对话记录"
+        },
+        {
+          "name": "2026-03-13-083032.md",
+          "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-083032.md",
+          "updated_at": "2026-03-13T00:32:02.546Z",
+          "title": "2026-03-13 对话记录"
+        },
+        {
+          "name": "2026-03-12-232951.md",
+          "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-12-232951.md",
+          "updated_at": "2026-03-12T15:36:02.586Z",
+          "title": "2026-03-12 对话记录：将第 8/9/10 步管理模式与 reasoner route 一起落地"
+        },
+        {
+          "name": "2026-03-12-231431.md",
+          "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-12-231431.md",
+          "updated_at": "2026-03-12T15:15:50.457Z",
+          "title": "2026-03-12 对话记录：把 DeepSeek 接成 OpenClaw 可调度模型"
+        }
+      ]
+    },
+    "apps": {
+      "available": true,
+      "sample_count": 1,
+      "last_sample_at": "2026-03-13T03:45:24.392Z",
+      "top_apps": []
+    }
+  },
+  "remote_snapshots": [
+    {
+      "schema_version": 1,
+      "collected_at": "2026-03-13T03:47:36.791Z",
+      "device_id": "macbook-sim",
+      "device_label": "macmini-local",
+      "hostname": "linqingxuandeMac-mini.local",
+      "user": "linqingxuan",
+      "browser": {
+        "collected_at": "2026-03-13T03:47:36.790Z",
+        "lookback_days": 3,
+        "browsers": [
+          {
+            "available": true,
+            "error": null,
+            "browser_id": "chrome",
+            "browser": "Google Chrome",
+            "total_visits": 864,
+            "categories": {
+              "agent": [
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "agent",
+                  "domain": "chatgpt.com",
+                  "visit_count": 174,
+                  "last_visited_at": "2026-03-13 01:10:00",
+                  "sample_titles": [
+                    "模型介绍",
+                    "ChatGPT",
+                    "开始使用 | ChatGPT"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "agent",
+                  "domain": "gemini.google.com",
+                  "visit_count": 41,
+                  "last_visited_at": "2026-03-13 01:36:31",
+                  "sample_titles": [
+                    "Google Gemini",
+                    "‎Google Gemini",
+                    "gemini.google.com"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "agent",
+                  "domain": "doubao.com",
+                  "visit_count": 4,
+                  "last_visited_at": "2026-03-12 01:11:38",
+                  "sample_titles": [
+                    "doubao.com/chat/38416639325549826",
+                    "豆包 - 字节跳动旗下 AI 智能助手"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "agent",
+                  "domain": "chat.deepseek.com",
+                  "visit_count": 2,
+                  "last_visited_at": "2026-03-13 01:44:38",
+                  "sample_titles": [
+                    "DeepSeek - 探索未至之境"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "agent",
+                  "domain": "chat.openai.com",
+                  "visit_count": 2,
+                  "last_visited_at": "2026-03-12 00:52:11",
+                  "sample_titles": [
+                    "开始使用 | ChatGPT",
+                    "ChatGPT"
+                  ]
+                }
+              ],
+              "course": [
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "course",
+                  "domain": "bilibili.com",
+                  "visit_count": 29,
+                  "last_visited_at": "2026-03-12 08:51:29",
+                  "sample_titles": [
+                    "【Obsidian】多端同步和备份方案_哔哩哔哩_bilibili",
+                    "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+                    "国内用户用海外 AI 的正确姿势：官方、正规、邪道一口气讲透_哔哩哔哩_bilibili"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "course",
+                  "domain": "search.bilibili.com",
+                  "visit_count": 10,
+                  "last_visited_at": "2026-03-12 08:44:23",
+                  "sample_titles": [
+                    "obsidian多端同步和备份方案-哔哩哔哩_bilibili",
+                    "obsidian多端同步-哔哩哔哩_bilibili",
+                    "国内怎么用chatgpt-哔哩哔哩_bilibili"
+                  ]
+                }
+              ],
+              "other": [
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "auth.openai.com",
+                  "visit_count": 135,
+                  "last_visited_at": "2026-03-13 01:37:16",
+                  "sample_titles": [
+                    "Sign into Codex",
+                    "使用 ChatGPT 登录到 Codex - OpenAI",
+                    "检查您的收件箱 - OpenAI"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "github.com",
+                  "visit_count": 51,
+                  "last_visited_at": "2026-03-12 13:15:36",
+                  "sample_titles": [
+                    "Fine-grained Personal Access Tokens",
+                    "New Fine-grained Personal Access Token",
+                    "GitHub Apps"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "accounts.google.com",
+                  "visit_count": 32,
+                  "last_visited_at": "2026-03-12 14:15:55",
+                  "sample_titles": [
+                    "登录 - Google 账号",
+                    "注册账号",
+                    "Chrome 应用商店"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "douyin.com",
+                  "visit_count": 32,
+                  "last_visited_at": "2026-03-11 10:26:39",
+                  "sample_titles": [
+                    "似离灼霞并明心的抖音 - 抖音",
+                    "抖音-记录美好生活"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "google.com",
+                  "visit_count": 28,
+                  "last_visited_at": "2026-03-12 14:39:02",
+                  "sample_titles": [
+                    "gl - Google 搜索",
+                    "Qwen - Google 搜索",
+                    "moonshot - Google 搜索"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "platform.moonshot.cn",
+                  "visit_count": 23,
+                  "last_visited_at": "2026-03-12 14:25:11",
+                  "sample_titles": [
+                    "Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+                    "Kimi K2.5 - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+                    "开始使用 Kimi API - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "localhost",
+                  "visit_count": 18,
+                  "last_visited_at": "2026-03-13 01:37:16",
+                  "sample_titles": [
+                    "Sign into Codex",
+                    "Authentication successful",
+                    "Neo4j Browser"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "bailian.console.aliyun.com",
+                  "visit_count": 18,
+                  "last_visited_at": "2026-03-12 14:24:00",
+                  "sample_titles": [
+                    "大模型服务平台百炼控制台"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "127.0.0.1",
+                  "visit_count": 18,
+                  "last_visited_at": "2026-03-12 13:16:54",
+                  "sample_titles": [
+                    "OpenClaw 控制 --- OpenClaw Control",
+                    "OpenClaw Control"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "help.openai.com",
+                  "visit_count": 15,
+                  "last_visited_at": "2026-03-10 06:38:11",
+                  "sample_titles": [
+                    "排查模型功能访问问题 | OpenAI Help Center",
+                    "ChatGPT | OpenAI Help Center"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "account.alibabacloud.com",
+                  "visit_count": 12,
+                  "last_visited_at": "2026-03-12 14:17:33",
+                  "sample_titles": [
+                    "Alicloud supply info",
+                    "注册账号",
+                    "登录 - Google 账号"
+                  ]
+                },
+                {
+                  "browser": "Google Chrome",
+                  "browser_id": "chrome",
+                  "category": "other",
+                  "domain": "scn0mulklu7f.feishu.cn",
+                  "visit_count": 11,
+                  "last_visited_at": "2026-03-12 01:11:39",
+                  "sample_titles": [
+                    "智能纪要：企业组织形态类型及特点分析 2026年3月11日 - 飞书云文档",
+                    "Docs",
+                    "accounts.feishu.cn/accounts/page/login?query_scope=all&redirect_uri=https%3A%2F%2Fscn0mul…"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "browser_id": "arc",
+            "browser": "Arc",
+            "available": false,
+            "error": "history database not found",
+            "total_visits": 0,
+            "categories": {
+              "agent": [],
+              "course": [],
+              "other": []
+            }
+          },
+          {
+            "browser_id": "brave",
+            "browser": "Brave",
+            "available": false,
+            "error": "history database not found",
+            "total_visits": 0,
+            "categories": {
+              "agent": [],
+              "course": [],
+              "other": []
+            }
+          },
+          {
+            "browser_id": "edge",
+            "browser": "Microsoft Edge",
+            "available": false,
+            "error": "history database not found",
+            "total_visits": 0,
+            "categories": {
+              "agent": [],
+              "course": [],
+              "other": []
+            }
+          },
+          {
+            "browser_id": "safari",
+            "browser": "Safari",
+            "available": false,
+            "error": "Error: unable to open database \"file:///Users/linqingxuan/Library/Safari/History.db?immutable=1\": authorization denied",
+            "total_visits": 0,
+            "categories": {
+              "agent": [],
+              "course": [],
+              "other": []
+            }
+          }
+        ],
+        "aggregate": {
+          "total_visits": 864,
+          "agent_sites": [
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "chatgpt.com",
+              "visit_count": 174,
+              "last_visited_at": "2026-03-13 01:10:00",
+              "sample_titles": [
+                "模型介绍",
+                "ChatGPT",
+                "开始使用 | ChatGPT"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "gemini.google.com",
+              "visit_count": 41,
+              "last_visited_at": "2026-03-13 01:36:31",
+              "sample_titles": [
+                "Google Gemini",
+                "‎Google Gemini",
+                "gemini.google.com"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "doubao.com",
+              "visit_count": 4,
+              "last_visited_at": "2026-03-12 01:11:38",
+              "sample_titles": [
+                "doubao.com/chat/38416639325549826",
+                "豆包 - 字节跳动旗下 AI 智能助手"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "chat.deepseek.com",
+              "visit_count": 2,
+              "last_visited_at": "2026-03-13 01:44:38",
+              "sample_titles": [
+                "DeepSeek - 探索未至之境"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "agent",
+              "domain": "chat.openai.com",
+              "visit_count": 2,
+              "last_visited_at": "2026-03-12 00:52:11",
+              "sample_titles": [
+                "开始使用 | ChatGPT",
+                "ChatGPT"
+              ]
+            }
+          ],
+          "course_sites": [
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "course",
+              "domain": "bilibili.com",
+              "visit_count": 29,
+              "last_visited_at": "2026-03-12 08:51:29",
+              "sample_titles": [
+                "【Obsidian】多端同步和备份方案_哔哩哔哩_bilibili",
+                "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+                "国内用户用海外 AI 的正确姿势：官方、正规、邪道一口气讲透_哔哩哔哩_bilibili"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "course",
+              "domain": "search.bilibili.com",
+              "visit_count": 10,
+              "last_visited_at": "2026-03-12 08:44:23",
+              "sample_titles": [
+                "obsidian多端同步和备份方案-哔哩哔哩_bilibili",
+                "obsidian多端同步-哔哩哔哩_bilibili",
+                "国内怎么用chatgpt-哔哩哔哩_bilibili"
+              ]
+            }
+          ],
+          "other_sites": [
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "auth.openai.com",
+              "visit_count": 135,
+              "last_visited_at": "2026-03-13 01:37:16",
+              "sample_titles": [
+                "Sign into Codex",
+                "使用 ChatGPT 登录到 Codex - OpenAI",
+                "检查您的收件箱 - OpenAI"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "github.com",
+              "visit_count": 51,
+              "last_visited_at": "2026-03-12 13:15:36",
+              "sample_titles": [
+                "Fine-grained Personal Access Tokens",
+                "New Fine-grained Personal Access Token",
+                "GitHub Apps"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "accounts.google.com",
+              "visit_count": 32,
+              "last_visited_at": "2026-03-12 14:15:55",
+              "sample_titles": [
+                "登录 - Google 账号",
+                "注册账号",
+                "Chrome 应用商店"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "douyin.com",
+              "visit_count": 32,
+              "last_visited_at": "2026-03-11 10:26:39",
+              "sample_titles": [
+                "似离灼霞并明心的抖音 - 抖音",
+                "抖音-记录美好生活"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "google.com",
+              "visit_count": 28,
+              "last_visited_at": "2026-03-12 14:39:02",
+              "sample_titles": [
+                "gl - Google 搜索",
+                "Qwen - Google 搜索",
+                "moonshot - Google 搜索"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "platform.moonshot.cn",
+              "visit_count": 23,
+              "last_visited_at": "2026-03-12 14:25:11",
+              "sample_titles": [
+                "Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+                "Kimi K2.5 - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务",
+                "开始使用 Kimi API - Moonshot AI 开放平台 - Kimi K2.5 大模型 API 服务"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "localhost",
+              "visit_count": 18,
+              "last_visited_at": "2026-03-13 01:37:16",
+              "sample_titles": [
+                "Sign into Codex",
+                "Authentication successful",
+                "Neo4j Browser"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "bailian.console.aliyun.com",
+              "visit_count": 18,
+              "last_visited_at": "2026-03-12 14:24:00",
+              "sample_titles": [
+                "大模型服务平台百炼控制台"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "127.0.0.1",
+              "visit_count": 18,
+              "last_visited_at": "2026-03-12 13:16:54",
+              "sample_titles": [
+                "OpenClaw 控制 --- OpenClaw Control",
+                "OpenClaw Control"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "help.openai.com",
+              "visit_count": 15,
+              "last_visited_at": "2026-03-10 06:38:11",
+              "sample_titles": [
+                "排查模型功能访问问题 | OpenAI Help Center",
+                "ChatGPT | OpenAI Help Center"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "account.alibabacloud.com",
+              "visit_count": 12,
+              "last_visited_at": "2026-03-12 14:17:33",
+              "sample_titles": [
+                "Alicloud supply info",
+                "注册账号",
+                "登录 - Google 账号"
+              ]
+            },
+            {
+              "browser": "Google Chrome",
+              "browser_id": "chrome",
+              "category": "other",
+              "domain": "scn0mulklu7f.feishu.cn",
+              "visit_count": 11,
+              "last_visited_at": "2026-03-12 01:11:39",
+              "sample_titles": [
+                "智能纪要：企业组织形态类型及特点分析 2026年3月11日 - 飞书云文档",
+                "Docs",
+                "accounts.feishu.cn/accounts/page/login?query_scope=all&redirect_uri=https%3A%2F%2Fscn0mul…"
+              ]
+            }
+          ]
+        }
+      },
+      "chatlogs": {
+        "total_files": 27,
+        "recent_files": [
+          {
+            "name": "2026-03-13-112356.md",
+            "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-112356.md",
+            "updated_at": "2026-03-13T03:24:46.632Z",
+            "title": "2026-03-13 11:23:56 对话记录"
+          },
+          {
+            "name": "2026-03-13-100339.md",
+            "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-100339.md",
+            "updated_at": "2026-03-13T02:04:23.243Z",
+            "title": "2026-03-13 10:03:39 对话记录"
+          },
+          {
+            "name": "2026-03-13-083646.md",
+            "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-083646.md",
+            "updated_at": "2026-03-13T00:37:30.403Z",
+            "title": "2026-03-13 对话记录"
+          },
+          {
+            "name": "2026-03-13-083032.md",
+            "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-13-083032.md",
+            "updated_at": "2026-03-13T00:32:02.546Z",
+            "title": "2026-03-13 对话记录"
+          },
+          {
+            "name": "2026-03-12-232951.md",
+            "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-12-232951.md",
+            "updated_at": "2026-03-12T15:36:02.586Z",
+            "title": "2026-03-12 对话记录：将第 8/9/10 步管理模式与 reasoner route 一起落地"
+          },
+          {
+            "name": "2026-03-12-231431.md",
+            "path": "/Users/linqingxuan/.openclaw/chatlog/2026-03-12-231431.md",
+            "updated_at": "2026-03-12T15:15:50.457Z",
+            "title": "2026-03-12 对话记录：把 DeepSeek 接成 OpenClaw 可调度模型"
+          }
+        ]
+      },
+      "apps": {
+        "available": true,
+        "sample_count": 1,
+        "last_sample_at": "2026-03-13T03:45:24.392Z",
+        "top_apps": []
+      }
+    }
+  ],
+  "workflows": {
+    "generated_at": "2026-03-13T03:48:03.098Z",
+    "task_count": 8,
+    "active_tasks": [
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live3",
+        "title": "管理模式完整主链 live smoke v3",
+        "status": "blocked",
+        "owner": "main",
+        "updated_at": "2026-03-13T02:30:09.391Z",
+        "current_branch": "retro",
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live3.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live3.jsonl",
+        "branches": [
+          {
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "status": "block",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T02:30:09.391Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:24:18.658Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:24:27.636Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:25:27.832Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:25:54.178Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:30:09.391Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "block",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.validation.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro BLOCK"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live2",
+        "title": "管理模式完整主链 live smoke v2",
+        "status": "blocked",
+        "owner": "main",
+        "updated_at": "2026-03-13T02:25:38.907Z",
+        "current_branch": "retro",
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live2.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live2.jsonl",
+        "branches": [
+          {
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "status": "block",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T02:25:38.908Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:20:40.769Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:20:50.307Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:21:54.743Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:22:30.458Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:25:38.908Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "block",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.validation.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro BLOCK"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live",
+        "title": "管理模式完整主链 live smoke",
+        "status": "in_progress",
+        "owner": "main",
+        "updated_at": "2026-03-13T02:15:43.147Z",
+        "current_branch": "retro",
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live.jsonl",
+        "branches": [
+          {
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "status": "running",
+            "last_event": "branch_execution_started",
+            "updated_at": "2026-03-13T02:15:43.139Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:15:29.148Z",
+            "task_id": "mgmt-execute-smoke-20260313-live",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:15:43.139Z",
+            "task_id": "mgmt-execute-smoke-20260313-live",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live/retro.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-handoff-smoke-20260313",
+        "title": "mgmt-handoff-smoke-20260313",
+        "status": "assigned",
+        "owner": "main",
+        "updated_at": "2026-03-13T00:30:17.312Z",
+        "current_branch": null,
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/archive/mgmt-handoff-smoke-20260313.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-handoff-smoke-20260313.jsonl",
+        "branches": [
+          {
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "status": "assigned",
+            "last_event": "branch_assigned",
+            "updated_at": "2026-03-13T00:30:17.312Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T00:30:17.312Z",
+            "task_id": "mgmt-handoff-smoke-20260313",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-handoff-smoke-20260313/retro.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          }
+        ]
+      }
+    ],
+    "recent_tasks": [
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live7",
+        "title": "管理模式完整主链 live smoke v7",
+        "status": "archived",
+        "owner": "main",
+        "updated_at": "2026-03-13T03:22:29.044Z",
+        "current_branch": null,
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live7.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live7.jsonl",
+        "branches": [
+          {
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "status": "pass",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T03:22:29.043Z"
+          },
+          {
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "status": "pass",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T03:16:30.314Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T03:10:31.668Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:10:41.773Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:12:47.792Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:13:18.991Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:16:30.314Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "pass",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/retro.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:16:30.333Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:16:30.366Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:19:49.616Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:19:49.665Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:22:29.043Z",
+            "task_id": "mgmt-execute-smoke-20260313-live7",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "pass",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live7/closeout.validation.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro PASS"
+          },
+          {
+            "from": "main",
+            "to": "executor",
+            "label": "closeout assigned"
+          },
+          {
+            "from": "executor",
+            "to": "validator",
+            "label": "closeout result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "closeout PASS"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live6",
+        "title": "管理模式完整主链 live smoke v6",
+        "status": "archived",
+        "owner": "main",
+        "updated_at": "2026-03-13T03:04:16.930Z",
+        "current_branch": null,
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live6.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live6.jsonl",
+        "branches": [
+          {
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "status": "pass",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T03:04:16.928Z"
+          },
+          {
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "status": "pass",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T03:00:30.883Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:52:40.028Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:52:50.661Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:54:26.194Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:55:01.847Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:55:41.327Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "fail",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:55:41.344Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:55:51.896Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:58:05.199Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:58:22.262Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:00:30.883Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "pass",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/retro.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:00:30.898Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:00:30.923Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:03:43.443Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:03:43.460Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:04:16.928Z",
+            "task_id": "mgmt-execute-smoke-20260313-live6",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "pass",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live6/closeout.validation.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro FAIL"
+          },
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro PASS"
+          },
+          {
+            "from": "main",
+            "to": "executor",
+            "label": "closeout assigned"
+          },
+          {
+            "from": "executor",
+            "to": "validator",
+            "label": "closeout result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "closeout PASS"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live5",
+        "title": "管理模式完整主链 live smoke v5",
+        "status": "archived",
+        "owner": "main",
+        "updated_at": "2026-03-13T03:00:31.814Z",
+        "current_branch": null,
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live5.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live5.jsonl",
+        "branches": [
+          {
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "status": "pass",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T03:00:31.812Z"
+          },
+          {
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "status": "pass",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T02:49:50.027Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:46:36.536Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:46:45.643Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:47:49.673Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:48:11.903Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:49:50.027Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "pass",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/retro.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:49:50.039Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:49:50.062Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:52:22.697Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:52:22.711Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:55:41.328Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "fail",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:55:41.344Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:55:41.376Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:58:54.135Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "deepseek/deepseek-chat",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:58:54.163Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T03:00:31.812Z",
+            "task_id": "mgmt-execute-smoke-20260313-live5",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "pass",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live5/closeout.validation.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro PASS"
+          },
+          {
+            "from": "main",
+            "to": "executor",
+            "label": "closeout assigned"
+          },
+          {
+            "from": "executor",
+            "to": "validator",
+            "label": "closeout result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "closeout FAIL"
+          },
+          {
+            "from": "main",
+            "to": "executor",
+            "label": "closeout assigned"
+          },
+          {
+            "from": "executor",
+            "to": "validator",
+            "label": "closeout result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "closeout PASS"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live4",
+        "title": "管理模式完整主链 live smoke v4",
+        "status": "archived",
+        "owner": "main",
+        "updated_at": "2026-03-13T02:49:50.159Z",
+        "current_branch": null,
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live4.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live4.jsonl",
+        "branches": [
+          {
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "status": "pass",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T02:49:50.156Z"
+          },
+          {
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "status": "pass",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T02:37:38.929Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:28:47.847Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:28:57.358Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:29:54.734Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:30:13.289Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:34:28.632Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "block",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:37:26.694Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:37:38.929Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "pass",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/retro.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:37:38.941Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:37:38.959Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:40:51.916Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:40:51.941Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:41:58.214Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "fail",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:41:58.227Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:41:58.248Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:43:33.157Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:43:33.177Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:43:45.261Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "fail",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:43:45.274Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:43:45.300Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:46:59.971Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:46:59.993Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:47:14.785Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "fail",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.validation.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:47:14.799Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:47:14.826Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:49:03.584Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "executor",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "gpt-5",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:49:03.609Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:49:50.156Z",
+            "task_id": "mgmt-execute-smoke-20260313-live4",
+            "branch_id": "closeout",
+            "owner": "validator",
+            "route": "default",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "pass",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live4/closeout.validation.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro BLOCK"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro PASS"
+          },
+          {
+            "from": "main",
+            "to": "executor",
+            "label": "closeout assigned"
+          },
+          {
+            "from": "executor",
+            "to": "validator",
+            "label": "closeout result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "closeout FAIL"
+          },
+          {
+            "from": "main",
+            "to": "executor",
+            "label": "closeout assigned"
+          },
+          {
+            "from": "executor",
+            "to": "validator",
+            "label": "closeout result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "closeout FAIL"
+          },
+          {
+            "from": "main",
+            "to": "executor",
+            "label": "closeout assigned"
+          },
+          {
+            "from": "executor",
+            "to": "validator",
+            "label": "closeout result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "closeout FAIL"
+          },
+          {
+            "from": "main",
+            "to": "executor",
+            "label": "closeout assigned"
+          },
+          {
+            "from": "executor",
+            "to": "validator",
+            "label": "closeout result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "closeout PASS"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live3",
+        "title": "管理模式完整主链 live smoke v3",
+        "status": "blocked",
+        "owner": "main",
+        "updated_at": "2026-03-13T02:30:09.391Z",
+        "current_branch": "retro",
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live3.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live3.jsonl",
+        "branches": [
+          {
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "status": "block",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T02:30:09.391Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:24:18.658Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:24:27.636Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:25:27.832Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:25:54.178Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:30:09.391Z",
+            "task_id": "mgmt-execute-smoke-20260313-live3",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "block",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live3/retro.validation.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro BLOCK"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live2",
+        "title": "管理模式完整主链 live smoke v2",
+        "status": "blocked",
+        "owner": "main",
+        "updated_at": "2026-03-13T02:25:38.907Z",
+        "current_branch": "retro",
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live2.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live2.jsonl",
+        "branches": [
+          {
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "status": "block",
+            "last_event": "branch_validation_finished",
+            "updated_at": "2026-03-13T02:25:38.908Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:20:40.769Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:20:50.307Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:21:54.743Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_finished",
+            "status": "completed_pending_validation",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:22:30.458Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.result.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:25:38.908Z",
+            "task_id": "mgmt-execute-smoke-20260313-live2",
+            "branch_id": "retro",
+            "owner": "validator",
+            "route": "strategy_review",
+            "tool_mode": "standard",
+            "model_hint": "validator/default",
+            "event": "branch_validation_finished",
+            "status": "block",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.json",
+            "result_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.result.json",
+            "validation_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live2/retro.validation.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          },
+          {
+            "from": "learning",
+            "to": "validator",
+            "label": "retro result"
+          },
+          {
+            "from": "validator",
+            "to": "main",
+            "label": "retro BLOCK"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-execute-smoke-20260313-live",
+        "title": "管理模式完整主链 live smoke",
+        "status": "in_progress",
+        "owner": "main",
+        "updated_at": "2026-03-13T02:15:43.147Z",
+        "current_branch": "retro",
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/hot/mgmt-execute-smoke-20260313-live.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-execute-smoke-20260313-live.jsonl",
+        "branches": [
+          {
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "status": "running",
+            "last_event": "branch_execution_started",
+            "updated_at": "2026-03-13T02:15:43.139Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T02:15:29.148Z",
+            "task_id": "mgmt-execute-smoke-20260313-live",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live/retro.json"
+          },
+          {
+            "timestamp": "2026-03-13T02:15:43.139Z",
+            "task_id": "mgmt-execute-smoke-20260313-live",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_execution_started",
+            "status": "running",
+            "packet_path": "shared/runtime/dispatch/mgmt-execute-smoke-20260313-live/retro.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          }
+        ]
+      },
+      {
+        "task_id": "mgmt-handoff-smoke-20260313",
+        "title": "mgmt-handoff-smoke-20260313",
+        "status": "assigned",
+        "owner": "main",
+        "updated_at": "2026-03-13T00:30:17.312Z",
+        "current_branch": null,
+        "card_path": "/Users/linqingxuan/.openclaw/shared/blackboard/archive/mgmt-handoff-smoke-20260313.md",
+        "activity_path": "/Users/linqingxuan/.openclaw/shared/runtime/activity/mgmt-handoff-smoke-20260313.jsonl",
+        "branches": [
+          {
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "status": "assigned",
+            "last_event": "branch_assigned",
+            "updated_at": "2026-03-13T00:30:17.312Z"
+          }
+        ],
+        "events": [
+          {
+            "timestamp": "2026-03-13T00:30:17.312Z",
+            "task_id": "mgmt-handoff-smoke-20260313",
+            "branch_id": "retro",
+            "owner": "learning",
+            "route": "strategy_review",
+            "tool_mode": "low_tool",
+            "model_hint": "deepseek/deepseek-reasoner",
+            "event": "branch_assigned",
+            "status": "assigned",
+            "packet_path": "shared/runtime/dispatch/mgmt-handoff-smoke-20260313/retro.json"
+          }
+        ],
+        "sequence": [
+          {
+            "from": "main",
+            "to": "learning",
+            "label": "retro assigned"
+          }
+        ]
+      }
+    ],
+    "owner_stats": [
+      {
+        "owner": "validator",
+        "branches": 10
+      },
+      {
+        "owner": "learning",
+        "branches": 2
+      }
+    ]
+  },
+  "cron_jobs": [
+    {
+      "id": "96acf7fc-958e-4314-8b2c-3a9c98cbd9db",
+      "name": "companion-morning-checkin",
+      "description": "Step15 morning proactive status check-in",
+      "enabled": true,
+      "createdAtMs": 1773320696144,
+      "updatedAtMs": 1773369000012,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 10 * * *",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请对林做一次轻量晨间状态检查。像日常聊天，不像问卷。优先关心今天的学习起步、精力和心情；控制在3个短点以内。若没有高价值内容，不要硬发。"
+      },
+      "state": {
+        "nextRunAtMs": 1773455400000,
+        "lastRunAtMs": 1773369000009,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 3,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "5a829294-6c08-4dae-8bc9-2d843bb614f3",
+      "name": "companion-evening-checkin",
+      "description": "Step15 evening learning and mood check-in",
+      "enabled": true,
+      "createdAtMs": 1773320696153,
+      "updatedAtMs": 1773323366095,
+      "schedule": {
+        "kind": "cron",
+        "expr": "20 21 * * *",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请做一次晚间学习与心情 check-in。优先问今天推进了什么、卡在哪里、此刻情绪如何；最后给1个最小下一步，不要造成压力。"
+      },
+      "state": {
+        "nextRunAtMs": 1773408000000,
+        "lastRunAtMs": 1773323366093,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 2,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "d3a46919-eef7-4a40-b138-8f8176cc28d3",
+      "name": "skill-watch-weekly",
+      "description": "Step15 weekly skill discovery watch",
+      "enabled": true,
+      "createdAtMs": 1773320696157,
+      "updatedAtMs": 1773320696157,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 18 * * 0",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请检查近期是否出现值得关注的新 skill、新 agent capability 或新工具组合。默认只推荐，不自动安装。必须给出来源、用途、风险、为什么值得试，并遵守 Skill_Discovery_Safety.md。"
+      },
+      "state": {
+        "nextRunAtMs": 1773570600000
+      }
+    },
+    {
+      "id": "7101b221-e44f-4775-acb7-463923449c6c",
+      "name": "interest-and-major-briefing",
+      "description": "Step15 midday interest frontier and major-news briefing",
+      "enabled": true,
+      "createdAtMs": 1773320696166,
+      "updatedAtMs": 1773320696166,
+      "schedule": {
+        "kind": "cron",
+        "expr": "40 12 * * *",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请整理一份简短前沿简报。优先给林可能感兴趣领域的2条高质量前沿消息；若当天有其他领域的重大消息，再补1条，并说明为什么值得看。没有高质量内容就跳过。"
+      },
+      "state": {
+        "nextRunAtMs": 1773376800000
+      }
+    },
+    {
+      "id": "4dc29428-daa2-478b-b15d-a5521b2bb683",
+      "name": "light-chat-nightly",
+      "description": "Step15 nightly light social message",
+      "enabled": true,
+      "createdAtMs": 1773320696170,
+      "updatedAtMs": 1773324600011,
+      "schedule": {
+        "kind": "cron",
+        "expr": "10 22 * * *",
+        "tz": "Asia/Shanghai",
+        "staggerMs": 0
+      },
+      "sessionTarget": "main",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "systemEvent",
+        "text": "第15步主动陪伴：请发送一条轻松但不低质的日常聊天消息。可以是网络知识、轻段子或轻调侃，但不要冒犯、不要刷屏、不要强行鸡汤。"
+      },
+      "state": {
+        "nextRunAtMs": 1773411000000,
+        "lastRunAtMs": 1773324600008,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 3,
+        "lastDeliveryStatus": "not-requested",
+        "consecutiveErrors": 0
+      }
+    }
+  ],
+  "dashboard": {
+    "local_url": "http://127.0.0.1:18789/#token=6c07ffdb5497a6975efd0794267d0eeae23be2fc1f80fa9f",
+    "tunnel_url": "http://127.0.0.1:18790/#token=6c07ffdb5497a6975efd0794267d0eeae23be2fc1f80fa9f",
+    "ssh_tunnel_command": "ssh -N -L 18790:127.0.0.1:18789 linqingxuan@linqingxuandeMac-mini.local"
+  }
+}

@@ -304,6 +304,17 @@
           "defaultNamespace": "openclaw-main",
           "autoSyncConfidence": 0.92,
           "autoSyncToSemanticGraph": false,
+          "management": {
+            "namespace": "openclaw-management",
+            "retentionDays": 7,
+            "mirrorDir": "/ABS/PATH/TO/.openclaw/shared/runtime/memory/management",
+            "syncTaskTreeToWorking": true,
+            "syncBranchPacketToWorking": true,
+            "syncActivityToWorking": true,
+            "syncSearchTraceToWorking": true,
+            "syncStrategyReviewToSemanticGraph": true,
+            "syncSearchTraceToSemanticGraph": false
+          },
           "mem0": {
             "qdrantUrl": "http://127.0.0.1:6333",
             "collectionName": "openclaw_memory",

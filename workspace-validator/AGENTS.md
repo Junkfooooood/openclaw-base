@@ -20,3 +20,4 @@
 - 当 branch 标记为 `route=strategy_review` 时，优先检查它是否真的属于低工具推理任务
 - 若 branch 仍夹带网页、代码、文件或设备动作，应要求 main 拆出新的 `default` branch
 - `strategy_review` branch 的默认 `model_hint` 应为 `deepseek/deepseek-reasoner`
+- 若 branch 输出声明使用过搜索 / 浏览 / 检索，应检查 `Search Trace` 是否存在且与结论一致
