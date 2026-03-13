@@ -25,6 +25,10 @@ This folder contains the local runtime helpers for OpenClaw's WeChat channel.
   - Write OpenClaw's `channels.wechat` config and restart the gateway
 - `latest_wechat_qr.sh`
   - Print the latest WeChat login QR URL from `logs/gateway.log`
+- `wechat_watchdog.mjs`
+  - Check WeChat login health and auto-heal clear disconnects
+- `install_wechat_watchdog.sh`
+  - Install a macOS LaunchAgent that runs the watchdog every 5 minutes
 
 ## Recommended path
 
@@ -34,6 +38,30 @@ This folder contains the local runtime helpers for OpenClaw's WeChat channel.
 4. `shared/runtime/wechat/configure_wechat_channel.sh --token <TOKEN_KEY>`
 5. `shared/runtime/wechat/latest_wechat_qr.sh`
 6. Scan the current QR URL with WeChat
+
+## Auto-recovery
+
+The local watchdog can handle the common "clear disconnect" path:
+
+1. Check `GET /login/GetLoginStatus`
+2. If the bridge is offline or unreachable:
+   - restart the OpenClaw gateway
+   - restart the WeChat stack
+   - restart the gateway again
+3. If the account still needs manual login, write the latest QR URL to:
+   - `shared/runtime/wechat/state/latest-recovery-qr.txt`
+   - `shared/runtime/wechat/state/watchdog-status.json`
+
+Useful commands:
+
+- One-off status check:
+  - `node /Users/linqingxuan/.openclaw/shared/runtime/wechat/wechat_watchdog.mjs status`
+- One-off self-heal:
+  - `node /Users/linqingxuan/.openclaw/shared/runtime/wechat/wechat_watchdog.mjs heal`
+- Force a full recovery pass:
+  - `node /Users/linqingxuan/.openclaw/shared/runtime/wechat/wechat_watchdog.mjs heal --force`
+- Install the background watchdog:
+  - `bash /Users/linqingxuan/.openclaw/shared/runtime/wechat/install_wechat_watchdog.sh`
 
 ## Current defaults
 

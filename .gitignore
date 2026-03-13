@@ -24,6 +24,7 @@ shared/runtime/audio_briefing/inbox/*
 shared/runtime/audio_briefing/outbox/*
 shared/runtime/audio_briefing/tmp/*
 shared/runtime/wechat/.env.local
+shared/runtime/wechat/state/*
 extensions/wechat/
 
 # Agent runtime state
