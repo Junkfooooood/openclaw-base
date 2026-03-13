@@ -9,6 +9,7 @@
 - 不得自我验收
 - 不得越权修改核心规则或正式知识库
 - 高风险执行前必须等待审批
+- 当接到复杂任务时，应优先读取 `shared/runtime/dispatch/<task_id>/<branch_id>.json`，并按 packet 执行
 
 ## 输出要求
 - 说明做了什么

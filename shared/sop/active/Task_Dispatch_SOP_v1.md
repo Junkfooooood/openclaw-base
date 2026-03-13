@@ -16,6 +16,7 @@ branch_retry_max: 3
 执行本 SOP 前必须参考以下文件：
 - `shared/policies/Core_Routing.md`
 - `shared/policies/Validation_Rules.md`
+- `shared/sop/active/Branch_Handoff_SOP_v1.md`
 - `shared/blackboard/temple/blackboard_card.md`
 - `shared/schemas/task_tree.schema.json`
 
@@ -85,8 +86,15 @@ Task Tree 必须至少包含：
 - 如该 branch 仍需要网页/代码/文件动作，必须再拆出新 branch，而不是让 reasoner route 越权执行
 
 ## Step 5: 分发执行
+在真正交给 owner 前，main 必须先做 handoff：
+- 为每个 ready branch 生成 packet
+- 将 packet 写入 `shared/runtime/dispatch/<task_id>/<branch_id>.json`
+- 将 handoff 事件追加到 `shared/runtime/activity/<task_id>.jsonl`
+- 把黑板中的 branch 状态从 `ready` 改为 `assigned`
+
 每个 branch 执行者仅负责：
 - 读取任务树
+- 读取属于自己的 branch packet
 - 读取相关 SOP
 - 完成本 branch 输出
 - 回写黑板状态
@@ -107,6 +115,10 @@ Task Tree 必须至少包含：
 - Next Step
 - blocker（如有）
 - retry_count
+
+若 branch 已分发给 owner，则还应保证：
+- 对应 packet 路径已可追踪
+- activity log 已追加 handoff 记录
 
 ## Step 7: validator 验收
 branch 产出后，交 validator 进行验收。

@@ -33,13 +33,14 @@
 1. main 读取本文件与 Task_Dispatch_SOP_v1.md
 2. 创建 Task Tree
 3. 创建黑板卡片
-4. 按 branch owner 分发
-5. branch 执行结果写入黑板
-6. validator 验收
-7. 若 FAIL，则回退原 owner 修复
-8. 若同一 branch 达到最大重试次数，则熔断
-9. main 汇总并向林汇报
-10. 任务结束后归档黑板卡片
+4. 生成 branch handoff packet 并写统一活动日志
+5. 按 branch owner 分发
+6. branch 执行结果写入黑板
+7. validator 验收
+8. 若 FAIL，则回退原 owner 修复
+9. 若同一 branch 达到最大重试次数，则熔断
+10. main 汇总并向林汇报
+11. 任务结束后归档黑板卡片
 
 ## Owner Routing
 - 学习监督 / 日志整理 / 周冲刺 / 学习建议 → learning
@@ -64,6 +65,22 @@
 - 明确写出 branch 状态、当前输出、下一步、阻塞点
 - 完成后完整记录进入 `shared/blackboard/archive/`
 - 热板保留一份摘要卡，至少包含一句话总结、输出路径和 archive 指针
+
+## Handoff Packet 规则
+- 所有 ready branch 必须生成 packet，路径为 `shared/runtime/dispatch/<task_id>/<branch_id>.json`
+- 所有 handoff 事件必须统一追加到 `shared/runtime/activity/<task_id>.jsonl`
+- packet 必须包含：
+  - owner
+  - route
+  - tool_mode
+  - model_hint
+  - goal
+  - expected_output
+  - acceptance
+  - task_tree_path
+  - blackboard_card_path
+  - recommended_invocation
+- 黑板中的 ready branch 一旦生成 packet，状态应改为 `assigned`
 
 ## Task Tree 规则
 Task Tree 必须至少包含：

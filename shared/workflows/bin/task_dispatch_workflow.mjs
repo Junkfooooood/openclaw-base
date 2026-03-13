@@ -6,6 +6,7 @@ import {
   computeDispatchState,
   finalizeBoardCard,
   findProjectRoot,
+  handoffReadyBranches,
   readJsonFromStdin,
   validateTaskTree,
   writeBoardInit,
@@ -50,6 +51,38 @@ function readPayload(args = {}, positional = []) {
   return readJsonFromStdin();
 }
 
+function buildRuntimeConfig(args = {}) {
+  const config = {};
+  if (args["hot-dir"]) config.hotDir = args["hot-dir"];
+  if (args["archive-dir"]) config.archiveDir = args["archive-dir"];
+  if (args["queue-dir"]) config.queueDir = args["queue-dir"];
+  if (args["dispatch-dir"]) config.dispatchDir = args["dispatch-dir"];
+  if (args["activity-dir"]) config.activityDir = args["activity-dir"];
+  if (args["queue-path"]) config.queuePath = args["queue-path"];
+  return config;
+}
+
+function resolveTaskTreeForHandoff(rawPayload) {
+  if (rawPayload?.task_tree && typeof rawPayload.task_tree === "object") {
+    return {
+      taskTree: rawPayload.task_tree,
+      queuePath: rawPayload.queue_path ?? null
+    };
+  }
+
+  if (rawPayload?.queue_path) {
+    return {
+      taskTree: readJsonFile(rawPayload.queue_path),
+      queuePath: rawPayload.queue_path
+    };
+  }
+
+  return {
+    taskTree: rawPayload,
+    queuePath: null
+  };
+}
+
 function printJson(payload, exitCode = 0) {
   process.stdout.write(`${JSON.stringify(payload, null, 2)}\n`);
   process.exitCode = exitCode;
@@ -83,6 +116,7 @@ async function main() {
   const [command] = process.argv.slice(2);
   const { args, positional } = parseArgs(process.argv.slice(3));
   const root = findProjectRoot();
+  const runtimeConfig = buildRuntimeConfig(args);
 
   switch (command) {
     case "normalize": {
@@ -118,7 +152,7 @@ async function main() {
         );
         return;
       }
-      const target = await writeBoardInit(root, validation.taskTree);
+      const target = await writeBoardInit(root, validation.taskTree, runtimeConfig);
       printJson({
         status: "initialized",
         task_id: validation.taskTree.task_id,
@@ -140,7 +174,7 @@ async function main() {
         );
         return;
       }
-      const target = await writeBoardUpdate(root, payload);
+      const target = await writeBoardUpdate(root, payload, runtimeConfig);
       printJson({
         status: "updated",
         task_id: payload.task_id,
@@ -163,7 +197,7 @@ async function main() {
         );
         return;
       }
-      const queuePath = await writeTaskTreeSnapshot(root, dispatchState.taskTree);
+      const queuePath = await writeTaskTreeSnapshot(root, dispatchState.taskTree, runtimeConfig);
       printJson({
         task_id: dispatchState.taskTree.task_id,
         title: dispatchState.taskTree.title,
@@ -173,6 +207,28 @@ async function main() {
         waiting_branches: dispatchState.waiting_branches,
         branches: dispatchState.branches
       });
+      return;
+    }
+    case "handoff": {
+      const rawPayload = readPayload(args, positional);
+      const { taskTree, queuePath } = resolveTaskTreeForHandoff(rawPayload);
+      const result = await handoffReadyBranches(root, taskTree, {
+        ...runtimeConfig,
+        queuePath: runtimeConfig.queuePath ?? queuePath
+      });
+      if (!result.valid) {
+        printJson(
+          {
+            status: "FAIL",
+            reason: "task tree is incomplete or invalid",
+            failed_checks: result.issues,
+            suggested_next_step: "fix_task_tree"
+          },
+          1
+        );
+        return;
+      }
+      printJson(result);
       return;
     }
     case "validate": {
@@ -205,7 +261,7 @@ async function main() {
         );
         return;
       }
-      const result = await finalizeBoardCard(root, payload);
+      const result = await finalizeBoardCard(root, payload, runtimeConfig);
       printJson({
         status: "archived",
         task_id: payload.task_id,
@@ -220,7 +276,7 @@ async function main() {
           status: "FAIL",
           reason: `unknown command '${command ?? ""}'`,
           failed_checks: ["unsupported_command"],
-          suggested_next_step: "use one of: normalize, board-init, board-update, dispatch, validate, approval, finalize"
+          suggested_next_step: "use one of: normalize, board-init, board-update, dispatch, handoff, validate, approval, finalize"
         },
         1
       );

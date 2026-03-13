@@ -19,6 +19,11 @@ steps:
     command: node shared/workflows/bin/task_dispatch_workflow.mjs validate
     stdin: $dispatch.stdout
 
+  - id: handoff
+    command: node shared/workflows/bin/task_dispatch_workflow.mjs handoff
+    stdin: $dispatch.stdout
+    condition: $validate.stdout.status == "PASS"
+
   - id: approve
     command: node shared/workflows/bin/task_dispatch_workflow.mjs approval --kind review
     stdin: $validate.stdout

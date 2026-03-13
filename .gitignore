@@ -42,6 +42,10 @@ shared/runtime/locks/*
 !shared/runtime/locks/.gitkeep
 shared/runtime/queue/*
 !shared/runtime/queue/.gitkeep
+shared/runtime/dispatch/*
+!shared/runtime/dispatch/.gitkeep
+shared/runtime/activity/*
+!shared/runtime/activity/.gitkeep
 shared/runtime/snapshots/*
 !shared/runtime/snapshots/.gitkeep
 shared/runtime/memory/commits/*

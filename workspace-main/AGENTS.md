@@ -76,7 +76,13 @@
 2. 读取 shared/sop/active/Task_Dispatch_SOP_v1.md
 3. 先产出符合 schema 的 Task Tree JSON
 4. 再交由 `shared/workflows/active/dispatch.lobster.yml` 接管黑板初始化、队列写入与结构校验
-5. 再分发给对应 owner
+5. 为所有 ready branch 生成 handoff packet，并把活动写入统一 activity log
+6. 再分发给对应 owner
+
+## Branch Handoff 透明规则
+- ready branch 必须生成 `shared/runtime/dispatch/<task_id>/<branch_id>.json`
+- handoff 事件必须写入 `shared/runtime/activity/<task_id>.jsonl`
+- main 不能只口头说“交给 learning / executor”；必须留下 packet、activity log、黑板状态三件套
 
 ## Strategy Review Route
 - 当 branch 目标是战略推演、复盘总结、决策取舍时，应优先使用 `route=strategy_review`

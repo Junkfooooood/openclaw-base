@@ -6,6 +6,7 @@ import {
   KNOWN_TOOL_MODES,
   computeDispatchState,
   findProjectRoot,
+  handoffReadyBranches,
   readJsonFromStdin,
   validateTaskTree,
   writeTaskTreeSnapshot
@@ -420,9 +421,11 @@ export default function register(api) {
           console.log(JSON.stringify(validation.taskTree, null, 2));
         });
 
-      program
+      const internalDispatch = program
         .command("internal-dispatch")
-        .description("Persist a task tree and emit a minimal dispatch summary.")
+        .description("Persist a task tree, create branch handoff packets, and emit management summaries.");
+
+      internalDispatch
         .command("run")
         .action(async () => {
           const taskTree = readJsonFromStdin();
@@ -455,6 +458,40 @@ export default function register(api) {
             waiting_branches: dispatchState.waiting_branches,
             branches: dispatchState.branches
           };
+          console.log(JSON.stringify(result, null, 2));
+        });
+
+      internalDispatch
+        .command("handoff")
+        .action(async () => {
+          const rawPayload = readJsonFromStdin();
+          const taskTree =
+            rawPayload?.task_tree && typeof rawPayload.task_tree === "object"
+              ? rawPayload.task_tree
+              : rawPayload?.queue_path
+                ? JSON.parse(fs.readFileSync(rawPayload.queue_path, "utf8"))
+                : rawPayload;
+          const root = findProjectRoot();
+          const result = await handoffReadyBranches(root, taskTree, {
+            queuePath: rawPayload?.queue_path ?? undefined
+          });
+          if (!result.valid) {
+            console.log(
+              JSON.stringify(
+                {
+                  status: "FAIL",
+                  reason: "task tree is incomplete",
+                  failed_checks: result.issues,
+                  suggested_next_step: "fix_task_tree"
+                },
+                null,
+                2
+              )
+            );
+            process.exitCode = 1;
+            return;
+          }
+
           console.log(JSON.stringify(result, null, 2));
         });
 

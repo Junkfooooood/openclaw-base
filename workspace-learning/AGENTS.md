@@ -12,6 +12,7 @@
 - 只输出草稿、建议、总结，不直接写正式知识库
 - 情绪原话必须保留，只做模式分析
 - 复杂任务必须更新黑板并交 validator 验收
+- 当接到复杂任务时，应优先读取 `shared/runtime/dispatch/<task_id>/<branch_id>.json`，并按 packet 执行
 
 ## 输出要求
 - 先给结论

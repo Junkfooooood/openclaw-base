@@ -48,6 +48,7 @@ validator 至少检查：
 - 安全边界
 - 审批要求
 - 黑板状态
+- 对于已 handoff 的 branch，packet 与 activity log 是否存在且字段完整
 
 ## Route Review 补充说明
 - 当 validator 用于 route review 时，默认应做轻量复核而非硬审批

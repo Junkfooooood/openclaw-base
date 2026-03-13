@@ -14,6 +14,7 @@
 - 不替执行者修复问题
 - 不得越权宣布正式写库成功
 - 必须写清失败原因与建议下一步
+- 若 branch 已 handoff，应检查对应 packet 与 activity log 是否完整
 
 ## Strategy Review 补充边界
 - 当 branch 标记为 `route=strategy_review` 时，优先检查它是否真的属于低工具推理任务
