@@ -56,6 +56,20 @@
 
 - `shared/sop/active/Conflict_Resolution_SOP_v1.md`
 
+补一条最快术语映射：
+
+- 神识 = 记忆系统
+- 功法 = 管理系统
+- 脉络 = 工作流系统
+- 五行物 = skills / skill 模块
+
+对外首次提到这些词时，优先写成：
+
+- `神识（记忆系统）`
+- `功法（管理系统）`
+- `脉络（工作流）`
+- `五行物（skill 模块）`
+
 如果是分支 owner，还要再读自己的 workspace：
 
 - `workspace-learning/*`
@@ -82,6 +96,12 @@
 - 改身份设定：改 `IDENTITY.md`
 - 改对用户关系与沟通方式：改 `USER.md`
 - 改环境事实：改 `TOOLS.md`
+
+补充说明：
+
+- 当前 `workspace-main` 的输出风格允许偏古风，但不能写成艰涩古文
+- 关键结论、风险、命令、路径仍必须直白清楚
+- 若用户指令与既有规则冲突，必须先明说冲突，再由林拍板
 
 ## 4. 记忆系统在哪里
 
@@ -225,7 +245,35 @@
 
 如果要改消息节奏、消息类型、送达方式，主要看这三处。
 
-## 10. 远程连接和设备同步在哪里
+当前已接入的重点任务包括：
+
+- `openclaw-daily-git-sync`
+  - 每天 `00:00` 检查重大文档改动并同步 GitHub `openclaw-base`
+- `morning-anchor-briefing`
+  - 每天 `08:30` 生成金融与 AI 的双主播晨报
+  - 先写 `甲：/乙：` 稿件，再调用音频脚本真实外发
+
+晨报音频执行层在：
+
+- `shared/runtime/audio_briefing/host_dialogue_audio.mjs`
+- `shared/runtime/audio_briefing/inbox/`
+- `.openclaw/media/audio_briefing/`
+
+## 10. Git 同步在哪里
+
+Git 同步的规则和执行层当前在：
+
+- `shared/runtime/git_sync/openclaw_git_sync.sh`
+- `cron/jobs.json`
+
+当前约定：
+
+- 不是每轮对话都上传 Git
+- 重大文档改动时，当前轮收尾同步
+- 每天 `00:00` 固定做一次兜底同步
+- 默认远端是 GitHub `openclaw-base` 的 `origin/main`
+
+## 11. 远程连接和设备同步在哪里
 
 远程与设备同步当前在：
 
@@ -247,7 +295,7 @@
 - dashboard tunnel：改 `macbook_dashboard_tunnel.sh`
 - MacBook 推送流程：改 `macbook_push_snapshot.sh`
 
-## 11. 新 agent 最容易犯的错
+## 12. 新 agent 最容易犯的错
 
 1. 把 runtime 状态当成长期事实
 2. 不读 `MEMORY.md` 就直接做复杂任务
@@ -255,8 +303,10 @@
 4. 把 Obsidian 当真相层
 5. 把 strategy_review route 用成 executor
 6. 没留痕就做正式写入或外发
+7. 遇到规则冲突时不汇报，自己偷改路线
+8. 不知道晨报和通知已经能直接发音频，还停留在文本模式
 
-## 12. 五分钟启动法
+## 13. 五分钟启动法
 
 如果时间非常紧，只做这几步：
 
@@ -268,3 +318,11 @@
 6. 去 `shared/runtime/*` 看当前运行状态
 
 这样至少不会脱离这套系统的主轨。
+
+若是飞书验收场景，可直接先自检：
+
+1. 我是谁，风格与边界是什么
+2. 神识 / 功法 / 脉络 / 五行物各指什么
+3. 当前复杂任务如何走 `board-init -> handoff -> execute -> validate -> finalize`
+4. 当前冲突如何走 `Conflict_Resolution_SOP_v1.md`
+5. 当前主动陪伴与晨报音频在哪一层实现

@@ -61,6 +61,40 @@
 - 这里主要是运行态，不是长期规则层
 - 看运行轨迹可以读它，改系统规则不要优先改它
 
+### `skills/`
+
+作用：
+
+- OpenClaw 可复用能力模块，也就是系统里的“五行物”
+
+当前重点内容：
+
+- `morning-anchor-briefing/`
+  - 金融与 AI 双主播晨报能力
+- 其他已 ready 的 skill
+  - 由 `openclaw skills list` 盘点
+
+你要改：
+
+- 某个 skill 的提示词、流程和边界：改对应目录下的 `SKILL.md`
+- 新增 skill：在 `skills/` 下新建目录，并补 `SKILL.md`
+
+### `media/`
+
+作用：
+
+- 可被 OpenClaw 消息通道直接读取的本地媒体目录
+
+当前重点内容：
+
+- `media/audio_briefing/`
+  - 晨报音频外发前的本地落盘位置
+
+注意：
+
+- 这里是发送介质层，不是长期知识层
+- 运行样本默认不入库，只保留占位目录
+
 ## 2. 配置层
 
 ### `openclaw.json`
@@ -313,6 +347,10 @@
   - branch 生命周期 jsonl
 - `memory/`
   - 管理记忆镜像
+- `audio_briefing/`
+  - 双主播晨报稿件 inbox、渲染中间产物生成入口
+- `git_sync/`
+  - GitHub `openclaw-base` 的同步脚本与模板
 - `remote_ops/`
   - 远程设备同步、dashboard 导出、学习看板导出
 - `sop_evolution/`
@@ -390,6 +428,34 @@
 - `macbook_push_snapshot.sh`
 - `README.md`
 
+### `shared/runtime/audio_briefing/`
+
+作用：
+
+- 晨间双主播读报的音频执行层
+
+关键文件：
+
+- `host_dialogue_audio.mjs`
+- `inbox/`
+
+你要改：
+
+- 双主播音色与合成参数
+- 稿件格式要求
+- 渲染后发送逻辑
+
+### `shared/runtime/git_sync/`
+
+作用：
+
+- 重大文档改动即时同步与每日 GitHub 兜底同步
+
+关键文件：
+
+- `openclaw_git_sync.sh`
+- `com.linqingxuan.openclaw-git.plist`
+
 ### `devices/`
 
 作用：
@@ -406,6 +472,13 @@
 作用：
 
 - 主动陪伴 / 学习监督的定时任务
+
+当前重点 job：
+
+- `openclaw-daily-git-sync`
+  - 每天 `00:00` 自动同步 GitHub `openclaw-base`
+- `morning-anchor-briefing`
+  - 每天 `08:30` 生成并发送晨间双主播音频读报
 
 ### `feishu/` 与 `channels`
 
@@ -469,6 +542,22 @@
 - `shared/sop/active/Proactive_Companion_SOP_v1.md`
 - `cron/jobs.json`
 - `openclaw.json` heartbeat 配置
+
+### 改晨报音频生成与外发
+
+先看：
+
+- `skills/morning-anchor-briefing/SKILL.md`
+- `shared/runtime/audio_briefing/host_dialogue_audio.mjs`
+- `cron/jobs.json`
+
+### 改 GitHub 自动同步规则
+
+先看：
+
+- `shared/runtime/git_sync/openclaw_git_sync.sh`
+- `cron/jobs.json`
+- `workspace-main/MEMORY.md`
 
 ## 10. 修改原则
 
