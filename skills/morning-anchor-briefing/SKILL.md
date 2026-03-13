@@ -60,3 +60,24 @@ When this skill is triggered by a scheduled morning job:
 - Keep the whole reply compact enough for one mobile message.
 - If there is no high-value update, say so briefly and skip forced output.
 - End with one line that helps Lin decide whether to dig deeper today.
+
+## Audio Mode
+
+If the request is to produce a sendable audio version:
+
+1. First write the final dialogue transcript as plain text with one speaker line per row:
+   - `甲：...`
+   - `乙：...`
+2. Save that transcript into a local file inside the workspace or runtime area.
+3. Then call:
+
+```bash
+node /Users/linqingxuan/.openclaw/shared/runtime/audio_briefing/host_dialogue_audio.mjs render-and-send --script-file /ABS/PATH/TO/transcript.txt --title "morning-anchor-briefing"
+```
+
+Notes:
+
+- The current audio pipeline uses two Chinese macOS voices for `甲/乙`.
+- It renders a real audio file and sends it to the default heartbeat target unless `--channel` and `--target` are overridden.
+- If you only need to render, use `render`.
+- If you already have an audio file and only need delivery, use `send`.

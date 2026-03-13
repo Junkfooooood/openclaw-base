@@ -17,6 +17,12 @@ update-check.json
 /credentials/
 /devices/
 /identity/
+/media/audio_briefing/*
+!/media/audio_briefing/.gitkeep
+shared/runtime/audio_briefing/inbox/*
+!shared/runtime/audio_briefing/inbox/.gitkeep
+shared/runtime/audio_briefing/outbox/*
+shared/runtime/audio_briefing/tmp/*
 
 # Agent runtime state
 agents/*/sessions/

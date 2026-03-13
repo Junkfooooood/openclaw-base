@@ -146,7 +146,7 @@
       "description": "Daily 8:30 finance and AI anchor-style briefing",
       "enabled": true,
       "createdAtMs": 1773382589156,
-      "updatedAtMs": 1773382636665,
+      "updatedAtMs": 1773383680051,
       "schedule": {
         "kind": "cron",
         "expr": "30 8 * * *",
@@ -156,7 +156,7 @@
       "wakeMode": "next-heartbeat",
       "payload": {
         "kind": "systemEvent",
-        "text": "第15步主动陪伴：请读取 /Users/linqingxuan/.openclaw/skills/morning-anchor-briefing/SKILL.md，并按其规范为林生成一份早间主播型读报。默认主题为金融与AI；若当天没有足够高质量更新，可压缩成短版，但不要编造。"
+        "text": "第15步主动陪伴：请读取 /Users/linqingxuan/.openclaw/skills/morning-anchor-briefing/SKILL.md。先生成一份金融与AI的双主播晨报稿，最终稿必须逐行写成 甲：/乙： 格式，并保存到 /Users/linqingxuan/.openclaw/shared/runtime/audio_briefing/inbox/morning-anchor-latest.txt。随后调用 node /Users/linqingxuan/.openclaw/shared/runtime/audio_briefing/host_dialogue_audio.mjs render-and-send --script-file /Users/linqingxuan/.openclaw/shared/runtime/audio_briefing/inbox/morning-anchor-latest.txt --title morning-anchor-briefing。若当天没有足够高质量更新，可跳过，不要编造。"
       },
       "state": {
         "nextRunAtMs": 1773448200000,
