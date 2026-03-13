@@ -23,6 +23,8 @@ shared/runtime/audio_briefing/inbox/*
 !shared/runtime/audio_briefing/inbox/.gitkeep
 shared/runtime/audio_briefing/outbox/*
 shared/runtime/audio_briefing/tmp/*
+shared/runtime/wechat/.env.local
+extensions/wechat/
 
 # Agent runtime state
 agents/*/sessions/
