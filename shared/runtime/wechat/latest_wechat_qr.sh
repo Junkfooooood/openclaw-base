@@ -9,7 +9,11 @@ if [[ ! -f "$LOG_FILE" ]]; then
   exit 1
 fi
 
-url="$(rg 'QR URL:' "$LOG_FILE" | tail -n 1 | sed 's/.*QR URL: //')"
+if command -v rg >/dev/null 2>&1; then
+  url="$(rg 'QR URL:' "$LOG_FILE" | tail -n 1 | sed 's/.*QR URL: //')"
+else
+  url="$(grep 'QR URL:' "$LOG_FILE" | tail -n 1 | sed 's/.*QR URL: //')"
+fi
 
 if [[ -z "$url" ]]; then
   echo "No WeChat QR URL found in gateway.log yet." >&2
