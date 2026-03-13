@@ -157,6 +157,18 @@
         },
         "boot-md": {
           "enabled": true
+        },
+        "bootstrap-extra-files": {
+          "enabled": true,
+          "paths": [
+            "workspace-main/BOOTSTRAP.md",
+            "workspace-main/IDENTITY.md",
+            "workspace-main/SOUL.md",
+            "workspace-main/USER.md",
+            "workspace-main/AGENTS.md",
+            "workspace-main/MEMORY.md",
+            "workspace-main/HEARTBEAT.md"
+          ]
         }
       }
     }

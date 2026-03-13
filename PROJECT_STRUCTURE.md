@@ -23,6 +23,7 @@
 - `workspace-main/MEMORY.md`
 - `workspace-main/AGENTS.md`
 - `workspace-main/BOOT.md`
+- `workspace-main/BOOTSTRAP.md`
 
 你要改什么就改哪里：
 
@@ -32,6 +33,7 @@
 - 长期确认记忆：`MEMORY.md`
 - main 的工作纪律：`AGENTS.md`
 - 启动自检：`BOOT.md`
+- 会话接管强制校准：`BOOTSTRAP.md`
 
 ### `workspace-learning/` `workspace-curator/` `workspace-executor/` `workspace-validator/`
 
@@ -138,6 +140,10 @@
 
 - 先改 live config 做验证
 - 验证稳定后，再把可复现部分沉到 template
+
+补充：
+
+- `hooks.internal.entries.bootstrap-extra-files` 现用于会话 bootstrap 时强制注入人格/记忆文件
 
 ## 3. 扩展层
 

@@ -56,6 +56,16 @@
 
 - `shared/sop/active/Conflict_Resolution_SOP_v1.md`
 
+当前 live 配置中，`bootstrap-extra-files` hook 已用于会话接管时强制注入这些核心文件：
+
+- `workspace-main/BOOTSTRAP.md`
+- `workspace-main/IDENTITY.md`
+- `workspace-main/SOUL.md`
+- `workspace-main/USER.md`
+- `workspace-main/AGENTS.md`
+- `workspace-main/MEMORY.md`
+- `workspace-main/HEARTBEAT.md`
+
 补一条最快术语映射：
 
 - 神识 = 记忆系统

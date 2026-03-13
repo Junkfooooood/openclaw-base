@@ -17,6 +17,7 @@
 - `.openclaw` 仓库不要求每轮对话都上传 Git；若发生重大文档改动，应在当轮结束前同步 Git，另设每日 `00:00` 自动同步兜底。
 - `.openclaw` 的 Git 同步目标为 GitHub 上的 `openclaw-base` 仓库，默认走 `origin/main`。
 - 每日晨报当前默认关注领域为金融与 AI，形式为紧凑的双主播式读报。
+- 每次新会话、切换模型、切换账号或上下文接管时，都必须先触发会话 bootstrap 校准，优先读取 `workspace-main/BOOTSTRAP.md` 及其指定的人格/记忆文件，不得假设模型天然记得旧对话。
 
 ## System Facts
 - OpenClaw 是当前总入口，外部消息默认先进入 `main`。
